@@ -1,9 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="المنصة التفاعلية للبرنامج التدريبي لإعداد وتنمية الكفايات المهنية لمعلمي الفيزياء - إعداد الباحثة نيرة محمود الدسوقي.">
+    <meta name="theme-color" content="#00d2ff">
+    <meta property="og:title" content="المنصة التفاعلية للبرنامج التدريبي | نيرة محمود الدسوقي">
+    <meta property="og:description" content="برنامج تدريبي مصغر في بيئة تعلم تكيفية لتنمية الكفايات المهنية والكفاءة الذاتية لمعلمي الفيزياء بالمرحلة الثانوية.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <title>المنصة التفاعلية للبرنامج التدريبي | نيرة محمود الدسوقي</title>
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
@@ -37,6 +47,7 @@
             flex-direction: column;
             overflow-x: hidden;
             line-height: 1.6;
+            scroll-behavior: smooth;
         }
 
         /* نافذة المصادقة (كلمة المرور) */
@@ -60,7 +71,10 @@
             text-align: center;
             width: 90%;
             max-width: 450px;
+            animation: scaleIn 0.3s ease-out;
         }
+
+        @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         .login-box h2 { margin-bottom: 15px; color: var(--primary); font-size: 24px;}
         .login-box p { color: var(--text-muted); margin-bottom: 25px; font-size: 14px;}
@@ -275,10 +289,28 @@
             .tab-btn { width: 100%; justify-content: center; }
         }
 
+        /* نظام الإشعارات (Toast) المضاف */
+        #toast-container {
+            position: fixed; bottom: 30px; left: 30px; z-index: 10000;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .toast {
+            background: var(--panel-bg); color: white; padding: 15px 25px; border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5); border-right: 4px solid var(--primary);
+            font-weight: bold; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, fadeOut 0.5s ease 3s forwards;
+            min-width: 250px; text-align: right; font-size: 14px;
+        }
+        .toast.success { border-right-color: var(--success); }
+        .toast.error { border-right-color: var(--danger); }
+        .toast.warning { border-right-color: var(--warning); }
+        
+        @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; margin-bottom: -60px; } }
+
         /* الطباعة */
         @media print {
             body { background: white; color: black; }
-            header, .tabs, .footer-wrapper, .action-btn, #auth-modal { display: none !important; }
+            header, .tabs, .footer-wrapper, .action-btn, #auth-modal, #toast-container { display: none !important; }
             .tab-content { border: none; box-shadow: none; display: block !important; padding: 0; background: white;}
             .section-title { color: black; border-bottom: 1px solid #ccc; }
             table { border: 1px solid #ddd; }
@@ -291,7 +323,8 @@
 </head>
 <body>
 
-    <!-- نافذة طلب كلمة المرور للأقسام الإدارية -->
+    <div id="toast-container"></div>
+
     <div id="auth-modal">
         <div class="login-box">
             <h2>الوصول للإدارة (لوحة التحكم)</h2>
@@ -303,7 +336,6 @@
         </div>
     </div>
 
-    <!-- المحتوى الرئيسي للمنصة -->
     <div id="app-content">
         <header>
             <div class="header-titles">
@@ -315,23 +347,20 @@
                 <p><strong>إعداد الباحثة:</strong> نيرة محمود الدسوقي عبد الخالق</p>
                 <p><strong>جهة العمل:</strong> مديرية التربية والتعليم - محافظة الدقهلية</p>
                 <p style="margin-top: 10px; color: var(--primary); font-size: 13px;" id="dateTimeDisplay"></p>
-                <p style="font-size: 13px;">حالة المزامنة: <span id="syncStatus" style="color: var(--danger); font-weight: bold;">غير متصل 🔴</span></p>
+                <p style="font-size: 13px;">حالة المزامنة: <span id="syncStatus" style="color: var(--warning); font-weight: bold;">جاري التحقق ⏳</span></p>
             </div>
         </header>
 
         <div class="tabs">
-            <!-- أقسام مفتوحة للجميع (المتدربين والزوار) -->
             <button class="tab-btn active" onclick="switchTab('program-info')">📖 عن البرنامج والأسس</button>
             <button class="tab-btn" onclick="switchTab('sessions')">📚 الجلسات والمحتوى العلمي</button>
             
-            <!-- أقسام الإدارة (تتطلب كلمة مرور) -->
             <button class="tab-btn" onclick="requestAccess('dashboard')">📊 الإحصائيات (لوحة القيادة)</button>
             <button class="tab-btn" onclick="requestAccess('trainees')">👥 إدارة بيانات معلمي الفيزياء</button>
             <button class="tab-btn" onclick="requestAccess('evaluation')">📝 أدوات التقويم والمقاييس</button>
             <button class="tab-btn" onclick="requestAccess('settings')">⚙️ الإعدادات والتصدير</button>
         </div>
 
-        <!-- 1. تبويب: عن البرنامج (مفتوح) -->
         <div id="program-info" class="tab-content active">
             <h2 class="section-title">المقدمة والأسس النظرية</h2>
             <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 25px;">
@@ -363,7 +392,6 @@
             </div>
         </div>
 
-        <!-- 2. تبويب: الجلسات (مفتوح) -->
         <div id="sessions" class="tab-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap;">
                 <h2 class="section-title" style="margin:0;">خطة الجلسات التدريبية (10 جلسات - 600 دقيقة)</h2>
@@ -371,11 +399,9 @@
             </div>
             
             <div class="sessions-grid" id="sessionsContainer">
-                <!-- يتم توليد البطاقات عبر جافاسكريبت للحفاظ على نظافة الكود -->
-            </div>
+                </div>
         </div>
 
-        <!-- 3. تبويب: لوحة القيادة (محمي) -->
         <div id="dashboard" class="tab-content">
             <h2 class="section-title">لوحة المتابعة والتحليل (Dashbaord)</h2>
             
@@ -438,7 +464,6 @@
             </div>
         </div>
 
-        <!-- 4. تبويب: إدارة المتدربين (محمي) -->
         <div id="trainees" class="tab-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
                 <h2 class="section-title" style="margin:0;">قاعدة بيانات متدربي الدقهلية</h2>
@@ -448,7 +473,6 @@
                 </div>
             </div>
 
-            <!-- نموذج الإضافة السريع -->
             <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--secondary);">
                 <h3 style="margin-bottom: 20px; color: var(--text-main);">إضافة معلم فيزياء جديد للمسار التكيفي</h3>
                 <div class="form-grid" style="align-items: end;">
@@ -485,7 +509,6 @@
                 </div>
             </div>
 
-            <!-- جدول البيانات -->
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -499,13 +522,11 @@
                         </tr>
                     </thead>
                     <tbody id="traineesTableBody">
-                        <!-- يتم التعبئة من جافاسكريبت -->
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
         </div>
 
-        <!-- 5. تبويب: أدوات التقويم (محمي) -->
         <div id="evaluation" class="tab-content">
             <h2 class="section-title">إدارة أدوات التقويم والقياس</h2>
             
@@ -549,7 +570,6 @@
             </div>
         </div>
 
-        <!-- 6. تبويب: الإعدادات والمزامنة (محمي) -->
         <div id="settings" class="tab-content">
             <h2 class="section-title">إعدادات النظام والربط السحابي (Google Sheets)</h2>
             
@@ -581,7 +601,6 @@
         </div>
     </div>
 
-    <!-- 3D FOOTER -->
     <div class="footer-wrapper">
         <div class="circle-container">
             <svg viewBox="0 0 500 500" class="rotating-svg">
@@ -599,6 +618,16 @@
     </div>
 
     <script>
+        // --- 0. نظام الإشعارات (الجديد كلياً) ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = type === 'success' ? `✅ ${message}` : (type === 'error' ? `❌ ${message}` : `⚠️ ${message}`);
+            container.appendChild(toast);
+            setTimeout(() => { if(toast.parentNode) toast.remove(); }, 3500);
+        }
+
         // --- 1. الأمان والوصول ---
         let isAuthenticated = false;
         let targetTabAfterAuth = '';
@@ -621,6 +650,7 @@
                 isAuthenticated = true;
                 closeAuthModal();
                 switchTab(targetTabAfterAuth);
+                showToast('تم تسجيل الدخول للوحة التحكم بنجاح', 'success');
             } else {
                 document.getElementById('errorMsg').style.display = 'block';
                 document.getElementById('passwordInput').style.borderColor = 'var(--danger)';
@@ -631,16 +661,16 @@
             document.getElementById('auth-modal').style.display = 'none';
         }
 
-        // --- 2. البيانات والجلسات من الملحق (واقعية كاملة) ---
-        // بيانات أولية لغرض العرض
+        // --- 2. البيانات والجلسات ---
         let traineesData = JSON.parse(localStorage.getItem('niraTraineesFull')) || [
             { id: 1, name: "أحمد عبد الله", school: "إدارة شرق المنصورة", level: "متقدم", progress: 85 },
             { id: 2, name: "منى محمود", school: "إدارة طلخا", level: "متوسط", progress: 60 }
         ];
 
-        let gasUrl = localStorage.getItem('niraGasUrl') || "";
+        // تعيين الرابط الافتراضي لجوجل شيت الذي قمت بتزويده إن لم يكن هناك واحد محفوظ
+        const defaultGasUrl = "https://script.google.com/macros/s/AKfycbzKbEigjZP5rUzLdFGsfeZ8BYCfvnIUaEeHbOKDvgGaCfcVNtxFp1r5M928Bm8CoCII/exec";
+        let gasUrl = localStorage.getItem('niraGasUrl') || defaultGasUrl;
 
-        // محتوى الجلسات التدريبية المأخوذ من الملف المرفق بالتفصيل
         const sessionsData = [
             { day: "اليوم الأول", num: "الجلسة 1", time: "60 دقيقة", title: "التهيئة للاختبار القبلي التشخيصي", desc: "الترحيب، قواعد العمل، التعريف ببيئة التعلم التكيفية وأدوات البحث، وتطبيق الاختبار التشخيصي لتحديد المسار." },
             { day: "اليوم الأول", num: "الجلسة 2", time: "60 دقيقة", title: "مهارات التدريس (1): توظيف اليوتيوب", desc: "أهمية اليوتيوب، معايير اختيار الفيديو، البحث عن فيديو قصير، وتصميم اختبار قصير بـ Google Forms." },
@@ -657,13 +687,11 @@
         // --- 3. تهيئة المنصة ---
         function initApp() {
             renderSessions();
-            updateDashboard();
             renderTrainees();
             
             document.getElementById('gasUrl').value = gasUrl;
-            if(gasUrl) document.getElementById('syncStatus').innerHTML = "متصل 🟢";
+            if(gasUrl) syncWithGoogleSheets(true);
 
-            // تحديث الوقت الحي
             setInterval(() => {
                 const now = new Date();
                 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
@@ -682,6 +710,7 @@
             buttons.forEach(btn => {
                 if(btn.getAttribute('onclick').includes(tabId)) btn.classList.add('active');
             });
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         // --- 5. العرض الديناميكي للبيانات ---
@@ -713,7 +742,6 @@
 
             traineesData.forEach((t, index) => {
                 if(t.level === 'متقدم') advanced++; else others++;
-                
                 let levelColor = t.level === 'متقدم' ? 'var(--success)' : (t.level === 'متوسط' ? 'var(--primary)' : 'var(--warning)');
                 
                 tbody.innerHTML += `
@@ -735,7 +763,6 @@
                 `;
             });
 
-            // تحديث إحصائيات لوحة القيادة
             document.getElementById('totalTrainees').innerText = traineesData.length;
             document.getElementById('countAdvanced').innerText = advanced;
             document.getElementById('countOthers').innerText = others;
@@ -751,24 +778,24 @@
             const level = document.getElementById('tLevel').value;
             const progress = document.getElementById('tProgress').value || 0;
 
-            if(!name) return alert("الرجاء إدخال اسم المعلم أولاً!");
+            if(!name) {
+                showToast("الرجاء إدخال اسم المعلم أولاً!", "warning");
+                return;
+            }
 
-            traineesData.push({
-                id: Date.now(), name: name, school: school, level: level, progress: parseInt(progress)
-            });
-
+            traineesData.push({ id: Date.now(), name: name, school: school, level: level, progress: parseInt(progress) });
             saveData();
             
-            // تصفير الحقول
             document.getElementById('tName').value = '';
             document.getElementById('tProgress').value = '';
-            alert("تم إضافة المتدرب لقاعدة البيانات بنجاح.");
+            showToast("تم إضافة المتدرب بنجاح.", "success");
         }
 
         function deleteTrainee(id) {
             if(confirm("تحذير: هل أنت متأكد من حذف بيانات هذا المعلم بشكل نهائي؟")) {
                 traineesData = traineesData.filter(t => t.id !== id);
                 saveData();
+                showToast("تم الحذف بنجاح.", "success");
             }
         }
 
@@ -776,7 +803,7 @@
             if(confirm("إجراء خطير! هل تريد مسح جميع بيانات المتدربين للبدء ببرنامج تدريبي جديد؟ لا يمكن التراجع عن هذا الإجراء.")) {
                 traineesData = [];
                 saveData();
-                alert("تم تصفير النظام بنجاح.");
+                showToast("تم تصفير النظام بالكامل.", "error");
             }
         }
 
@@ -786,13 +813,11 @@
             autoSyncIfConfigured();
         }
 
-        // --- 7. التصدير والاستيراد (ملفات CSV) ---
+        // --- 7. التصدير والاستيراد ---
         function exportCSV() {
             let csvContent = "data:text/csv;charset=utf-8,\uFEFF"; 
             csvContent += "الرقم_التعريفي,اسم_المعلم,الإدارة_التعليمية,المسار_التكيفي,نسبة_الإنجاز\n";
-            traineesData.forEach(t => {
-                csvContent += `${t.id},${t.name},${t.school},${t.level},${t.progress}\n`;
-            });
+            traineesData.forEach(t => { csvContent += `${t.id},${t.name},${t.school},${t.level},${t.progress}\n`; });
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement("a");
             link.setAttribute("href", encodedUri);
@@ -800,12 +825,13 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            showToast("تم التصدير بنجاح", "success");
         }
 
         function importCSV() {
             const fileInput = document.getElementById('importFile');
             const file = fileInput.files[0];
-            if (!file) return alert("الرجاء اختيار ملف CSV من جهازك أولاً.");
+            if (!file) return showToast("الرجاء اختيار ملف CSV من جهازك أولاً.", "warning");
 
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -826,51 +852,54 @@
                     }
                 }
                 saveData();
-                alert(`تم الاستيراد بنجاح! تمت إضافة ${addedCount} متدرب.`);
-                fileInput.value = ''; // تصفير الملف
+                showToast(`تم الاستيراد بنجاح! تمت إضافة ${addedCount} متدرب.`, "success");
+                fileInput.value = '';
             };
             reader.readAsText(file, "UTF-8");
         }
 
-        // --- 8. المزامنة السحابية (Google Apps Script) ---
+        // --- 8. المزامنة السحابية (Google Apps Script) بتحديثها الاحترافي ---
         function saveSettingsAndSync() {
             gasUrl = document.getElementById('gasUrl').value.trim();
             localStorage.setItem('niraGasUrl', gasUrl);
             
             if(gasUrl) {
-                document.getElementById('syncStatus').innerHTML = "جاري الاتصال السحابي... ⏳";
-                document.getElementById('syncStatus').style.color = "var(--warning)";
-                syncWithGoogleSheets();
+                syncWithGoogleSheets(false);
             } else {
                 document.getElementById('syncStatus').innerHTML = "غير متصل 🔴";
                 document.getElementById('syncStatus').style.color = "var(--danger)";
+                showToast("يرجى إدخال الرابط أولاً", "warning");
             }
         }
 
         function autoSyncIfConfigured() {
-            if(gasUrl) syncWithGoogleSheets();
+            if(gasUrl) syncWithGoogleSheets(true);
         }
 
-        function syncWithGoogleSheets() {
-            // يتم إرسال البيانات كـ POST request لسكربت جوجل
+        function syncWithGoogleSheets(isSilent = false) {
+            const statusEl = document.getElementById('syncStatus');
+            statusEl.innerHTML = "جاري الاتصال السحابي... ⏳";
+            statusEl.style.color = "var(--warning)";
+
+            // استخدام text/plain يمنع متصفحك من إرسال طلب OPTIONS المعقد (Preflight) الذي غالباً ما يرفضه جوجل
             fetch(gasUrl, {
                 method: 'POST',
-                mode: 'no-cors', // مطلوب لطلبات Apps Script من متصفحات مختلفة
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ data: traineesData })
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                body: JSON.stringify({ timestamp: new Date().toISOString(), payload: traineesData })
             }).then(() => {
-                document.getElementById('syncStatus').innerHTML = "تمت المزامنة الحية بنجاح 🟢";
-                document.getElementById('syncStatus').style.color = "var(--success)";
+                statusEl.innerHTML = "تمت المزامنة الحية بنجاح 🟢";
+                statusEl.style.color = "var(--success)";
+                if(!isSilent) showToast("تم ربط ومزامنة البيانات مع جوجل بنجاح!", "success");
             }).catch(err => {
                 console.error("فشل الاتصال", err);
-                document.getElementById('syncStatus').innerHTML = "خطأ في الشبكة السحابية 🔴";
-                document.getElementById('syncStatus').style.color = "var(--danger)";
+                statusEl.innerHTML = "خطأ في الشبكة السحابية 🔴";
+                statusEl.style.color = "var(--danger)";
+                if(!isSilent) showToast("فشلت المزامنة، تأكد من صحة الرابط", "error");
             });
         }
 
-        // تشغيل المنصة عند اكتمال تحميل المستند
         window.onload = initApp;
     </script>
 </body>
 </html>
-
