@@ -1,0 +1,876 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنصة التفاعلية للبرنامج التدريبي | نيرة محمود الدسوقي</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+        :root {
+            --primary: #00d2ff;
+            --primary-glow: rgba(0, 210, 255, 0.4);
+            --secondary: #3a7bd5;
+            --dark-bg: #010408;
+            --panel-bg: rgba(10, 25, 47, 0.85);
+            --card-bg: rgba(15, 35, 65, 0.6);
+            --text-main: #ffffff;
+            --text-muted: #b0c4de;
+            --success: #00e676;
+            --warning: #ffb300;
+            --danger: #ff1744;
+            --border-color: rgba(0, 210, 255, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--dark-bg) 0%, #061121 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* نافذة المصادقة (كلمة المرور) */
+        #auth-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(1, 4, 8, 0.95);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(15px);
+        }
+
+        .login-box {
+            background: var(--panel-bg);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 40px var(--primary-glow);
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+        }
+
+        .login-box h2 { margin-bottom: 15px; color: var(--primary); font-size: 24px;}
+        .login-box p { color: var(--text-muted); margin-bottom: 25px; font-size: 14px;}
+        .login-box input {
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            border: 1px solid var(--secondary); background: rgba(0,0,0,0.6);
+            color: white; border-radius: 10px; font-size: 16px; text-align: center;
+            transition: all 0.3s ease;
+        }
+        .login-box input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 10px var(--primary-glow); }
+        .login-box button.btn-submit {
+            width: 100%; padding: 15px; background: linear-gradient(45deg, var(--secondary), var(--primary));
+            border: none; color: white; font-weight: bold; font-size: 18px;
+            border-radius: 10px; cursor: pointer; transition: 0.3s;
+        }
+        .login-box button.btn-submit:hover { transform: translateY(-3px); box-shadow: 0 5px 20px var(--primary-glow); }
+        .login-box button.btn-cancel {
+            background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted);
+            margin-top: 15px; padding: 10px; width: 100%; border-radius: 10px; cursor: pointer; transition: 0.3s;
+        }
+        .login-box button.btn-cancel:hover { background: rgba(255,255,255,0.1); color: white; }
+
+        /* المحتوى الرئيسي والهيدر */
+        #app-content {
+            flex: 1;
+            padding: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px;
+            background: var(--panel-bg);
+            border-radius: 20px;
+            border-bottom: 3px solid var(--primary);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .header-titles h1 { font-size: 28px; color: var(--primary); font-weight: 900; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .header-titles h2 { font-size: 18px; color: var(--text-main); margin-bottom: 5px; font-weight: 500; }
+        .header-titles p { color: var(--text-muted); font-size: 14px; }
+        
+        .header-info { text-align: left; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; border-right: 3px solid var(--secondary); }
+        .header-info p { margin-bottom: 5px; font-size: 14px; }
+
+        /* التبويبات (Navigation) */
+        .tabs { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;}
+        .tab-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--secondary);
+            color: white; padding: 15px 25px; border-radius: 12px;
+            cursor: pointer; transition: all 0.3s ease; font-weight: bold; font-size: 16px;
+            display: flex; align-items: center; gap: 10px;
+            backdrop-filter: blur(5px);
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff;
+            box-shadow: 0 5px 15px var(--primary-glow); transform: translateY(-2px); border-color: transparent;
+        }
+
+        /* حاويات المحتوى */
+        .tab-content {
+            display: none;
+            background: var(--panel-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* العناوين الفرعية */
+        .section-title {
+            color: var(--primary); border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px; margin-bottom: 25px; font-size: 22px; display: inline-block;
+        }
+
+        /* الجداول (Responsive) */
+        .table-responsive { overflow-x: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        table { width: 100%; border-collapse: collapse; min-width: 800px; background: rgba(0,0,0,0.2); }
+        th, td { padding: 15px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        th { background: rgba(0, 210, 255, 0.15); color: var(--primary); font-weight: bold; white-space: nowrap; font-size: 15px; }
+        td { font-size: 14px; }
+        tr:hover { background: rgba(0, 210, 255, 0.05); }
+
+        /* النماذج والمدخلات */
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 14px; font-weight: bold; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; font-size: 15px;
+            transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary); outline: none; box-shadow: 0 0 8px var(--primary-glow); background: rgba(0,0,0,0.7);
+        }
+
+        /* الأزرار */
+        .action-btn {
+            padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;
+            color: white; font-weight: bold; transition: all 0.3s; font-size: 14px; display: inline-flex; align-items: center; gap: 5px;
+        }
+        .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .btn-add { background: linear-gradient(45deg, #00b09b, #96c93d); }
+        .btn-export { background: linear-gradient(45deg, var(--secondary), #2b5876); }
+        .btn-print { background: linear-gradient(45deg, #f2994a, #f2c94c); color: #000; }
+        .btn-sync { background: linear-gradient(45deg, #11998e, #38ef7d); color: #000; }
+        .btn-delete { background: linear-gradient(45deg, #cb2d3e, #ef473a); padding: 8px 15px; font-size: 12px; }
+
+        /* الكروت الإحصائية */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card {
+            background: var(--card-bg); padding: 25px; border-radius: 15px;
+            border-right: 4px solid var(--primary); border-bottom: 1px solid var(--border-color);
+            display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%); opacity: 0.1; pointer-events: none;
+        }
+        .stat-card h3 { color: var(--text-muted); font-size: 15px; margin-bottom: 15px; z-index: 1; }
+        .stat-card p { font-size: 40px; font-weight: 900; color: var(--text-main); margin: 0; z-index: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .stat-card .icon { position: absolute; left: 20px; bottom: 20px; font-size: 40px; opacity: 0.2; }
+
+        /* شبكة الجلسات والمحتوى */
+        .sessions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
+        .session-card {
+             background: var(--card-bg); padding: 25px; border-radius: 15px; border-top: 3px solid var(--secondary);
+             transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%;
+        }
+        .session-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 210, 255, 0.15); border-top-color: var(--primary); }
+        .session-card .session-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
+        .session-card .badge { background: rgba(0, 210, 255, 0.15); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
+        .session-card h3 { color: var(--text-main); font-size: 18px; line-height: 1.4; margin-bottom: 10px; }
+        .session-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; flex-grow: 1; }
+        .session-card .session-footer { margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; justify-content: space-between; font-size: 13px; color: var(--secondary); }
+
+        /* أشرطة التقدم */
+        .progress-container { background: rgba(255,255,255,0.1); border-radius: 10px; width: 100%; height: 14px; margin-top: 8px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
+        .progress-bar { background: linear-gradient(90deg, var(--secondary), var(--primary)); height: 100%; border-radius: 10px; transition: width 0.8s ease-in-out; position: relative; overflow: hidden; }
+        .progress-bar::after { content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent); animation: shimmer 2s infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* قوائم المهام والأهداف */
+        .styled-list { list-style: none; padding-right: 10px; }
+        .styled-list li { position: relative; padding-right: 25px; margin-bottom: 12px; color: var(--text-muted); font-size: 15px; }
+        .styled-list li::before { content: '✓'; position: absolute; right: 0; top: 0; color: var(--success); font-weight: bold; }
+
+        /* =========================================================
+           FOOTER PROFESSIONALLY CENTERED - SOVEREIGN EAGLE
+           ========================================================= */
+        .footer-wrapper {
+            padding: 40px 20px; 
+            background: rgba(2, 5, 10, 0.98); 
+            border-top: 3px solid var(--primary); 
+            display: flex; justify-content: center; align-items: center; 
+            margin-top: auto; position: relative; overflow: hidden; 
+            height: 550px; flex-shrink: 0; box-shadow: 0 -15px 50px rgba(0,0,0,0.8);
+        }
+        .circle-container { 
+            position: relative; width: 480px; height: 480px; 
+            display: flex; justify-content: center; align-items: center;
+            transform: scale(0.8);
+        }
+        @media (min-width: 768px) {
+            .circle-container { transform: scale(1); }
+            .footer-wrapper { padding: 80px 20px; }
+        }
+        .rotating-svg { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+            animation: rotateText 22s linear infinite; z-index: 2;
+        }
+        @keyframes rotateText { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .text-path-style { 
+            font-size: 20px; fill: #ffffff; font-family: 'Arial Black', Impact, sans-serif; 
+            letter-spacing: 6px; filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.9));
+        }
+        .name-highlight { 
+            font-size: 28px; font-weight: 900; fill: var(--primary); 
+            letter-spacing: 4px; text-transform: uppercase; 
+        }
+        .center-prayer {
+            position: relative; width: 340px; text-align: center; font-size: 2.2rem; 
+            font-weight: 900; color: var(--primary); line-height: 1.8; z-index: 10;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-shadow: 0 1px 0 #0099cc, 0 2px 0 #0088b3, 0 3px 0 #007799, 0 4px 0 #006680, 0 5px 0 #005566, 0 10px 20px rgba(0,0,0,0.9), 0 0 40px var(--primary-glow);
+        }
+        .center-prayer::before, .center-prayer::after { 
+            content: "🦅"; font-size: 2.2rem; opacity: 0.95; 
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+        .center-prayer::before { margin-bottom: 15px; }
+        .center-prayer::after { margin-top: 15px; transform: scaleX(-1); }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            header { flex-direction: column; text-align: center; }
+            .header-info { border-right: none; border-top: 3px solid var(--secondary); margin-top: 15px; width: 100%; text-align: center; }
+            .tabs { flex-direction: column; }
+            .tab-btn { width: 100%; justify-content: center; }
+        }
+
+        /* الطباعة */
+        @media print {
+            body { background: white; color: black; }
+            header, .tabs, .footer-wrapper, .action-btn, #auth-modal { display: none !important; }
+            .tab-content { border: none; box-shadow: none; display: block !important; padding: 0; background: white;}
+            .section-title { color: black; border-bottom: 1px solid #ccc; }
+            table { border: 1px solid #ddd; }
+            th { background: #eee !important; color: black !important; }
+            td { color: black; border-bottom: 1px solid #ddd; }
+            .stat-card { border: 1px solid #ccc; break-inside: avoid; background: #fff;}
+            .stat-card p, .stat-card h3 { color: black; text-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- نافذة طلب كلمة المرور للأقسام الإدارية -->
+    <div id="auth-modal">
+        <div class="login-box">
+            <h2>الوصول للإدارة (لوحة التحكم)</h2>
+            <p>هذا القسم مخصص للباحثة والمشرفين. الرجاء إدخال كلمة المرور (nira).</p>
+            <input type="password" id="passwordInput" placeholder="أدخل كلمة المرور هنا..." onkeypress="if(event.key === 'Enter') verifyPassword()">
+            <button class="btn-submit" onclick="verifyPassword()">🔑 دخول آمن</button>
+            <button class="btn-cancel" onclick="closeAuthModal()">إلغاء والعودة للمحتوى العام</button>
+            <p id="errorMsg" style="color: var(--danger); margin-top: 15px; display: none; font-weight: bold;">❌ كلمة المرور غير صحيحة!</p>
+        </div>
+    </div>
+
+    <!-- المحتوى الرئيسي للمنصة -->
+    <div id="app-content">
+        <header>
+            <div class="header-titles">
+                <h2>جامعة المنصورة | كلية التربية | قسم المناهج وطرق التدريس</h2>
+                <h1>البرنامج التدريبي المصغر في بيئة تعلم تكيفية</h1>
+                <p>لتنمية الكفايات المهنية والكفاءة الذاتية لدى معلمي الفيزياء بالمرحلة الثانوية</p>
+            </div>
+            <div class="header-info">
+                <p><strong>إعداد الباحثة:</strong> نيرة محمود الدسوقي عبد الخالق</p>
+                <p><strong>جهة العمل:</strong> مديرية التربية والتعليم - محافظة الدقهلية</p>
+                <p style="margin-top: 10px; color: var(--primary); font-size: 13px;" id="dateTimeDisplay"></p>
+                <p style="font-size: 13px;">حالة المزامنة: <span id="syncStatus" style="color: var(--danger); font-weight: bold;">غير متصل 🔴</span></p>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <!-- أقسام مفتوحة للجميع (المتدربين والزوار) -->
+            <button class="tab-btn active" onclick="switchTab('program-info')">📖 عن البرنامج والأسس</button>
+            <button class="tab-btn" onclick="switchTab('sessions')">📚 الجلسات والمحتوى العلمي</button>
+            
+            <!-- أقسام الإدارة (تتطلب كلمة مرور) -->
+            <button class="tab-btn" onclick="requestAccess('dashboard')">📊 الإحصائيات (لوحة القيادة)</button>
+            <button class="tab-btn" onclick="requestAccess('trainees')">👥 إدارة بيانات معلمي الفيزياء</button>
+            <button class="tab-btn" onclick="requestAccess('evaluation')">📝 أدوات التقويم والمقاييس</button>
+            <button class="tab-btn" onclick="requestAccess('settings')">⚙️ الإعدادات والتصدير</button>
+        </div>
+
+        <!-- 1. تبويب: عن البرنامج (مفتوح) -->
+        <div id="program-info" class="tab-content active">
+            <h2 class="section-title">المقدمة والأسس النظرية</h2>
+            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 25px;">
+                <p style="margin-bottom: 15px; text-align: justify; line-height: 1.8;">
+                    يُعد المعلم الركيزة الأساسية في أي تطوير تربوي. وفي عصر التحول الرقمي والثورة الصناعية الرابعة، لم تعد طرق التدريس التقليدية كافية وحدها لإعداد جيل مبدع. أصبح من الضروري أن يمتلك معلم الفيزياء مجموعة متكاملة من الكفايات المهنية الرقمية.
+                    جاء هذا البرنامج لمعالجة الضعف في مستوى الكفايات المهنية والكفاءة الذاتية لدى معلمي الفيزياء بالمرحلة الثانوية (بمحافظة الدقهلية)، من خلال تقديم برنامج تدريبي قائم على <strong>التدريب المصغر (Microlearning)</strong> في <strong>بيئة تعلم تكيفية (Adaptive Learning Environment)</strong>.
+                </p>
+            </div>
+
+            <div class="form-grid">
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; border-right: 3px solid var(--primary);">
+                    <h3 style="color: var(--secondary); margin-bottom: 15px;">الأسس والمرتكزات</h3>
+                    <ul class="styled-list">
+                        <li><strong>الكفايات المهنية:</strong> استخدام التكنولوجيا، إنتاج المحتوى والاختبارات الإلكترونية.</li>
+                        <li><strong>نظرية الكفاءة الذاتية (Bandura):</strong> إنجازات الأداء، الخبرات البديلة، الإقناع اللفظي، الحالات الانفعالية.</li>
+                        <li><strong>التدريب المصغر:</strong> كائنات تدريبية لا تتجاوز 5-10 دقائق، تركيز على هدف واحد.</li>
+                        <li><strong>التعلم التكيفي:</strong> اختبار قبلي، مسارات مختلفة، وتيرة ذاتية.</li>
+                    </ul>
+                </div>
+                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; border-right: 3px solid var(--warning);">
+                    <h3 style="color: var(--warning); margin-bottom: 15px;">متطلبات التدريب الفنية</h3>
+                    <ul class="styled-list">
+                        <li>قاعة افتراضية (Google Classroom + Zoom).</li>
+                        <li>حاسوب أو هاتف ذكي مع اتصال جيد بالإنترنت (5 ميجابت).</li>
+                        <li>حساب Google (Gmail) للدخول إلى النماذج والدرايف.</li>
+                        <li>تطبيق WhatsApp أو Telegram للتواصل والمناقشات.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. تبويب: الجلسات (مفتوح) -->
+        <div id="sessions" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap;">
+                <h2 class="section-title" style="margin:0;">خطة الجلسات التدريبية (10 جلسات - 600 دقيقة)</h2>
+                <span style="background: var(--primary); color: var(--dark-bg); padding: 5px 15px; border-radius: 20px; font-weight: bold;">الفئة المستهدفة: معلمو الفيزياء</span>
+            </div>
+            
+            <div class="sessions-grid" id="sessionsContainer">
+                <!-- يتم توليد البطاقات عبر جافاسكريبت للحفاظ على نظافة الكود -->
+            </div>
+        </div>
+
+        <!-- 3. تبويب: لوحة القيادة (محمي) -->
+        <div id="dashboard" class="tab-content">
+            <h2 class="section-title">لوحة المتابعة والتحليل (Dashbaord)</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="icon">👥</div>
+                    <h3>إجمالي المعلمين المسجلين</h3>
+                    <p id="totalTrainees">0</p>
+                </div>
+                <div class="stat-card">
+                    <div class="icon">📈</div>
+                    <h3>متوسط الإنجاز العام</h3>
+                    <p id="avgProgress">0%</p>
+                </div>
+                <div class="stat-card" style="border-right-color: var(--success);">
+                    <div class="icon">🟢</div>
+                    <h3>المسار المتقدم</h3>
+                    <p id="countAdvanced">0</p>
+                </div>
+                <div class="stat-card" style="border-right-color: var(--warning);">
+                    <div class="icon">🟡</div>
+                    <h3>المسار المتوسط/المبتدئ</h3>
+                    <p id="countOthers">0</p>
+                </div>
+            </div>
+
+            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px;">
+                <h3 style="color: var(--secondary); margin-bottom: 20px;">توزيع الأهداف والمحاور الأربعة للبرنامج</h3>
+                <div class="form-grid">
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">المحور الأول: مهارات التدريس</h4>
+                        <ul class="styled-list">
+                            <li>توظيف اليوتيوب والبحث الدقيق.</li>
+                            <li>استخدام السبورة الذكية ومشاركة الشاشة.</li>
+                            <li>تصميم خطة الدرس التفاعلية.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">المحور الثاني: المحتوى الإلكتروني</h4>
+                        <ul class="styled-list">
+                            <li>العروض التقديمية (PowerPoint/Canva).</li>
+                            <li>الفيديو التعليمي القصير والتعليق الصوتي.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">المحور الثالث: الاختبارات الإلكترونية</h4>
+                        <ul class="styled-list">
+                            <li>الإنشاء على Google Forms والتصحيح الآلي.</li>
+                            <li>التغذية الراجعة وتحليل النتائج.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">المحور الرابع: الكفاءة الذاتية</h4>
+                        <ul class="styled-list">
+                            <li>رفع مستوى الثقة في استخدام التكنولوجيا.</li>
+                            <li>التطوير المهني المستمر.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. تبويب: إدارة المتدربين (محمي) -->
+        <div id="trainees" class="tab-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+                <h2 class="section-title" style="margin:0;">قاعدة بيانات متدربي الدقهلية</h2>
+                <div>
+                    <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة السجل</button>
+                    <button class="action-btn btn-export" onclick="exportCSV()">⬇️ تصدير لـ Excel/CSV</button>
+                </div>
+            </div>
+
+            <!-- نموذج الإضافة السريع -->
+            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--secondary);">
+                <h3 style="margin-bottom: 20px; color: var(--text-main);">إضافة معلم فيزياء جديد للمسار التكيفي</h3>
+                <div class="form-grid" style="align-items: end;">
+                    <div class="form-group">
+                        <label>الاسم الرباعي</label>
+                        <input type="text" id="tName" placeholder="أدخل اسم المعلم...">
+                    </div>
+                    <div class="form-group">
+                        <label>الإدارة التعليمية (محافظة الدقهلية)</label>
+                        <select id="tSchool">
+                            <option value="إدارة شرق المنصورة">إدارة شرق المنصورة</option>
+                            <option value="إدارة غرب المنصورة">إدارة غرب المنصورة</option>
+                            <option value="إدارة طلخا">إدارة طلخا</option>
+                            <option value="إدارة ميت غمر">إدارة ميت غمر</option>
+                            <option value="إدارة دكرنس">إدارة دكرنس</option>
+                            <option value="أخرى">أخرى...</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>نتيجة التشخيص القبلي (المسار)</label>
+                        <select id="tLevel">
+                            <option value="مبتدئ">مبتدئ (تأسيس الكفايات)</option>
+                            <option value="متوسط">متوسط (تطوير المهارات)</option>
+                            <option value="متقدم">متقدم (إتقان وإنتاج)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>نسبة اجتياز المهام (%)</label>
+                        <input type="number" id="tProgress" placeholder="مثال: 75" min="0" max="100">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <button class="action-btn btn-add" style="width: 100%; height: 45px; justify-content: center;" onclick="addTrainee()">➕ حفظ البيانات</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- جدول البيانات -->
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="5%">م</th>
+                            <th width="25%">اسم المعلم</th>
+                            <th width="20%">الإدارة التعليمية</th>
+                            <th width="15%">المسار التكيفي</th>
+                            <th width="20%">التقدم (الوتيرة الذاتية)</th>
+                            <th width="15%">إجراءات النظام</th>
+                        </tr>
+                    </thead>
+                    <tbody id="traineesTableBody">
+                        <!-- يتم التعبئة من جافاسكريبت -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 5. تبويب: أدوات التقويم (محمي) -->
+        <div id="evaluation" class="tab-content">
+            <h2 class="section-title">إدارة أدوات التقويم والقياس</h2>
+            
+            <div class="sessions-grid">
+                <div class="session-card">
+                    <h3>1. التقويم التشخيصي (القبلي)</h3>
+                    <p>يتم تطبيقه في الجلسة الأولى لتحديد المستوى المبدئي للمعلم، وتصنيفه في المسار التكيفي المناسب.</p>
+                    <ul class="styled-list" style="margin-top: 15px;">
+                        <li>اختبار معرفي للكفايات المهنية.</li>
+                        <li>مقياس الكفاءة الذاتية (القبلي).</li>
+                    </ul>
+                    <div class="session-footer">
+                        <span>أداة التنفيذ: Google Forms</span>
+                    </div>
+                </div>
+                
+                <div class="session-card">
+                    <h3>2. التقويم التكويني (المستمر)</h3>
+                    <p>أثناء الجلسات عبر تطبيقات قصيرة ومناقشات لتقديم تغذية راجعة فورية وتصحيح المسار.</p>
+                    <ul class="styled-list" style="margin-top: 15px;">
+                        <li>إنتاج خطة درس (تطبيق).</li>
+                        <li>إنتاج فيديو/عرض (مخرجات).</li>
+                    </ul>
+                    <div class="session-footer">
+                        <span>أداة التنفيذ: Google Classroom / Drive</span>
+                    </div>
+                </div>
+
+                <div class="session-card">
+                    <h3>3. التقويم الختامي (البعدي)</h3>
+                    <p>لقياس مدى تحقق أهداف البرنامج الكلية وتقييم الفعالية لمنح شهادة الإنجاز.</p>
+                    <ul class="styled-list" style="margin-top: 15px;">
+                        <li>اختبار معرفي بعدي.</li>
+                        <li>مقياس كفاءة ذاتية بعدي.</li>
+                        <li>بطاقة ملاحظة الأداء (النهائي).</li>
+                    </ul>
+                    <div class="session-footer">
+                        <span>أداة التنفيذ: تحليل شامل (Sheets)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. تبويب: الإعدادات والمزامنة (محمي) -->
+        <div id="settings" class="tab-content">
+            <h2 class="section-title">إعدادات النظام والربط السحابي (Google Sheets)</h2>
+            
+            <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 15px; margin-bottom: 30px;">
+                <h3 style="color: var(--primary); margin-bottom: 15px;">إعداد المزامنة الحية (Apps Script)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 15px;">
+                    لربط المنصة بجدول بيانات جوجل، قم بنشر كود Apps Script كـ Web App والصق الرابط هنا. سيتم حفظ وتحديث بيانات المتدربين (لوحة الدقهلية) تلقائياً.
+                </p>
+                <div class="form-group" style="max-width: 800px;">
+                    <input type="text" id="gasUrl" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom: 15px;">
+                    <button class="action-btn btn-sync" onclick="saveSettingsAndSync()">🔄 حفظ الرابط وإجراء مزامنة الآن</button>
+                </div>
+            </div>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px; background: rgba(0,0,0,0.3); padding: 25px; border-radius: 15px;">
+                    <h3 style="color: var(--secondary); margin-bottom: 15px;">استيراد بيانات خارجية (CSV)</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 14px;">قم برفع ملف CSV يحتوي على بيانات المعلمين لإضافتهم دفعة واحدة للنظام.</p>
+                    <input type="file" id="importFile" accept=".csv" style="width: 100%; color: white; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 15px;">
+                    <button class="action-btn btn-export" onclick="importCSV()" style="width: 100%; justify-content: center;">⬆️ استيراد ومعالجة البيانات</button>
+                </div>
+
+                <div style="flex: 1; min-width: 300px; background: rgba(255,23,68,0.1); border: 1px solid rgba(255,23,68,0.3); padding: 25px; border-radius: 15px;">
+                    <h3 style="color: var(--danger); margin-bottom: 15px;">منطقة الخطر (إدارة التخزين)</h3>
+                    <p style="color: var(--text-muted); margin-bottom: 15px; font-size: 14px;">يتم حفظ البيانات تلقائياً في المتصفح (LocalStorage). يمكنك مسح جميع البيانات للبدء ببرنامج تدريبي جديد.</p>
+                    <button class="action-btn btn-delete" onclick="factoryReset()" style="width: 100%; height: 45px; font-size: 16px;">⚠️ مسح جميع بيانات المنصة (إعادة ضبط)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3D FOOTER -->
+    <div class="footer-wrapper">
+        <div class="circle-container">
+            <svg viewBox="0 0 500 500" class="rotating-svg">
+                <defs><path id="textCirclePath" d="M 250, 440 A 190,190 0 1,1 250,60 A 190,190 0 1,1 250,440" /></defs>
+                <circle cx="250" cy="250" r="215" fill="none" stroke="rgba(0, 210, 255, 0.3)" stroke-width="4" />
+                <circle cx="250" cy="250" r="165" fill="none" stroke="rgba(0, 210, 255, 0.3)" stroke-width="4" />
+                <text><textPath href="#textCirclePath" startOffset="50%" text-anchor="middle" class="text-path-style">
+                    ALL RIGHTS RESERVED ®© DESIGNED & DEVELOPED BY <tspan class="name-highlight">MAHMOUD MOHAMED</tspan>
+                </textPath></text>
+            </svg>
+            <div class="center-prayer">
+                <span>ولا تنسونا من خالص دعائكم بظهر الغيب</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. الأمان والوصول ---
+        let isAuthenticated = false;
+        let targetTabAfterAuth = '';
+
+        function requestAccess(tabId) {
+            if (isAuthenticated) {
+                switchTab(tabId);
+            } else {
+                targetTabAfterAuth = tabId;
+                document.getElementById('auth-modal').style.display = 'flex';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('errorMsg').style.display = 'none';
+                document.getElementById('passwordInput').focus();
+            }
+        }
+
+        function verifyPassword() {
+            const pass = document.getElementById('passwordInput').value;
+            if (pass === 'nira') {
+                isAuthenticated = true;
+                closeAuthModal();
+                switchTab(targetTabAfterAuth);
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+                document.getElementById('passwordInput').style.borderColor = 'var(--danger)';
+            }
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').style.display = 'none';
+        }
+
+        // --- 2. البيانات والجلسات من الملحق (واقعية كاملة) ---
+        // بيانات أولية لغرض العرض
+        let traineesData = JSON.parse(localStorage.getItem('niraTraineesFull')) || [
+            { id: 1, name: "أحمد عبد الله", school: "إدارة شرق المنصورة", level: "متقدم", progress: 85 },
+            { id: 2, name: "منى محمود", school: "إدارة طلخا", level: "متوسط", progress: 60 }
+        ];
+
+        let gasUrl = localStorage.getItem('niraGasUrl') || "";
+
+        // محتوى الجلسات التدريبية المأخوذ من الملف المرفق بالتفصيل
+        const sessionsData = [
+            { day: "اليوم الأول", num: "الجلسة 1", time: "60 دقيقة", title: "التهيئة للاختبار القبلي التشخيصي", desc: "الترحيب، قواعد العمل، التعريف ببيئة التعلم التكيفية وأدوات البحث، وتطبيق الاختبار التشخيصي لتحديد المسار." },
+            { day: "اليوم الأول", num: "الجلسة 2", time: "60 دقيقة", title: "مهارات التدريس (1): توظيف اليوتيوب", desc: "أهمية اليوتيوب، معايير اختيار الفيديو، البحث عن فيديو قصير، وتصميم اختبار قصير بـ Google Forms." },
+            { day: "اليوم الثاني", num: "الجلسة 3", time: "60 دقيقة", title: "مهارات التدريس (2): السبورة الذكية", desc: "توظيف السبورة ومشاركة الشاشة في شرح الظواهر الفيزيائية ومحاكاة PhET." },
+            { day: "اليوم الثاني", num: "الجلسة 4", time: "60 دقيقة", title: "تصميم خطة الدرس التفاعلية", desc: "عناصر خطة الدرس، صياغة الأهداف السلوكية، وإعداد خطة متكاملة (تمهيد، عرض، تطبيق، تقويم)." },
+            { day: "اليوم الثالث", num: "الجلسة 5", time: "60 دقيقة", title: "إنتاج المحتوى (1): العروض التقديمية", desc: "مبادئ التصميم (قاعدة 5×5)، تصميم إنفوغرافيك واستخدام Canva/PowerPoint." },
+            { day: "اليوم الثالث", num: "الجلسة 6", time: "60 دقيقة", title: "إنتاج المحتوى (2): الفيديو القصير", desc: "كتابة السيناريو، خطوات الإنتاج بالهاتف/الشاشة، وإضافة التعليق الصوتي." },
+            { day: "اليوم الرابع", num: "الجلسة 7", time: "60 دقيقة", title: "الاختبارات الإلكترونية (1): الإنشاء", desc: "أهمية الاختبارات، إنشاء النماذج، أنواع الأسئلة وتفعيل التصحيح الآلي." },
+            { day: "اليوم الرابع", num: "الجلسة 8", time: "60 دقيقة", title: "الاختبارات الإلكترونية (2): التحليل", desc: "إضافة التغذية الراجعة Feedback، إرسال الرابط، وتحليل النتائج بـ Google Sheets." },
+            { day: "اليوم الخامس", num: "الجلسة 9", time: "60 دقيقة", title: "تنمية الكفاءة الذاتية للمعلم", desc: "العوامل المؤثرة في الكفاءة (Bandura)، تعزيز الثقة وحل مشكلات التكنولوجيا." },
+            { day: "اليوم الخامس", num: "الجلسة 10", time: "60 دقيقة", title: "ختامية: مراجعة وتقويم شامل", desc: "استمارات التقويم، الاختبار البعدي، مقياس الكفاءة الذاتية ومنح شهادات الإنجاز." }
+        ];
+
+        // --- 3. تهيئة المنصة ---
+        function initApp() {
+            renderSessions();
+            updateDashboard();
+            renderTrainees();
+            
+            document.getElementById('gasUrl').value = gasUrl;
+            if(gasUrl) document.getElementById('syncStatus').innerHTML = "متصل 🟢";
+
+            // تحديث الوقت الحي
+            setInterval(() => {
+                const now = new Date();
+                const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
+                document.getElementById('dateTimeDisplay').innerText = now.toLocaleDateString('ar-EG', options);
+            }, 1000);
+        }
+
+        // --- 4. واجهة المستخدم (التنقل) ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                if(btn.getAttribute('onclick').includes(tabId)) btn.classList.add('active');
+            });
+        }
+
+        // --- 5. العرض الديناميكي للبيانات ---
+        function renderSessions() {
+            const container = document.getElementById('sessionsContainer');
+            container.innerHTML = '';
+            sessionsData.forEach(s => {
+                container.innerHTML += `
+                    <div class="session-card">
+                        <div class="session-header">
+                            <span class="badge">${s.day} | ${s.time}</span>
+                            <span style="color: var(--text-muted); font-size: 14px;">${s.num}</span>
+                        </div>
+                        <h3>${s.title}</h3>
+                        <p>${s.desc}</p>
+                        <div class="session-footer">
+                            <span>أسلوب التدريب: مصغر تفاعلي</span>
+                            <span>التقويم: تكويني</span>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function renderTrainees() {
+            const tbody = document.getElementById('traineesTableBody');
+            tbody.innerHTML = '';
+            let advanced = 0, others = 0;
+
+            traineesData.forEach((t, index) => {
+                if(t.level === 'متقدم') advanced++; else others++;
+                
+                let levelColor = t.level === 'متقدم' ? 'var(--success)' : (t.level === 'متوسط' ? 'var(--primary)' : 'var(--warning)');
+                
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td><strong>${t.name}</strong></td>
+                        <td style="color: var(--text-muted);">${t.school}</td>
+                        <td><span style="background: rgba(0,0,0,0.4); border: 1px solid ${levelColor}; color: ${levelColor}; padding: 4px 10px; border-radius: 12px; font-size: 13px;">${t.level}</span></td>
+                        <td>
+                            <div class="progress-container">
+                                <div class="progress-bar" style="width: ${t.progress}%;"></div>
+                            </div>
+                            <small style="display: block; margin-top: 5px; text-align: left; font-weight: bold;">${t.progress}%</small>
+                        </td>
+                        <td>
+                            <button class="action-btn btn-delete" onclick="deleteTrainee(${t.id})">🗑️ مسح</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            // تحديث إحصائيات لوحة القيادة
+            document.getElementById('totalTrainees').innerText = traineesData.length;
+            document.getElementById('countAdvanced').innerText = advanced;
+            document.getElementById('countOthers').innerText = others;
+            
+            const avg = traineesData.length > 0 ? (traineesData.reduce((sum, t) => sum + t.progress, 0) / traineesData.length).toFixed(1) : 0;
+            document.getElementById('avgProgress').innerText = avg + "%";
+        }
+
+        // --- 6. العمليات (إضافة، حذف، مسح كلي) ---
+        function addTrainee() {
+            const name = document.getElementById('tName').value.trim();
+            const school = document.getElementById('tSchool').value;
+            const level = document.getElementById('tLevel').value;
+            const progress = document.getElementById('tProgress').value || 0;
+
+            if(!name) return alert("الرجاء إدخال اسم المعلم أولاً!");
+
+            traineesData.push({
+                id: Date.now(), name: name, school: school, level: level, progress: parseInt(progress)
+            });
+
+            saveData();
+            
+            // تصفير الحقول
+            document.getElementById('tName').value = '';
+            document.getElementById('tProgress').value = '';
+            alert("تم إضافة المتدرب لقاعدة البيانات بنجاح.");
+        }
+
+        function deleteTrainee(id) {
+            if(confirm("تحذير: هل أنت متأكد من حذف بيانات هذا المعلم بشكل نهائي؟")) {
+                traineesData = traineesData.filter(t => t.id !== id);
+                saveData();
+            }
+        }
+
+        function factoryReset() {
+            if(confirm("إجراء خطير! هل تريد مسح جميع بيانات المتدربين للبدء ببرنامج تدريبي جديد؟ لا يمكن التراجع عن هذا الإجراء.")) {
+                traineesData = [];
+                saveData();
+                alert("تم تصفير النظام بنجاح.");
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('niraTraineesFull', JSON.stringify(traineesData));
+            renderTrainees();
+            autoSyncIfConfigured();
+        }
+
+        // --- 7. التصدير والاستيراد (ملفات CSV) ---
+        function exportCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,\uFEFF"; 
+            csvContent += "الرقم_التعريفي,اسم_المعلم,الإدارة_التعليمية,المسار_التكيفي,نسبة_الإنجاز\n";
+            traineesData.forEach(t => {
+                csvContent += `${t.id},${t.name},${t.school},${t.level},${t.progress}\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "سجل_متدربي_الفيزياء_الدقهلية.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function importCSV() {
+            const fileInput = document.getElementById('importFile');
+            const file = fileInput.files[0];
+            if (!file) return alert("الرجاء اختيار ملف CSV من جهازك أولاً.");
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const lines = e.target.result.split('\n');
+                let addedCount = 0;
+                for(let i = 1; i < lines.length; i++) { 
+                    if(lines[i].trim() === '') continue;
+                    const cols = lines[i].split(',');
+                    if(cols.length >= 4) {
+                        traineesData.push({
+                            id: Date.now() + Math.random(),
+                            name: cols[1].trim(),
+                            school: cols[2] ? cols[2].trim() : "غير محدد",
+                            level: cols[3] ? cols[3].trim() : "مبتدئ",
+                            progress: parseInt(cols[4]) || 0
+                        });
+                        addedCount++;
+                    }
+                }
+                saveData();
+                alert(`تم الاستيراد بنجاح! تمت إضافة ${addedCount} متدرب.`);
+                fileInput.value = ''; // تصفير الملف
+            };
+            reader.readAsText(file, "UTF-8");
+        }
+
+        // --- 8. المزامنة السحابية (Google Apps Script) ---
+        function saveSettingsAndSync() {
+            gasUrl = document.getElementById('gasUrl').value.trim();
+            localStorage.setItem('niraGasUrl', gasUrl);
+            
+            if(gasUrl) {
+                document.getElementById('syncStatus').innerHTML = "جاري الاتصال السحابي... ⏳";
+                document.getElementById('syncStatus').style.color = "var(--warning)";
+                syncWithGoogleSheets();
+            } else {
+                document.getElementById('syncStatus').innerHTML = "غير متصل 🔴";
+                document.getElementById('syncStatus').style.color = "var(--danger)";
+            }
+        }
+
+        function autoSyncIfConfigured() {
+            if(gasUrl) syncWithGoogleSheets();
+        }
+
+        function syncWithGoogleSheets() {
+            // يتم إرسال البيانات كـ POST request لسكربت جوجل
+            fetch(gasUrl, {
+                method: 'POST',
+                mode: 'no-cors', // مطلوب لطلبات Apps Script من متصفحات مختلفة
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ data: traineesData })
+            }).then(() => {
+                document.getElementById('syncStatus').innerHTML = "تمت المزامنة الحية بنجاح 🟢";
+                document.getElementById('syncStatus').style.color = "var(--success)";
+            }).catch(err => {
+                console.error("فشل الاتصال", err);
+                document.getElementById('syncStatus').innerHTML = "خطأ في الشبكة السحابية 🔴";
+                document.getElementById('syncStatus').style.color = "var(--danger)";
+            });
+        }
+
+        // تشغيل المنصة عند اكتمال تحميل المستند
+        window.onload = initApp;
+    </script>
+</body>
+</html>
+
