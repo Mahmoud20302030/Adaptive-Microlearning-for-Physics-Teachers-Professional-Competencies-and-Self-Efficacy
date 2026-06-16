@@ -33,39 +33,40 @@
         :root {
             /* باليت ألوان Premium Dark SaaS & Cyberpunk Vibes */
             --primary: #00d2ff; 
-            --primary-glow: rgba(0, 210, 255, 0.6); 
+            --primary-glow: rgba(0, 210, 255, 0.8); 
             --secondary: #3a7bd5;
-            --dark-bg: #040814; /* لون ليلي شديد العمق */
-            --panel-bg: rgba(10, 15, 30, 0.7); 
-            --card-bg: rgba(17, 25, 40, 0.75);
+            --secondary-glow: rgba(58, 123, 213, 0.6);
+            --dark-bg: #020610; /* لون ليلي شديد العمق معتم أكثر لبروز الإضاءة */
+            --panel-bg: rgba(10, 15, 30, 0.85); 
+            --card-bg: rgba(17, 25, 40, 0.85);
             --text-main: #ffffff; 
             --text-muted: #94a3b8; 
             --success: #10b981;
-            --success-glow: rgba(16, 185, 129, 0.4);
+            --success-glow: rgba(16, 185, 129, 0.6);
             --warning: #f59e0b; 
-            --warning-glow: rgba(245, 158, 11, 0.4);
+            --warning-glow: rgba(245, 158, 11, 0.6);
             --danger: #ef4444; 
-            --border-color: rgba(0, 210, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.08);
+            --border-color: rgba(0, 210, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --gradient-accent: linear-gradient(135deg, var(--secondary), var(--primary));
         }
 
         * { box-sizing: border-box; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
         
         /* شريط التمرير المخصص الحديث */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: #02040a; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.3); border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
-        ::-webkit-scrollbar-thumb:hover { background: var(--primary); box-shadow: 0 0 10px var(--primary-glow); }
-        ::selection { background: rgba(0, 210, 255, 0.3); color: #fff; text-shadow: 0 0 5px var(--primary); }
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: #010205; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.4); border-radius: 10px; border: 1px solid rgba(255,255,255,0.05); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); box-shadow: 0 0 15px var(--primary-glow); }
+        ::selection { background: rgba(0, 210, 255, 0.4); color: #fff; text-shadow: 0 0 8px var(--primary); }
 
         /* الخلفية الديناميكية الفخمة */
         body { 
             background-color: var(--dark-bg);
             background-image: 
-                radial-gradient(circle at 15% 10%, rgba(58, 123, 213, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
-                url('data:image/svg+xml;utf8,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.02)" stroke-width="1"/></svg>');
+                radial-gradient(circle at 10% 10%, rgba(58, 123, 213, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
+                url('data:image/svg+xml;utf8,<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg"><path d="M 60 0 L 0 0 0 60" fill="none" stroke="rgba(255,255,255,0.015)" stroke-width="1"/></svg>');
             background-attachment: fixed;
             color: var(--text-main); 
             min-height: 100vh; 
@@ -73,147 +74,276 @@
             flex-direction: column; 
             overflow-x: hidden; 
             line-height: 1.8; 
-            scroll-behavior: smooth; 
+            scroll-behavior: smooth;
         }
 
-        /* حركات الانيميشن العالمية */
-        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-        @keyframes pulseGlow { 0% { box-shadow: 0 0 15px var(--primary-glow); } 50% { box-shadow: 0 0 30px var(--primary-glow), 0 0 10px var(--primary); } 100% { box-shadow: 0 0 15px var(--primary-glow); } }
-        @keyframes floatEffect { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
+        /* حركات الانيميشن العالمية (اضف مالااراه) */
+        @keyframes fadeSlideUp { 
+            from { opacity: 0; transform: translateY(40px); filter: blur(10px); } 
+            to { opacity: 1; transform: translateY(0); filter: blur(0); } 
+        }
+        @keyframes laserPulse { 
+            0% { box-shadow: 0 0 10px rgba(0,210,255,0.2), inset 0 0 5px rgba(0,210,255,0.1); border-color: rgba(0, 210, 255, 0.3); } 
+            50% { box-shadow: 0 0 25px rgba(0,210,255,0.6), inset 0 0 15px rgba(0,210,255,0.3); border-color: var(--primary); } 
+            100% { box-shadow: 0 0 10px rgba(0,210,255,0.2), inset 0 0 5px rgba(0,210,255,0.1); border-color: rgba(0, 210, 255, 0.3); } 
+        }
+        @keyframes glowingBorder {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         /* نافذة تسجيل الدخول */
-        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 4, 10, 0.9); justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(20px); }
-        .login-box { background: rgba(15, 23, 42, 0.7); padding: 50px 45px; border-radius: 30px; border: 1px solid var(--glass-border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px rgba(0, 210, 255, 0.15) inset; text-align: center; width: 90%; max-width: 440px; animation: scaleIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); backdrop-filter: blur(25px); position: relative; overflow: hidden; }
-        .login-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,210,255,0.1) 0%, transparent 60%); z-index: -1; }
+        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 4, 10, 0.95); justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(25px); }
+        .login-box { 
+            background: rgba(15, 23, 42, 0.85); padding: 50px 45px; border-radius: 30px; 
+            border: 2px solid var(--primary); animation: laserPulse 3s infinite alternate;
+            text-align: center; width: 90%; max-width: 440px; 
+            backdrop-filter: blur(25px); position: relative; overflow: hidden;
+        }
+        .login-box::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0,210,255,0.15) 0%, transparent 60%); z-index: -1; }
         @keyframes scaleIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .login-box h2 { margin-bottom: 25px; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 32px; font-weight: 900; }
-        .login-box input { width: 100%; padding: 18px; margin-bottom: 25px; border: 2px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.4); color: white; border-radius: 16px; font-size: 18px; font-weight: 700; text-align: center; transition: all 0.3s ease; box-shadow: inset 0 4px 10px rgba(0,0,0,0.5); }
-        .login-box input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0, 210, 255, 0.3), inset 0 2px 5px rgba(0,0,0,0.5); outline: none; background: rgba(0,0,0,0.6); }
-        .btn-submit { width: 100%; padding: 18px; background: var(--gradient-accent); border: none; color: white; font-weight: 900; font-size: 20px; border-radius: 16px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; }
-        .btn-submit::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent); transform: rotate(45deg) translateY(-100%); transition: all 0.6s ease; }
+        .login-box h2 { margin-bottom: 25px; background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 34px; font-weight: 900; }
+        .login-box input { 
+            width: 100%; padding: 18px; margin-bottom: 25px; border: 2px solid rgba(255,255,255,0.1); 
+            background: rgba(0,0,0,0.6); color: white; border-radius: 16px; font-size: 18px; font-weight: 700; text-align: center; transition: all 0.3s ease; box-shadow: inset 0 4px 10px rgba(0,0,0,0.6); 
+        }
+        .login-box input:focus { border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 210, 255, 0.5), inset 0 2px 5px rgba(0,0,0,0.6); outline: none; background: rgba(0,0,0,0.8); }
+        
+        .btn-submit { 
+            width: 100%; padding: 18px; background: var(--gradient-accent); border: none; color: white; font-weight: 900; font-size: 20px; border-radius: 16px; cursor: pointer; transition: all 0.4s ease; position: relative; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 210, 255, 0.3);
+        }
+        .btn-submit::after { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent); transform: rotate(45deg) translateY(-100%); transition: all 0.6s ease; }
         .btn-submit:hover::after { transform: rotate(45deg) translateY(100%); }
-        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0, 210, 255, 0.4); letter-spacing: 1px; }
-        .btn-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted); margin-top: 20px; padding: 14px; width: 100%; border-radius: 16px; cursor: pointer; transition: 0.3s; font-weight: 700; font-size: 16px; }
-        .btn-cancel:hover { background: rgba(255,255,255,0.05); color: white; border-color: rgba(255,255,255,0.3); }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(0, 210, 255, 0.6); letter-spacing: 1.5px; }
+        .btn-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); margin-top: 20px; padding: 14px; width: 100%; border-radius: 16px; cursor: pointer; transition: 0.3s; font-weight: 800; font-size: 16px; }
+        .btn-cancel:hover { background: rgba(255,255,255,0.1); color: white; border-color: rgba(255,255,255,0.4); box-shadow: 0 0 15px rgba(255,255,255,0.1); }
 
         /* الهيكل الأساسي */
         #app-content { flex: 1; padding: 40px 30px; max-width: 1700px; margin: 0 auto; width: 100%; }
         
         /* الهيدر الفخم */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 45px; background: rgba(15, 23, 42, 0.5); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-radius: 30px; border: 1px solid var(--glass-border); border-bottom: 4px solid var(--primary); margin-bottom: 50px; flex-wrap: wrap; gap: 30px; box-shadow: 0 30px 60px -15px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1); position: relative; z-index: 10; }
-        header::before { content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,210,255,0.05)); border-radius: 30px; z-index: -1; }
-        .header-titles h1 { font-size: 42px; color: var(--text-main); font-weight: 900; margin-bottom: 15px; line-height: 1.4; letter-spacing: -0.5px; }
-        .header-titles h1 span { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 30px rgba(0, 210, 255, 0.3); }
-        .header-titles h2 { font-size: 20px; color: var(--text-muted); font-weight: 800; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
-        .header-info { background: rgba(0,0,0,0.5); padding: 30px 35px; border-radius: 24px; border-right: 5px solid var(--secondary); text-align: right; box-shadow: inset 0 4px 20px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.03); }
-        .header-info p { font-size: 16px; font-weight: 600; margin-bottom: 8px; color: #cbd5e1; }
+        header { 
+            display: flex; justify-content: space-between; align-items: center; padding: 45px; 
+            background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); 
+            border-radius: 30px; border: 1px solid var(--glass-border); 
+            border-bottom: 5px solid var(--primary); margin-bottom: 50px; flex-wrap: wrap; gap: 30px;
+            box-shadow: 0 35px 70px -15px rgba(0,0,0,0.8), inset 0 2px 0 rgba(255,255,255,0.15); position: relative; z-index: 10;
+            animation: laserPulse 4s infinite alternate;
+        }
+        header::before { content: ''; position: absolute; top: 0; right: 0; width: 250px; height: 100%; background: linear-gradient(90deg, transparent, rgba(0,210,255,0.08)); border-radius: 30px; z-index: -1; }
+        
+        .header-titles h1 { font-size: 46px; color: var(--text-main); font-weight: 900; margin-bottom: 15px; line-height: 1.4; letter-spacing: -0.5px; text-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .header-titles h1 span { background: var(--gradient-accent); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 35px rgba(0, 210, 255, 0.4); }
+        .header-titles h2 { font-size: 22px; color: var(--text-muted); font-weight: 900; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+        
+        .header-info { 
+            background: rgba(0,0,0,0.6); padding: 30px 35px; border-radius: 24px; 
+            border-right: 6px solid var(--secondary); text-align: right; 
+            box-shadow: inset 0 4px 25px rgba(0,0,0,0.6), 0 0 20px rgba(58, 123, 213, 0.2); border: 1px solid rgba(255,255,255,0.05);
+        }
+        .header-info p { font-size: 17px; font-weight: 700; margin-bottom: 8px; color: #e2e8f0; }
 
         /* التبويبات (Tabs) */
-        .tabs { display: flex; gap: 18px; margin-bottom: 50px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 10;}
-        .tab-btn { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); color: var(--text-muted); padding: 18px 35px; border-radius: 20px; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 800; font-size: 16px; display: flex; align-items: center; gap: 12px; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .tab-btn:hover { background: rgba(255,255,255,0.05); color: #fff; transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
-        .tab-btn.active { background: var(--gradient-accent); color: #fff; box-shadow: 0 15px 35px -5px rgba(0, 210, 255, 0.4), inset 0 1px 0 rgba(255,255,255,0.3); transform: translateY(-5px); border-color: transparent; }
+        .tabs { display: flex; gap: 18px; margin-bottom: 50px; flex-wrap: wrap; justify-content: center; position: relative; z-index: 10; }
+        .tab-btn { 
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: var(--text-muted);
+            padding: 18px 35px; border-radius: 20px; cursor: pointer; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+            font-weight: 800; font-size: 17px; display: flex; align-items: center; gap: 12px; 
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .tab-btn:hover { background: rgba(255,255,255,0.08); color: #fff; transform: translateY(-4px); border-color: rgba(255,255,255,0.3); box-shadow: 0 10px 20px rgba(0,210,255,0.2); }
+        .tab-btn.active { 
+            background: var(--gradient-accent); color: #fff;
+            box-shadow: 0 15px 40px -5px rgba(0, 210, 255, 0.5), inset 0 2px 0 rgba(255,255,255,0.4); 
+            transform: translateY(-5px); border-color: transparent; letter-spacing: 0.5px;
+        }
 
-        .tab-content { display: none; background: var(--panel-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); padding: 55px; border-radius: 30px; border: 1px solid var(--glass-border); box-shadow: 0 40px 80px -20px rgba(0,0,0,0.7), inset 0 0 40px rgba(255,255,255,0.01); animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; position: relative; z-index: 5; }
+        .tab-content { 
+            display: none; background: var(--panel-bg); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); padding: 55px;
+            border-radius: 30px; border: 1px solid var(--glass-border); 
+            box-shadow: 0 45px 90px -20px rgba(0,0,0,0.8), inset 0 0 50px rgba(255,255,255,0.02);
+            animation: fadeSlideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; position: relative; z-index: 5;
+        }
         .tab-content.active { display: block; }
         
-        .section-title { color: var(--text-main); border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; margin-bottom: 45px; font-size: 32px; display: inline-block; font-weight: 900; position: relative; padding-right: 15px; }
-        .section-title::before { content: ''; position: absolute; right: 0; top: 10px; bottom: 20px; width: 5px; background: var(--primary); border-radius: 5px; box-shadow: 0 0 15px var(--primary-glow); }
-        .section-title::after { content: ''; position: absolute; bottom: -1px; right: 0; width: 60%; height: 3px; background: var(--gradient-accent); box-shadow: 0 0 20px var(--primary-glow); border-radius: 10px; }
+        .section-title { 
+            color: var(--text-main); border-bottom: 1px solid var(--glass-border); padding-bottom: 20px; margin-bottom: 45px; 
+            font-size: 34px; display: inline-block; font-weight: 900; position: relative; padding-right: 20px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .section-title::before { content: ''; position: absolute; right: 0; top: 5px; bottom: 15px; width: 6px; background: var(--primary); border-radius: 6px; box-shadow: 0 0 20px var(--primary-glow); }
+        .section-title::after { content: ''; position: absolute; bottom: -1px; right: 0; width: 65%; height: 4px; background: var(--gradient-accent); box-shadow: 0 0 25px var(--primary-glow); border-radius: 10px; }
 
         /* القوائم النظيفة والاحترافية */
         .clean-list { list-style: none; padding-right: 0; margin-top: 15px; }
-        .clean-list li { position: relative; padding-right: 45px; margin-bottom: 20px; color: #e2e8f0; font-size: 18px; font-weight: 600; line-height: 1.7; transition: transform 0.3s ease; }
-        .clean-list li:hover { transform: translateX(-5px); color: #fff; }
+        .clean-list li { position: relative; padding-right: 45px; margin-bottom: 20px; color: #e2e8f0; font-size: 18px; font-weight: 700; line-height: 1.7; transition: transform 0.3s ease; }
+        .clean-list li:hover { transform: translateX(-8px); color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
         .clean-list li:last-child { margin-bottom: 0; }
-        .clean-list li::before { content: '✓'; position: absolute; right: 0; top: 2px; color: var(--success); font-weight: 900; background: rgba(16, 185, 129, 0.1); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 16px; border: 1px solid rgba(16, 185, 129, 0.2); box-shadow: 0 4px 10px rgba(16, 185, 129, 0.1); }
+        .clean-list li::before { 
+            content: '✓'; position: absolute; right: 0; top: 0; color: var(--success); font-weight: 900; 
+            background: rgba(16, 185, 129, 0.15); width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+            border-radius: 12px; font-size: 18px; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+        }
 
         /* الجداول (Data Tables) - Modern Data Grid */
-        .table-wrapper { overflow-x: auto; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); max-height: 750px; overflow-y: auto; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--glass-border); backdrop-filter: blur(10px); }
-        .table-wrapper::-webkit-scrollbar { width: 8px; height: 8px; }
-        .table-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+        .table-wrapper { 
+            overflow-x: auto; border-radius: 24px; box-shadow: 0 25px 60px rgba(0,0,0,0.6); max-height: 750px; overflow-y: auto; 
+            background: rgba(15, 23, 42, 0.7); border: 1px solid var(--glass-border); backdrop-filter: blur(15px);
+        }
+        .table-wrapper::-webkit-scrollbar { width: 10px; height: 10px; }
+        .table-wrapper::-webkit-scrollbar-thumb { background: rgba(0,210,255,0.3); border-radius: 10px; }
         table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 1100px; }
-        th, td { padding: 25px 30px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        th { background: rgba(10, 15, 30, 0.95); color: var(--primary); font-weight: 900; white-space: nowrap; font-size: 17px; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(20px); border-bottom: 2px solid rgba(0, 210, 255, 0.2); letter-spacing: 0.5px; text-transform: uppercase; }
+        th, td { padding: 25px 30px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        th { 
+            background: rgba(10, 15, 30, 0.98); color: var(--primary); font-weight: 900; white-space: nowrap; font-size: 18px; 
+            position: sticky; top: 0; z-index: 10; backdrop-filter: blur(25px); border-bottom: 2px solid rgba(0, 210, 255, 0.3);
+            letter-spacing: 0.5px; text-transform: uppercase; text-shadow: 0 0 10px rgba(0,210,255,0.3);
+        }
         th:first-child { border-top-right-radius: 24px; } th:last-child { border-top-left-radius: 24px; }
-        tr { transition: all 0.3s ease; }
-        tr:hover { background: rgba(255, 255, 255, 0.02); transform: scale(1.002); box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.05); }
-        td { font-size: 16px; font-weight: 600; color: #cbd5e1; vertical-align: middle; }
+        tr { transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        tr:hover { 
+            background: rgba(0, 210, 255, 0.05); transform: scale(1.005); 
+            box-shadow: inset 4px 0 0 var(--primary), inset 0 0 30px rgba(0, 210, 255, 0.08); 
+        }
+        td { font-size: 17px; font-weight: 700; color: #cbd5e1; vertical-align: middle; }
 
         /* النماذج والأزرار */
         .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; margin-bottom: 35px; }
-        .form-group label { display: block; margin-bottom: 12px; color: var(--text-muted); font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 20px 25px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); color: white; border-radius: 18px; font-size: 16px; font-weight: 700; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: inset 0 2px 10px rgba(0,0,0,0.2); backdrop-filter: blur(5px); }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.15), inset 0 2px 10px rgba(0,0,0,0.4); background: rgba(0,0,0,0.5); outline: none; transform: translateY(-2px); }
+        .form-group label { display: block; margin-bottom: 12px; color: var(--text-muted); font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea { 
+            width: 100%; padding: 20px 25px; background: rgba(0,0,0,0.4); border: 2px solid rgba(255,255,255,0.08); 
+            color: white; border-radius: 18px; font-size: 17px; font-weight: 800; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+            box-shadow: inset 0 2px 15px rgba(0,0,0,0.3); backdrop-filter: blur(10px);
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+            border-color: var(--primary); box-shadow: 0 0 0 5px rgba(0, 210, 255, 0.2), inset 0 2px 10px rgba(0,0,0,0.5); 
+            background: rgba(0,0,0,0.6); outline: none; transform: translateY(-3px); 
+        }
         
         .controls-wrapper { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
-        .action-btn { padding: 16px 30px; border: none; border-radius: 16px; cursor: pointer; color: white; font-weight: 800; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 15px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); position: relative; overflow: hidden; z-index: 1;}
-        .action-btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(255,255,255,0.1), transparent); z-index: -1; border-radius: 16px; }
-        .action-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.3); filter: brightness(1.1); }
-        .action-btn:active { transform: translateY(1px); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+        .action-btn { 
+            padding: 16px 30px; border: none; border-radius: 16px; cursor: pointer; color: white; font-weight: 900; 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-size: 16px; display: inline-flex; align-items: center; gap: 10px; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3); position: relative; overflow: hidden; z-index: 1; letter-spacing: 0.5px;
+        }
+        .action-btn::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(255,255,255,0.15), transparent); z-index: -1; border-radius: 16px; }
+        .action-btn:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(0,0,0,0.4); filter: brightness(1.15); }
+        .action-btn:active { transform: translateY(2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         
-        .btn-add { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
-        .btn-add:hover { box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4); }
-        .btn-edit { background: linear-gradient(135deg, #f59e0b, #d97706); padding: 12px 22px; font-size: 14px; box-shadow: 0 6px 15px rgba(245, 158, 11, 0.3); }
+        .btn-add { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4); }
+        .btn-add:hover { box-shadow: 0 15px 40px rgba(16, 185, 129, 0.5); }
+        .btn-edit { background: linear-gradient(135deg, #f59e0b, #d97706); padding: 12px 22px; font-size: 15px; box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4); }
         .btn-export { background: linear-gradient(135deg, var(--secondary), #1e3a8a); }
         .btn-import { background: linear-gradient(135deg, #8b5cf6, #6d28d9); cursor: pointer; margin: 0; }
         .btn-print { background: linear-gradient(135deg, #64748b, #475569); }
-        .btn-sync { background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 8px 25px rgba(0, 210, 255, 0.3); }
-        .btn-delete { background: linear-gradient(135deg, #ef4444, #dc2626); padding: 12px 22px; font-size: 14px; box-shadow: 0 6px 15px rgba(239, 68, 68, 0.3); }
+        .btn-sync { background: linear-gradient(135deg, var(--primary), var(--secondary)); box-shadow: 0 8px 30px rgba(0, 210, 255, 0.4); }
+        .btn-delete { background: linear-gradient(135deg, #ef4444, #dc2626); padding: 12px 22px; font-size: 15px; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4); }
         input[type="file"] { display: none; }
 
         /* الكروت الإحصائية والجلسات - Modern SaaS Cards */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; margin-bottom: 50px; }
-        .stat-card { background: linear-gradient(145deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9)); padding: 45px; border-radius: 30px; border: 1px solid var(--glass-border); border-right: 6px solid var(--primary); display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6); backdrop-filter: blur(20px); }
-        .stat-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
-        .stat-card:hover { transform: translateY(-10px); box-shadow: 0 35px 60px -15px rgba(0,0,0,0.8), 0 0 30px rgba(0, 210, 255, 0.1) inset; border-color: rgba(255,255,255,0.1); border-right-color: var(--primary); background: linear-gradient(145deg, rgba(40, 53, 75, 0.9), rgba(15, 23, 42, 0.95)); }
-        .stat-card:hover::before { opacity: 1; animation: rotateText 10s linear infinite; }
-        .stat-card p { font-size: 65px; font-weight: 900; color: var(--text-main); margin: 0; z-index: 1; text-shadow: 0 10px 30px rgba(0, 210, 255, 0.5); line-height: 1; background: linear-gradient(180deg, #fff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .stat-card h3 { font-size: 19px; color: var(--text-muted); font-weight: 800; margin-bottom: 15px; z-index: 1; text-transform: uppercase; letter-spacing: 1px;}
-        .stat-card .icon { position: absolute; left: 25px; bottom: -20px; font-size: 120px; opacity: 0.03; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: grayscale(1); z-index: 0; }
-        .stat-card:hover .icon { transform: scale(1.15) rotate(-15deg); opacity: 0.1; filter: grayscale(0); }
+        .stat-card { 
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95)); padding: 45px; border-radius: 30px; 
+            border: 1px solid var(--glass-border); border-right: 6px solid var(--primary); display: flex; flex-direction: column; justify-content: center; 
+            position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1); 
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.7); backdrop-filter: blur(25px);
+        }
+        .stat-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 60%); opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+        .stat-card:hover { 
+            transform: translateY(-12px); box-shadow: 0 40px 70px -15px rgba(0,0,0,0.9), 0 0 40px rgba(0, 210, 255, 0.15) inset; 
+            border-color: rgba(255,255,255,0.15); border-right-color: var(--primary); 
+            background: linear-gradient(145deg, rgba(40, 53, 75, 0.95), rgba(15, 23, 42, 0.98));
+        }
+        .stat-card:hover::before { opacity: 1; animation: rotatingBorder 10s linear infinite; }
+        .stat-card p { font-size: 70px; font-weight: 900; color: var(--text-main); margin: 0; z-index: 1; text-shadow: 0 10px 40px rgba(0, 210, 255, 0.6); line-height: 1; background: linear-gradient(180deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat-card h3 { font-size: 20px; color: var(--text-muted); font-weight: 900; margin-bottom: 15px; z-index: 1; text-transform: uppercase; letter-spacing: 1px; }
+        .stat-card .icon { position: absolute; left: 25px; bottom: -25px; font-size: 130px; opacity: 0.04; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); filter: grayscale(1); z-index: 0; }
+        .stat-card:hover .icon { transform: scale(1.2) rotate(-15deg); opacity: 0.15; filter: grayscale(0); text-shadow: 0 0 20px rgba(0,210,255,0.5); }
 
         .sessions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 35px; }
-        .session-card { background: rgba(20, 30, 48, 0.6); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.04); border-top: 5px solid var(--secondary); transition: all 0.4s ease; display: flex; flex-direction: column; height: 100%; position: relative; backdrop-filter: blur(20px); box-shadow: 0 15px 35px rgba(0,0,0,0.3); overflow: hidden; }
-        .session-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 100%); pointer-events: none; }
-        .session-card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 210, 255, 0.1); border-top-color: var(--primary); background: rgba(30, 41, 59, 0.8); }
-        .session-card .session-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px;}
-        .session-card .badge { background: rgba(0, 210, 255, 0.1); color: var(--primary); padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: 900; border: 1px solid rgba(0, 210, 255, 0.2); box-shadow: 0 0 15px rgba(0,210,255,0.1); }
-        .session-card h3 { color: #fff; font-size: 24px; line-height: 1.5; margin-bottom: 18px; font-weight: 900; }
-        .session-card p { color: var(--text-muted); font-size: 17px; line-height: 1.8; font-weight: 600; flex-grow: 1; }
-        .session-card .strategy { font-size: 16px; font-weight: 800; color: var(--warning); margin-top: 25px; padding: 20px; background: rgba(245, 158, 11, 0.05); border-radius: 16px; border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);}
+        .session-card { 
+            background: rgba(20, 30, 48, 0.7); padding: 40px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); 
+            border-top: 6px solid var(--secondary); transition: all 0.4s ease; display: flex; flex-direction: column; height: 100%; 
+            position: relative; backdrop-filter: blur(25px); box-shadow: 0 20px 45px rgba(0,0,0,0.4); overflow: hidden; 
+        }
+        .session-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 100%); pointer-events: none; }
+        .session-card:hover { 
+            transform: translateY(-15px); box-shadow: 0 35px 70px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 210, 255, 0.15); 
+            border-top-color: var(--primary); background: rgba(30, 41, 59, 0.85); 
+        }
+        .session-card .session-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 25px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 20px; }
+        .session-card .badge { 
+            background: rgba(0, 210, 255, 0.15); color: var(--primary); padding: 8px 20px; border-radius: 20px; 
+            font-size: 15px; font-weight: 900; border: 1px solid rgba(0, 210, 255, 0.3); box-shadow: 0 0 20px rgba(0,210,255,0.2); 
+        }
+        .session-card h3 { color: #fff; font-size: 26px; line-height: 1.5; margin-bottom: 18px; font-weight: 900; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .session-card p { color: var(--text-muted); font-size: 18px; line-height: 1.8; font-weight: 700; flex-grow: 1; }
+        .session-card .strategy { font-size: 17px; font-weight: 900; color: var(--warning); margin-top: 25px; padding: 22px; background: rgba(245, 158, 11, 0.08); border-radius: 16px; border: 1px solid rgba(245, 158, 11, 0.25); box-shadow: inset 0 2px 15px rgba(0,0,0,0.15); }
 
         /* الإشعارات (Toast) */
         #toast-container { position: fixed; bottom: 40px; left: 40px; z-index: 10000; display: flex; flex-direction: column; gap: 15px; }
-        .toast { background: rgba(15, 23, 42, 0.95); color: white; padding: 22px 35px; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 30px rgba(0, 210, 255, 0.1); border-right: 6px solid var(--primary); font-weight: 800; font-size: 16px; animation: slideInLeft 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, fadeOut 0.5s ease 3.5s forwards; min-width: 340px; text-align: right; backdrop-filter: blur(25px); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); border-left: 1px solid rgba(255,255,255,0.1);}
+        .toast { 
+            background: rgba(15, 23, 42, 0.98); color: white; padding: 22px 35px; border-radius: 20px; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(0, 210, 255, 0.15); border-right: 6px solid var(--primary); 
+            font-weight: 900; font-size: 17px; animation: slideInLeft 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, fadeOut 0.5s ease 3.5s forwards; 
+            min-width: 350px; text-align: right; backdrop-filter: blur(30px); border-top: 1px solid rgba(255,255,255,0.15); 
+            border-bottom: 1px solid rgba(255,255,255,0.15); border-left: 1px solid rgba(255,255,255,0.15);
+        }
         @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { to { opacity: 0; visibility: hidden; transform: translateY(10px); } }
-        .toast.success { border-right-color: var(--success); box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 30px rgba(16, 185, 129, 0.15); } 
-        .toast.error { border-right-color: var(--danger); } 
-        .toast.warning { border-right-color: var(--warning); }
+        @keyframes fadeOut { to { opacity: 0; visibility: hidden; transform: translateY(15px); } }
+        .toast.success { border-right-color: var(--success); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(16, 185, 129, 0.2); } 
+        .toast.error { border-right-color: var(--danger); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(239, 68, 68, 0.2); } 
+        .toast.warning { border-right-color: var(--warning); box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(245, 158, 11, 0.2); }
         
-        .program-focus-header { background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(0, 0, 0, 0.6)); padding: 40px; border-radius: 30px; border: 1px solid var(--glass-border); border-right: 6px solid var(--primary); margin-bottom: 45px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 25px; backdrop-filter: blur(25px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
-        .program-focus-header::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--primary-glow); filter: blur(80px); border-radius: 50%; opacity: 0.5; pointer-events: none; }
-        .program-focus-header h3 { color: #fff; margin: 0; font-size: 28px; font-weight: 900; text-shadow: 0 4px 10px rgba(0,0,0,0.5);}
+        .program-focus-header { 
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(0, 0, 0, 0.7)); padding: 45px; border-radius: 30px; 
+            border: 1px solid var(--glass-border); border-right: 6px solid var(--primary); margin-bottom: 45px; display: flex; 
+            justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 25px; backdrop-filter: blur(30px); 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5); position: relative; overflow: hidden;
+        }
+        .program-focus-header::before { content: ''; position: absolute; top: -50px; right: -50px; width: 180px; height: 180px; background: var(--primary-glow); filter: blur(90px); border-radius: 50%; opacity: 0.6; pointer-events: none; }
+        .program-focus-header h3 { color: #fff; margin: 0; font-size: 30px; font-weight: 900; text-shadow: 0 5px 15px rgba(0,0,0,0.6); }
 
         /* الفوتر الأصلي بدون أي تغيير في الألوان إطلاقاً (محمي حسب الطلب) */
-        .footer-wrapper { padding: 40px 20px; background: rgba(2, 5, 10, 0.98); border-top: 3px solid var(--primary); display: flex; justify-content: center; align-items: center; margin-top: auto; position: relative; overflow: hidden; height: 550px; flex-shrink: 0; box-shadow: 0 -15px 50px rgba(0,0,0,0.8); }
+        .footer-wrapper { 
+            padding: 40px 20px; background: rgba(2, 5, 10, 0.98); border-top: 3px solid var(--primary); 
+            display: flex; justify-content: center; align-items: center; margin-top: auto; position: relative;
+            overflow: hidden; height: 550px; flex-shrink: 0; box-shadow: 0 -15px 50px rgba(0,0,0,0.8);
+        }
         .circle-container { position: relative; width: 480px; height: 480px; display: flex; justify-content: center; align-items: center; transform: scale(0.8); }
         @media (min-width: 768px) { .circle-container { transform: scale(1); } .footer-wrapper { padding: 80px 20px; } }
         .rotating-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; animation: rotateText 22s linear infinite; z-index: 2; }
         @keyframes rotateText { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .text-path-style { font-size: 20px; fill: #ffffff; font-family: 'Arial Black', Impact, sans-serif; letter-spacing: 6px; filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.9)); }
         .name-highlight { font-size: 28px; font-weight: 900; fill: var(--primary); letter-spacing: 4px; text-transform: uppercase; }
-        .center-prayer { position: relative; width: 340px; text-align: center; font-size: 2.2rem; font-weight: 900; color: var(--primary); line-height: 1.8; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; text-shadow: 0 1px 0 #0099cc, 0 2px 0 #0088b3, 0 3px 0 #007799, 0 4px 0 #006680, 0 5px 0 #005566, 0 10px 20px rgba(0,0,0,0.9), 0 0 40px var(--primary-glow); }
+        .center-prayer { 
+            position: relative; width: 340px; text-align: center; font-size: 2.2rem; font-weight: 900; color: var(--primary); 
+            line-height: 1.8; z-index: 10; display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-shadow: 0 1px 0 #0099cc, 0 2px 0 #0088b3, 0 3px 0 #007799, 0 4px 0 #006680, 0 5px 0 #005566, 0 10px 20px rgba(0,0,0,0.9), 0 0 40px var(--primary-glow);
+        }
         .center-prayer::before, .center-prayer::after { content: "🦅"; font-size: 2.2rem; opacity: 0.95; filter: drop-shadow(0 0 10px var(--primary-glow)); }
         .center-prayer::before { margin-bottom: 15px; } .center-prayer::after { margin-top: 15px; transform: scaleX(-1); }
 
-        /* الطباعة */
+        /* منظومة الطباعة العالمية (Print-Ready) المحدثة بالكامل */
         @media print {
-            body { background: white; color: black; } header, .tabs, .footer-wrapper, .action-btn, .controls-wrapper, #auth-modal, #toast-container { display: none !important; }
-            .tab-content { border: none; box-shadow: none; display: block !important; padding: 0; background: white;}
-            .section-title { color: black; border-bottom: 2px solid #000; } .table-wrapper { max-height: none; overflow: visible; border: none; box-shadow: none; } table { border: 1px solid #ddd; } th { background: #eee !important; color: black !important; position: static;} td { color: black; border-bottom: 1px solid #ddd; font-weight: bold;}
-            .stat-card, .session-card { border: 2px solid #ccc; break-inside: avoid; background: #fff;} .stat-card p, .stat-card h3, .session-card h3, .session-card p, .clean-list li { color: black; text-shadow: none; }
+            @page { size: A4 portrait; margin: 1.5cm; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; text-shadow: none !important; box-shadow: none !important; animation: none !important; }
+            body { background: #ffffff !important; color: #000000 !important; font-family: 'Cairo', sans-serif; }
+            header, .tabs, .footer-wrapper, .action-btn, .controls-wrapper, #auth-modal, #toast-container { display: none !important; }
+            #app-content { max-width: 100% !important; padding: 0 !important; margin: 0 !important; }
+            .tab-content { border: none !important; box-shadow: none !important; display: block !important; padding: 0 !important; background: #ffffff !important; page-break-after: always; }
+            .section-title { color: #000 !important; border-bottom: 3px solid #000 !important; font-size: 26px !important; text-align: center; width: 100%; display: block; margin-bottom: 30px !important; }
+            .table-wrapper { max-height: none !important; overflow: visible !important; border: none !important; box-shadow: none !important; background: transparent !important; }
+            table { border: 2px solid #000 !important; width: 100% !important; page-break-inside: auto; }
+            th { background: #f0f0f0 !important; color: #000 !important; border-bottom: 2px solid #000 !important; position: static !important; }
+            td { color: #000 !important; border-bottom: 1px solid #ccc !important; font-weight: 700 !important; }
+            tr { page-break-inside: avoid !important; page-break-after: auto !important; background: #fff !important; transform: none !important; }
+            /* إخفاء العمود الأخير (الإدارة) عند الطباعة إن وجد */
+            th:last-child, td:last-child { display: none !important; }
+            .stat-card, .session-card { border: 2px solid #333 !important; page-break-inside: avoid !important; background: #fff !important; margin-bottom: 15px; }
+            .stat-card p, .stat-card h3, .session-card h3, .session-card p, .clean-list li { color: #000 !important; }
+            .program-focus-header { background: #f9f9f9 !important; border: 2px solid #000 !important; color: #000 !important; page-break-inside: avoid; }
+            .program-focus-header h3, .program-focus-header p { color: #000 !important; text-shadow: none !important; }
         }
     </style>
 </head>
@@ -224,7 +354,7 @@
     <div id="auth-modal">
         <div class="login-box">
             <h2>الوصول للإدارة الشاملة</h2>
-            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.7; font-weight: 600; font-size: 16px;">الرجاء إدخال كلمة المرور (nira) للوصول لأدوات التحكم والتعديل.</p>
+            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.7; font-weight: 700; font-size: 17px;">الرجاء إدخال كلمة المرور (nira) للوصول لأدوات التحكم والتعديل.</p>
             <input type="password" id="passwordInput" placeholder="كلمة المرور..." onkeypress="if(event.key === 'Enter') verifyPassword()">
             <button class="btn-submit" onclick="verifyPassword()">🔑 تسجيل دخول</button>
             <button class="btn-cancel" onclick="closeAuthModal()">إلغاء والعودة للمحتوى العام</button>
@@ -237,21 +367,20 @@
             <div class="header-titles">
                 <h2>جامعة المنصورة | كلية التربية | قسم المناهج وطرق التدريس</h2>
                 <h1>المنصة التفاعلية المتقدمة <span>لبرامج التدريب المصغر</span></h1>
-                <p style="color: var(--text-muted); font-size: 18px; font-weight: 700;">بيئة تعلم تكيفية شاملة لتنمية الكفايات المهنية الرقمية والكفاءة الذاتية</p>
+                <p style="color: var(--text-muted); font-size: 19px; font-weight: 800;">بيئة تعلم تكيفية شاملة لتنمية الكفايات المهنية الرقمية والكفاءة الذاتية</p>
             </div>
             <div class="header-info">
                 <p><strong>إعداد وتطوير:</strong> الباحثة / نيرة محمود الدسوقي</p>
                 <p><strong>الجهة:</strong> مديرية التربية والتعليم - الدقهلية</p>
-                <p style="margin-top: 15px; color: var(--primary); font-size: 16px; font-weight: 900; text-shadow: 0 0 10px rgba(0,210,255,0.3);" id="dateTimeDisplay"></p>
-                <p style="font-size: 15px; margin-top: 5px; font-weight: 800;">حالة المزامنة: <span id="syncStatus" style="color: var(--danger); text-shadow: 0 0 10px rgba(239,68,68,0.5);">غير متصل 🔴</span></p>
+                <p style="margin-top: 15px; color: var(--primary); font-size: 17px; font-weight: 900; text-shadow: 0 0 15px rgba(0,210,255,0.5);" id="dateTimeDisplay"></p>
+                <p style="font-size: 16px; margin-top: 5px; font-weight: 900;">حالة المزامنة: <span id="syncStatus" style="color: var(--danger); text-shadow: 0 0 15px rgba(239,68,68,0.7);">غير متصل 🔴</span></p>
             </div>
         </header>
 
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('program-info')">📖 عن البرنامج الأساسي</button>
             <button class="tab-btn" onclick="switchTab('all-programs')">🎓 دليل الـ 50 برنامج تدريبي</button>
-            <button class="tab-btn" onclick="switchTab('program-sessions')" id="tabSessionsBtn" style="display:none; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border: none; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4); border-color: transparent;">📚 تصفح جلسات البرنامج (10)</button>
-            
+            <button class="tab-btn" onclick="switchTab('program-sessions')" id="tabSessionsBtn" style="display:none; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border: none; box-shadow: 0 8px 30px rgba(245, 158, 11, 0.5); border-color: transparent;">📚 تصفح جلسات البرنامج (10)</button>
             <button class="tab-btn" onclick="requestAccess('dashboard')">📊 الإحصائيات</button>
             <button class="tab-btn" onclick="requestAccess('trainees')">👥 إدارة المتدربين</button>
             <button class="tab-btn" onclick="requestAccess('evaluation')">📝 أدوات التقويم</button>
@@ -261,14 +390,14 @@
 
         <div id="program-info" class="tab-content active">
             <h2 class="section-title">المقدمة والأسس النظرية للتدريب المصغر</h2>
-            <div style="background: rgba(15, 23, 42, 0.6); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 0 2px 20px rgba(0,0,0,0.5); backdrop-filter: blur(10px);">
-                <p style="margin-bottom: 0; text-align: justify; line-height: 2.3; font-size: 20px; font-weight: 700; color: #f8fafc;">
-                    يُعد المعلم الركيزة الأساسية في أي تطوير تربوي. وفي عصر التحول الرقمي، لم تعد طرق التدريس التقليدية كافية. جاء هذا النظام لمعالجة الضعف في مستوى الكفايات المهنية الرقمية والكفاءة الذاتية لدى معلمي الفيزياء والمواد الأخرى، من خلال تقديم <strong style="color: var(--primary); text-shadow: 0 0 15px rgba(0,210,255,0.5);">50 برنامجاً تدريبياً</strong> قائماً على <strong style="color: var(--warning); text-shadow: 0 0 15px rgba(245,158,11,0.5);">التدريب المصغر (Microlearning)</strong> في <strong style="color: var(--success); text-shadow: 0 0 15px rgba(16,185,129,0.5);">بيئة تعلم تكيفية (Adaptive Learning Environment)</strong> وفق مسارات تلبي احتياجات كل متدرب بصورة مبتكرة.
+            <div style="background: rgba(15, 23, 42, 0.7); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 2px 25px rgba(0,0,0,0.6); backdrop-filter: blur(15px);">
+                <p style="margin-bottom: 0; text-align: justify; line-height: 2.3; font-size: 21px; font-weight: 800; color: #f8fafc; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">
+                    يُعد المعلم الركيزة الأساسية في أي تطوير تربوي. وفي عصر التحول الرقمي، لم تعد طرق التدريس التقليدية كافية. جاء هذا النظام لمعالجة الضعف في مستوى الكفايات المهنية الرقمية والكفاءة الذاتية لدى معلمي الفيزياء والمواد الأخرى، من خلال تقديم <strong style="color: var(--primary); text-shadow: 0 0 20px rgba(0,210,255,0.6);">50 برنامجاً تدريبياً</strong> قائماً على <strong style="color: var(--warning); text-shadow: 0 0 20px rgba(245,158,11,0.6);">التدريب المصغر (Microlearning)</strong> في <strong style="color: var(--success); text-shadow: 0 0 20px rgba(16,185,129,0.6);">بيئة تعلم تكيفية (Adaptive Learning Environment)</strong> وفق مسارات تلبي احتياجات كل متدرب بصورة مبتكرة.
                 </p>
             </div>
             <div class="form-grid" style="gap: 35px;">
-                <div style="background: rgba(0,0,0,0.4); padding: 40px; border-radius: 24px; border-right: 6px solid var(--primary); border: 1px solid rgba(0, 210, 255, 0.15); border-right-width: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <h3 style="color: var(--primary); margin-bottom: 25px; font-weight: 900; font-size: 24px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">أسس البرنامج (Bandura & Microlearning)</h3>
+                <div style="background: rgba(0,0,0,0.5); padding: 40px; border-radius: 24px; border-right: 6px solid var(--primary); border: 1px solid rgba(0, 210, 255, 0.2); box-shadow: 0 15px 40px rgba(0,0,0,0.4); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <h3 style="color: var(--primary); margin-bottom: 25px; font-weight: 900; font-size: 25px; text-shadow: 0 2px 10px rgba(0,0,0,0.6);">أسس البرنامج (Bandura & Microlearning)</h3>
                     <ul class="clean-list">
                         <li><strong>الكفايات المهنية:</strong> التكنولوجيا، المحتوى التفاعلي، التقويم الرقمي.</li>
                         <li><strong>الكفاءة الذاتية:</strong> إنجازات الأداء، الخبرات البديلة، والتشجيع.</li>
@@ -276,8 +405,8 @@
                         <li><strong>التكيفية:</strong> مسارات (مبتدئ، متوسط، متقدم) بوتيرة ذاتية.</li>
                     </ul>
                 </div>
-                <div style="background: rgba(0,0,0,0.4); padding: 40px; border-radius: 24px; border-right: 6px solid var(--warning); border: 1px solid rgba(245, 158, 11, 0.15); border-right-width: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <h3 style="color: var(--warning); margin-bottom: 25px; font-weight: 900; font-size: 24px; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">متطلبات البيئة التدريبية</h3>
+                <div style="background: rgba(0,0,0,0.5); padding: 40px; border-radius: 24px; border-right: 6px solid var(--warning); border: 1px solid rgba(245, 158, 11, 0.2); box-shadow: 0 15px 40px rgba(0,0,0,0.4); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <h3 style="color: var(--warning); margin-bottom: 25px; font-weight: 900; font-size: 25px; text-shadow: 0 2px 10px rgba(0,0,0,0.6);">متطلبات البيئة التدريبية</h3>
                     <ul class="clean-list">
                         <li>قاعة افتراضية (Classroom + Zoom).</li>
                         <li>أجهزة ذكية واتصال إنترنت مستقر (5 ميجابت).</li>
@@ -292,11 +421,11 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 45px; flex-wrap: wrap; gap: 25px;">
                 <h2 class="section-title" style="margin:0;">قاعدة بيانات برامج التدريب المصغر (50 برنامج)</h2>
                 <div class="controls-wrapper">
-                    <span style="background: rgba(16, 185, 129, 0.1); color: var(--success); padding: 14px 28px; border-radius: 20px; font-weight: 900; font-size: 16px; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 0 20px rgba(16,185,129,0.15); letter-spacing: 0.5px;">يتضمن 500 جلسة تفاعلية</span>
+                    <span style="background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 14px 28px; border-radius: 20px; font-weight: 900; font-size: 17px; border: 1px solid rgba(16, 185, 129, 0.4); box-shadow: 0 0 25px rgba(16,185,129,0.25); letter-spacing: 0.5px;">يتضمن 500 جلسة تفاعلية</span>
                     <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة الدليل</button>
                 </div>
             </div>
-            <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 18px; font-weight: 600; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 16px; border-right: 4px solid var(--secondary);">انقر على زر <strong style="color: var(--primary); text-shadow: 0 0 10px rgba(0,210,255,0.4);">(عرض الجلسات)</strong> بجوار أي برنامج لتصفح تفاصيل ومحتوى الجلسات العشر المخصصة له.</p>
+            <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 19px; font-weight: 800; background: rgba(0,0,0,0.4); padding: 22px; border-radius: 16px; border-right: 5px solid var(--secondary); box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);">انقر على زر <strong style="color: var(--primary); text-shadow: 0 0 15px rgba(0,210,255,0.6);">(عرض الجلسات)</strong> بجوار أي برنامج لتصفح تفاصيل ومحتوى الجلسات العشر المخصصة له.</p>
             
             <div class="table-wrapper">
                 <table>
@@ -310,18 +439,18 @@
             <div class="program-focus-header">
                 <div style="z-index: 2;">
                     <h3 id="currentProgramTitle">الجلسات التدريبية</h3>
-                    <p style="color: #cbd5e1; font-size: 18px; font-weight: 700; margin-top: 15px;" id="currentProgramMeta">...</p>
+                    <p style="color: #cbd5e1; font-size: 19px; font-weight: 800; margin-top: 15px;" id="currentProgramMeta">...</p>
                 </div>
                 <div class="controls-wrapper" style="z-index: 2;">
-                    <button class="action-btn" style="background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(10px);" onclick="switchTab('all-programs')">↩️ العودة لدليل البرامج</button>
+                    <button class="action-btn" style="background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.25); backdrop-filter: blur(15px);" onclick="switchTab('all-programs')">↩️ العودة لدليل البرامج</button>
                     <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة الجلسات</button>
                     <button class="action-btn btn-export admin-only" style="display:none;" onclick="exportSessionsCSV()">⬇️ تصدير الجلسات</button>
                     <label class="action-btn btn-import admin-only" style="display:none;">⬆️ استيراد الجلسات<input type="file" accept=".csv" onchange="importSessionsCSV(event)"></label>
                 </div>
             </div>
 
-            <div id="editSessionBlock" class="admin-only" style="display:none; background: rgba(15, 23, 42, 0.8); padding: 45px; border-radius: 30px; margin-bottom: 50px; border: 1px solid rgba(255,255,255,0.08); border-left: 6px solid var(--primary); box-shadow: 0 25px 50px rgba(0,0,0,0.5); backdrop-filter: blur(20px);">
-                <h3 style="color: white; margin-bottom: 35px; font-weight: 900; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">محرر الجلسات (للبرنامج الحالي)</h3>
+            <div id="editSessionBlock" class="admin-only" style="display:none; background: rgba(15, 23, 42, 0.85); padding: 45px; border-radius: 30px; margin-bottom: 50px; border: 1px solid rgba(255,255,255,0.1); border-left: 6px solid var(--primary); box-shadow: 0 30px 60px rgba(0,0,0,0.6); backdrop-filter: blur(25px);">
+                <h3 style="color: white; margin-bottom: 35px; font-weight: 900; font-size: 26px; text-shadow: 0 2px 15px rgba(0,0,0,0.6);">محرر الجلسات (للبرنامج الحالي)</h3>
                 <input type="hidden" id="sId">
                 <div class="form-grid">
                     <div class="form-group"><label>اليوم</label><input type="text" id="sDay" placeholder="اليوم الأول"></div>
@@ -333,16 +462,16 @@
                 <div class="form-group" style="margin-bottom: 35px;"><label>أساليب واستراتيجيات التدريس</label><input type="text" id="sStrategy" placeholder="مثال: تدريب مصغر، محاكاة..."></div>
                 
                 <div class="controls-wrapper">
-                    <button class="action-btn btn-add" id="btnSaveSession" onclick="saveSessionData()" style="padding: 18px 35px; font-size: 16px;">💾 حفظ وإضافة الجلسة</button>
-                    <button class="action-btn btn-cancel" id="btnCancelSession" onclick="cancelEditSession()" style="display: none; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); margin-top: 0; padding: 18px 35px;">❌ إلغاء التعديل</button>
+                    <button class="action-btn btn-add" id="btnSaveSession" onclick="saveSessionData()" style="padding: 18px 35px; font-size: 17px;">💾 حفظ وإضافة الجلسة</button>
+                    <button class="action-btn btn-cancel" id="btnCancelSession" onclick="cancelEditSession()" style="display: none; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); margin-top: 0; padding: 18px 35px;">❌ إلغاء التعديل</button>
                 </div>
             </div>
 
             <div class="sessions-grid" id="publicSessionsGrid">
             </div>
 
-            <div class="table-wrapper admin-only" style="display:none; margin-top: 50px; border-top: 4px solid var(--warning);">
-                <h3 style="margin: 35px; color:var(--warning); font-weight: 900; font-size: 24px; text-shadow: 0 0 15px rgba(245,158,11,0.3);">جدول الإدارة السريع للجلسات</h3>
+            <div class="table-wrapper admin-only" style="display:none; margin-top: 50px; border-top: 5px solid var(--warning);">
+                <h3 style="margin: 35px; color:var(--warning); font-weight: 900; font-size: 26px; text-shadow: 0 0 20px rgba(245,158,11,0.4);">جدول الإدارة السريع للجلسات</h3>
                 <table>
                     <thead><tr><th width="15%">اليوم/الجلسة</th><th width="25%">العنوان</th><th width="35%">المحتوى والتفاصيل</th><th width="10%">المدة</th><th width="15%">إدارة</th></tr></thead>
                     <tbody id="sessionsTableBody"></tbody>
@@ -369,13 +498,13 @@
                 </div>
             </div>
 
-            <div style="background: rgba(15, 23, 42, 0.8); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(255,255,255,0.08); border-left: 6px solid var(--secondary); box-shadow: 0 25px 50px rgba(0,0,0,0.5); backdrop-filter: blur(20px);">
+            <div style="background: rgba(15, 23, 42, 0.85); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(255,255,255,0.1); border-left: 6px solid var(--secondary); box-shadow: 0 30px 60px rgba(0,0,0,0.6); backdrop-filter: blur(25px);">
                 <div class="form-grid" style="align-items: end;">
                     <div class="form-group"><label>الاسم الرباعي</label><input type="text" id="tName"></div>
                     <div class="form-group"><label>الجهة / الإدارة</label><input type="text" id="tSchool" value="الدقهلية - ميت غمر - كوبري النيل بجوار شركة الكهرباء"></div>
                     <div class="form-group"><label>المسار التكيفي</label><select id="tLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></div>
                     <div class="form-group"><label>الإنجاز (%)</label><input type="number" id="tProgress" min="0" max="100"></div>
-                    <div class="form-group"><button class="action-btn btn-add" style="width: 100%; height: 62px; justify-content: center; font-size: 18px;" onclick="addTrainee()">➕ إضافة المتدرب</button></div>
+                    <div class="form-group"><button class="action-btn btn-add" style="width: 100%; height: 62px; justify-content: center; font-size: 19px;" onclick="addTrainee()">➕ إضافة المتدرب</button></div>
                 </div>
             </div>
 
@@ -426,7 +555,7 @@
                 </div>
             </div>
 
-            <div style="background: rgba(15, 23, 42, 0.8); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(255,255,255,0.08); border-left: 6px solid var(--success); box-shadow: 0 25px 50px rgba(0,0,0,0.5); backdrop-filter: blur(20px);">
+            <div style="background: rgba(15, 23, 42, 0.85); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(255,255,255,0.1); border-left: 6px solid var(--success); box-shadow: 0 30px 60px rgba(0,0,0,0.6); backdrop-filter: blur(25px);">
                 <input type="hidden" id="pId">
                 <div class="form-grid">
                     <div class="form-group" style="grid-column: span 2;"><label>اسم البرنامج التدريبي التكيفي</label><input type="text" id="pTitle"></div>
@@ -434,8 +563,8 @@
                     <div class="form-group"><label>المخرجات المتوقعة</label><input type="text" id="pOutput"></div>
                 </div>
                 <div class="controls-wrapper">
-                    <button class="action-btn btn-add" id="btnSaveProgram" onclick="saveProgramData()" style="padding: 18px 35px; font-size: 16px;">💾 إضافة البرنامج وتوليد جلساته</button>
-                    <button class="action-btn btn-cancel" id="btnCancelProgram" onclick="cancelEditProgram()" style="display: none; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); margin-top: 0; padding: 18px 35px;">❌ إلغاء</button>
+                    <button class="action-btn btn-add" id="btnSaveProgram" onclick="saveProgramData()" style="padding: 18px 35px; font-size: 17px;">💾 إضافة البرنامج وتوليد جلساته</button>
+                    <button class="action-btn btn-cancel" id="btnCancelProgram" onclick="cancelEditProgram()" style="display: none; background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.2); margin-top: 0; padding: 18px 35px;">❌ إلغاء</button>
                 </div>
             </div>
 
@@ -449,19 +578,19 @@
 
         <div id="settings" class="tab-content">
             <h2 class="section-title">المزامنة السحابية وإعدادات الـ Webhook</h2>
-            <div style="background: rgba(0,0,0,0.4); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(0, 210, 255, 0.15); box-shadow: inset 0 2px 20px rgba(0,0,0,0.4);">
-                <h3 style="color: var(--primary); margin-bottom: 25px; font-weight: 900; font-size: 24px; text-shadow: 0 0 10px rgba(0,210,255,0.3);">Google Apps Script API (Text/Plain Bypassing)</h3>
-                <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 18px; font-weight: 600;">تم تصميم النظام ليعمل بنمط <code>no-cors</code>، مما يعني أن الرابط أدناه سيتلقى البيانات بصمت تام في الخلفية وتخزينها في جدول Google الخاص بك.</p>
+            <div style="background: rgba(0,0,0,0.5); padding: 45px; border-radius: 30px; margin-bottom: 45px; border: 1px solid rgba(0, 210, 255, 0.2); box-shadow: inset 0 2px 25px rgba(0,0,0,0.5);">
+                <h3 style="color: var(--primary); margin-bottom: 25px; font-weight: 900; font-size: 26px; text-shadow: 0 0 15px rgba(0,210,255,0.4);">Google Apps Script API (Text/Plain Bypassing)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 19px; font-weight: 800;">تم تصميم النظام ليعمل بنمط <code>no-cors</code>، مما يعني أن الرابط أدناه سيتلقى البيانات بصمت تام في الخلفية وتخزينها في جدول Google الخاص بك.</p>
                 <div class="form-group" style="max-width: 850px;">
                     <input type="text" id="gasUrl" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom: 30px; padding: 22px;">
-                    <button class="action-btn btn-sync" onclick="saveSettingsAndSync()" style="font-size: 18px; padding: 20px 40px;">🔄 حفظ الرابط والمزامنة القسرية للبيانات</button>
+                    <button class="action-btn btn-sync" onclick="saveSettingsAndSync()" style="font-size: 19px; padding: 20px 40px;">🔄 حفظ الرابط والمزامنة القسرية للبيانات</button>
                 </div>
             </div>
             
-            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.25); padding: 45px; border-radius: 30px; box-shadow: inset 0 2px 20px rgba(239,68,68,0.05);">
-                <h3 style="color: var(--danger); margin-bottom: 25px; font-weight: 900; font-size: 24px; text-shadow: 0 0 15px rgba(239,68,68,0.3);">إعادة ضبط المصنع (منطقة الخطر)</h3>
-                <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 18px; font-weight: 600;">هذا الإجراء سيقوم بمسح كافة التعديلات واسترجاع الحالة الأصلية للمنصة وبيانات الـ 50 برنامجاً والـ 20 متدرباً.</p>
-                <button class="action-btn btn-delete" onclick="factoryResetAll()" style="font-size: 18px; padding: 20px 40px; box-shadow: 0 10px 30px rgba(239,68,68,0.4);">⚠️ استعادة جميع بيانات النظام الأساسية</button>
+            <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.35); padding: 45px; border-radius: 30px; box-shadow: inset 0 2px 25px rgba(239,68,68,0.1);">
+                <h3 style="color: var(--danger); margin-bottom: 25px; font-weight: 900; font-size: 26px; text-shadow: 0 0 20px rgba(239,68,68,0.4);">إعادة ضبط المصنع (منطقة الخطر)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 35px; font-size: 19px; font-weight: 800;">هذا الإجراء سيقوم بمسح كافة التعديلات واسترجاع الحالة الأصلية للمنصة وبيانات الـ 50 برنامجاً والـ 20 متدرباً.</p>
+                <button class="action-btn btn-delete" onclick="factoryResetAll()" style="font-size: 19px; padding: 20px 40px; box-shadow: 0 10px 35px rgba(239,68,68,0.5);">⚠️ استعادة جميع بيانات النظام الأساسية</button>
             </div>
         </div>
     </div>
@@ -589,7 +718,6 @@
         let traineesDB = JSON.parse(localStorage.getItem('niraTrainees_v5')) || defaultTrainees;
         
         if(!sessionsDB[1]) sessionsDB[1] = JSON.parse(JSON.stringify(exactDocSessions));
-
         let currentProgId = 1; 
         const defaultGasUrl = "https://script.google.com/macros/s/AKfycbzKbEigjZP5rUzLdFGsfeZ8BYCfvnIUaEeHbOKDvgGaCfcVNtxFp1r5M928Bm8CoCII/exec";
         let gasUrl = localStorage.getItem('niraGasUrl_v5') || defaultGasUrl;
@@ -611,7 +739,8 @@
         }
         function verifyPassword() {
             if (document.getElementById('passwordInput').value === 'nira') {
-                isAuthenticated = true; document.getElementById('auth-modal').style.display = 'none';
+                isAuthenticated = true;
+                document.getElementById('auth-modal').style.display = 'none';
                 switchTab(targetTab); updateAdminVisibility(); showToast('تم الدخول بصلاحيات الإدارة', 'success');
             } else { document.getElementById('errorMsg').style.display = 'block'; }
         }
@@ -643,13 +772,12 @@
         function renderPrograms() {
             const tbody1 = document.getElementById('programsListBody'); tbody1.innerHTML = '';
             const tbody2 = document.getElementById('manageProgramsBody'); tbody2.innerHTML = '';
-            
             programsDB.forEach((p, i) => {
-                let isMainRow = p.id === 1 ? 'background: rgba(0, 210, 255, 0.05); border-right: 5px solid var(--primary); box-shadow: inset 0 0 20px rgba(0,210,255,0.05);' : '';
+                let isMainRow = p.id === 1 ? 'background: rgba(0, 210, 255, 0.08); border-right: 5px solid var(--primary); box-shadow: inset 0 0 25px rgba(0,210,255,0.08);' : '';
                 let commonHtml = `<td>${i + 1}</td>
-                    <td style="color:var(--primary); font-weight:900; font-size:18px;">${p.title}</td>
-                    <td style="color:var(--text-muted); font-weight:700;">${p.category}</td>
-                    <td style="color:var(--success); font-weight:800; font-size:16px;">${p.output}</td>`;
+                    <td style="color:var(--primary); font-weight:900; font-size:19px; text-shadow: 0 0 10px rgba(0,210,255,0.3);">${p.title}</td>
+                    <td style="color:var(--text-muted); font-weight:800;">${p.category}</td>
+                    <td style="color:var(--success); font-weight:900; font-size:17px;">${p.output}</td>`;
                 
                 tbody1.innerHTML += `<tr style="${isMainRow}">${commonHtml}
                     <td><button class="action-btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="openProgramSessions(${p.id})">📂 عرض الجلسات</button></td></tr>`;
@@ -677,7 +805,8 @@
         }
 
         function generateSmartSessionsForProgram(prog) {
-            let temp = []; let days = ["اليوم الأول", "اليوم الثاني", "اليوم الثالث", "اليوم الرابع", "اليوم الخامس"];
+            let temp = [];
+            let days = ["اليوم الأول", "اليوم الثاني", "اليوم الثالث", "اليوم الرابع", "اليوم الخامس"];
             for(let i=0; i<10; i++) {
                 temp.push({
                     id: Date.now() + i, day: days[Math.floor(i/2)], num: `الجلسة ${i+1}`, time: i < 2 ? "50 دقيقة" : "60 دقيقة",
@@ -693,18 +822,17 @@
             const grid = document.getElementById('publicSessionsGrid'); grid.innerHTML = '';
             const tbody = document.getElementById('sessionsTableBody'); tbody.innerHTML = '';
             const sessions = sessionsDB[currentProgId] || [];
-
             sessions.forEach(s => {
                 grid.innerHTML += `<div class="session-card">
-                    <div class="session-header"><span class="badge">${s.day} | ${s.time}</span><span style="color:var(--text-muted);font-weight:900; font-size:16px;">${s.num}</span></div>
+                    <div class="session-header"><span class="badge">${s.day} | ${s.time}</span><span style="color:var(--text-muted);font-weight:900; font-size:17px;">${s.num}</span></div>
                     <h3>${s.title}</h3><p>${s.desc}</p>
                     <div class="strategy">💡 <strong style="color: var(--warning);">الاستراتيجية:</strong> <span style="color: #f1f5f9;">${s.strategy}</span></div>
                 </div>`;
 
                 tbody.innerHTML += `<tr>
-                    <td><strong style="color: white; font-size:16px;">${s.day}</strong><br><small style="color:var(--text-muted); font-weight:700;">${s.num}</small></td>
-                    <td style="color:var(--primary); font-weight:900; font-size:18px;">${s.title}</td>
-                    <td style="font-size:16px; line-height:1.7;">${s.desc}<br><em style="color:var(--warning); display:block; margin-top:8px; font-weight:800;">${s.strategy}</em></td>
+                    <td><strong style="color: white; font-size:17px;">${s.day}</strong><br><small style="color:var(--text-muted); font-weight:800;">${s.num}</small></td>
+                    <td style="color:var(--primary); font-weight:900; font-size:19px; text-shadow: 0 0 10px rgba(0,210,255,0.3);">${s.title}</td>
+                    <td style="font-size:17px; line-height:1.8;">${s.desc}<br><em style="color:var(--warning); display:block; margin-top:8px; font-weight:900;">${s.strategy}</em></td>
                     <td style="font-weight:900; color:#fff;">${s.time}</td>
                     <td><div class="controls-wrapper"><button class="action-btn btn-edit" onclick="editSession(${s.id})">✏️</button><button class="action-btn btn-delete" onclick="deleteSession(${s.id})">🗑</button></div></td>
                 </tr>`;
@@ -716,10 +844,11 @@
             const tbody = document.getElementById('traineesTableBody'); tbody.innerHTML = '';
             traineesDB.forEach((t, i) => {
                 let clr = t.level === 'متقدم' ? 'var(--success)' : (t.level === 'متوسط' ? 'var(--primary)' : 'var(--warning)');
-                let glowClr = t.level === 'متقدم' ? 'rgba(16, 185, 129, 0.2)' : (t.level === 'متوسط' ? 'rgba(0, 210, 255, 0.2)' : 'rgba(245, 158, 11, 0.2)');
-                tbody.innerHTML += `<tr><td>${i + 1}</td><td style="font-size:18px; font-weight:800; color:#fff;">${t.name}</td><td style="color:var(--text-muted)">${t.school}</td>
-                    <td><span style="border:1px solid ${clr}; color:${clr}; padding:8px 18px; border-radius:20px; font-size:14px; font-weight: 900; background: rgba(0,0,0,0.5); box-shadow: 0 0 10px ${glowClr};">${t.level}</span></td>
-                    <td><div class="progress-container" style="background:rgba(255,255,255,0.05); height:14px; border-radius:10px; border: 1px solid rgba(255,255,255,0.1);"><div class="progress-bar" style="background: linear-gradient(90deg, var(--secondary), var(--primary)); height: 100%; border-radius: 10px; width:${t.progress}%; box-shadow: 0 0 10px var(--primary-glow);"></div></div><small style="font-weight:900; color:var(--text-main); margin-top:10px; display:block; font-size:15px;">${t.progress}%</small></td>
+                let glowClr = t.level === 'متقدم' ? 'rgba(16, 185, 129, 0.3)' : (t.level === 'متوسط' ? 'rgba(0, 210, 255, 0.3)' : 'rgba(245, 158, 11, 0.3)');
+                
+                tbody.innerHTML += `<tr><td>${i + 1}</td><td style="font-size:19px; font-weight:900; color:#fff; text-shadow: 0 0 10px rgba(255,255,255,0.2);">${t.name}</td><td style="color:var(--text-muted)">${t.school}</td>
+                    <td><span style="border:2px solid ${clr}; color:${clr}; padding:8px 20px; border-radius:20px; font-size:15px; font-weight: 900; background: rgba(0,0,0,0.6); box-shadow: 0 0 15px ${glowClr};">${t.level}</span></td>
+                    <td><div class="progress-container" style="background:rgba(255,255,255,0.1); height:16px; border-radius:10px; border: 1px solid rgba(255,255,255,0.15);"><div class="progress-bar" style="background: linear-gradient(90deg, var(--secondary), var(--primary)); height: 100%; border-radius: 10px; width:${t.progress}%; box-shadow: 0 0 15px var(--primary-glow);"></div></div><small style="font-weight:900; color:var(--text-main); margin-top:10px; display:block; font-size:16px;">${t.progress}%</small></td>
                     <td><button class="action-btn btn-delete" onclick="deleteTrainee(${t.id})">🗑</button></td></tr>`;
             });
             updateStats();
@@ -745,16 +874,21 @@
             localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderCurrentSessions(); cancelEditSession(); triggerAutoSync();
         }
         function editSession(id) {
-            const s = sessionsDB[currentProgId].find(s => s.id === id); if(!s) return;
-            document.getElementById('sId').value = s.id; document.getElementById('sDay').value = s.day; document.getElementById('sNum').value = s.num; document.getElementById('sTime').value = s.time; document.getElementById('sTitle').value = s.title; document.getElementById('sDesc').value = s.desc; document.getElementById('sStrategy').value = s.strategy;
+            const s = sessionsDB[currentProgId].find(s => s.id === id);
+            if(!s) return;
+            document.getElementById('sId').value = s.id; document.getElementById('sDay').value = s.day; document.getElementById('sNum').value = s.num; document.getElementById('sTime').value = s.time; document.getElementById('sTitle').value = s.title; document.getElementById('sDesc').value = s.desc;
+            document.getElementById('sStrategy').value = s.strategy;
             document.getElementById('btnSaveSession').innerHTML = "💾 حفظ التعديلات"; document.getElementById('btnCancelSession').style.display = "inline-flex"; window.scrollTo({top: document.getElementById('editSessionBlock').offsetTop - 50, behavior: 'smooth'});
         }
-        function cancelEditSession() { document.getElementById('sId').value=''; document.getElementById('sDay').value=''; document.getElementById('sNum').value=''; document.getElementById('sTime').value=''; document.getElementById('sTitle').value=''; document.getElementById('sDesc').value=''; document.getElementById('sStrategy').value=''; document.getElementById('btnSaveSession').innerHTML = "💾 حفظ وإضافة الجلسة"; document.getElementById('btnCancelSession').style.display = "none"; }
-        function deleteSession(id) { if(confirm("مسح هذه الجلسة؟")) { sessionsDB[currentProgId] = sessionsDB[currentProgId].filter(s => s.id !== id); localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderCurrentSessions(); showToast("تم المسح", "success"); triggerAutoSync(); } }
+        function cancelEditSession() { document.getElementById('sId').value=''; document.getElementById('sDay').value=''; document.getElementById('sNum').value=''; document.getElementById('sTime').value=''; document.getElementById('sTitle').value=''; document.getElementById('sDesc').value=''; document.getElementById('sStrategy').value='';
+            document.getElementById('btnSaveSession').innerHTML = "💾 حفظ وإضافة الجلسة"; document.getElementById('btnCancelSession').style.display = "none"; }
+        function deleteSession(id) { if(confirm("مسح هذه الجلسة؟")) { sessionsDB[currentProgId] = sessionsDB[currentProgId].filter(s => s.id !== id);
+            localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderCurrentSessions(); showToast("تم المسح", "success"); triggerAutoSync(); } }
 
         // Programs
         function saveProgramData() {
-            const id = document.getElementById('pId').value; const title = document.getElementById('pTitle').value.trim();
+            const id = document.getElementById('pId').value;
+            const title = document.getElementById('pTitle').value.trim();
             if(!title) return showToast("أدخل اسم البرنامج", "warning");
             const pData = { id: id ? parseInt(id) : Date.now(), title, category: document.getElementById('pCategory').value || 'عام', output: document.getElementById('pOutput').value || 'غير محدد' };
             if(id) { const i = programsDB.findIndex(p => p.id == id); if(i > -1) programsDB[i] = pData; showToast("تم التحديث", "success"); } 
@@ -763,25 +897,36 @@
         }
         function editProgram(id) {
             if(id === 1) { showToast("البرنامج الأساسي (1) المأخوذ من الملحق محمي من التعديل.", "warning"); return; }
-            const p = programsDB.find(p => p.id === id); if(!p) return;
+            const p = programsDB.find(p => p.id === id);
+            if(!p) return;
             document.getElementById('pId').value = p.id; document.getElementById('pTitle').value = p.title; document.getElementById('pCategory').value = p.category; document.getElementById('pOutput').value = p.output;
-            document.getElementById('btnSaveProgram').innerHTML = "💾 حفظ التعديلات"; document.getElementById('btnCancelProgram').style.display = "inline-flex"; window.scrollTo({top: document.getElementById('manage-programs').offsetTop - 50, behavior: 'smooth'});
+            document.getElementById('btnSaveProgram').innerHTML = "💾 حفظ التعديلات";
+            document.getElementById('btnCancelProgram').style.display = "inline-flex"; window.scrollTo({top: document.getElementById('manage-programs').offsetTop - 50, behavior: 'smooth'});
         }
-        function cancelEditProgram() { document.getElementById('pId').value=''; document.getElementById('pTitle').value=''; document.getElementById('pCategory').value=''; document.getElementById('pOutput').value=''; document.getElementById('btnSaveProgram').innerHTML = "💾 إضافة البرنامج وتوليد جلساته"; document.getElementById('btnCancelProgram').style.display = "none"; }
-        function deleteProgram(id) { if(id === 1) return showToast("البرنامج الأساسي محمي من الحذف.", "warning"); if(confirm("حذف البرنامج وكافة جلساته؟")) { programsDB = programsDB.filter(p => p.id !== id); delete sessionsDB[id]; localStorage.setItem('niraPrograms_v5', JSON.stringify(programsDB)); localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderPrograms(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
+        function cancelEditProgram() { document.getElementById('pId').value='';
+            document.getElementById('pTitle').value=''; document.getElementById('pCategory').value=''; document.getElementById('pOutput').value=''; document.getElementById('btnSaveProgram').innerHTML = "💾 إضافة البرنامج وتوليد جلساته"; document.getElementById('btnCancelProgram').style.display = "none";
+        }
+        function deleteProgram(id) { if(id === 1) return showToast("البرنامج الأساسي محمي من الحذف.", "warning");
+            if(confirm("حذف البرنامج وكافة جلساته؟")) { programsDB = programsDB.filter(p => p.id !== id); delete sessionsDB[id]; localStorage.setItem('niraPrograms_v5', JSON.stringify(programsDB)); localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderPrograms();
+            showToast("تم الحذف", "success"); triggerAutoSync(); } }
 
         // Trainees
         function addTrainee() {
-            const name = document.getElementById('tName').value.trim(); if(!name) return showToast("أدخل الاسم", "warning");
+            const name = document.getElementById('tName').value.trim();
+            if(!name) return showToast("أدخل الاسم", "warning");
             traineesDB.push({ id: Date.now(), name, school: document.getElementById('tSchool').value, level: document.getElementById('tLevel').value, progress: parseInt(document.getElementById('tProgress').value || 0) });
-            localStorage.setItem('niraTrainees_v5', JSON.stringify(traineesDB)); document.getElementById('tName').value=''; document.getElementById('tProgress').value=''; renderTrainees(); showToast("تم الإضافة", "success"); triggerAutoSync();
+            localStorage.setItem('niraTrainees_v5', JSON.stringify(traineesDB));
+            document.getElementById('tName').value=''; document.getElementById('tProgress').value=''; renderTrainees(); showToast("تم الإضافة", "success"); triggerAutoSync();
         }
-        function deleteTrainee(id) { if(confirm("حذف المتدرب؟")) { traineesDB = traineesDB.filter(t => t.id !== id); localStorage.setItem('niraTrainees_v5', JSON.stringify(traineesDB)); renderTrainees(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
+        function deleteTrainee(id) { if(confirm("حذف المتدرب؟")) { traineesDB = traineesDB.filter(t => t.id !== id);
+            localStorage.setItem('niraTrainees_v5', JSON.stringify(traineesDB)); renderTrainees(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
 
         // ==========================================
         // 6. CSV Export & Import Engines
         // ==========================================
-        function downloadCSV(content, filename) { const encodedUri = encodeURI(content); const link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", filename); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast("تم التصدير بنجاح", "success"); }
+        function downloadCSV(content, filename) { const encodedUri = encodeURI(content);
+            const link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", filename); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast("تم التصدير بنجاح", "success");
+        }
 
         function exportTraineesCSV() {
             let csv = "data:text/csv;charset=utf-8,\uFEFFالاسم,الجهة,المسار,التقدم\n";
@@ -798,10 +943,12 @@
         }
 
         function handleCSVImport(event, callback) {
-            const file = event.target.files[0]; if (!file) return;
+            const file = event.target.files[0];
+            if (!file) return;
             const reader = new FileReader();
             reader.onload = function(e) {
-                const lines = e.target.result.split('\n'); let count = 0;
+                const lines = e.target.result.split('\n');
+                let count = 0;
                 for(let i = 1; i < lines.length; i++) { 
                     if(lines[i].trim() === '') continue;
                     let row = lines[i].replace(/","/g, '|||').replace(/"/g, '').split('|||');
@@ -814,30 +961,33 @@
         }
 
         function importTraineesCSV(event) { handleCSVImport(event, (row) => { if(row.length>=4) { traineesDB.push({ id: Date.now()+Math.random(), name: row[0].trim(), school: row[1].trim(), level: row[2].trim(), progress: parseInt(row[3])||0 }); localStorage.setItem('niraTrainees_v5', JSON.stringify(traineesDB)); renderTrainees(); return true; } return false; }); }
-        function importProgramsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=3) { programsDB.push({ id: Date.now()+Math.random(), title: row[0].trim(), category: row[1].trim(), output: row[2].trim() }); localStorage.setItem('niraPrograms_v5', JSON.stringify(programsDB)); renderPrograms(); return true; } return false; }); }
-        function importSessionsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=5) { if(!sessionsDB[currentProgId]) sessionsDB[currentProgId]=[]; sessionsDB[currentProgId].push({ id: Date.now()+Math.random(), day: row[0].trim(), num: row[1].trim(), title: row[2].trim(), time: row[3].trim(), strategy: row[4].trim(), desc: row[5]?row[5].trim():'' }); localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderCurrentSessions(); return true; } return false; }); }
+        function importProgramsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=3) { programsDB.push({ id: Date.now()+Math.random(), title: row[0].trim(), category: row[1].trim(), output: row[2].trim() }); localStorage.setItem('niraPrograms_v5', JSON.stringify(programsDB));
+            renderPrograms(); return true; } return false; }); }
+        function importSessionsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=5) { if(!sessionsDB[currentProgId]) sessionsDB[currentProgId]=[]; sessionsDB[currentProgId].push({ id: Date.now()+Math.random(), day: row[0].trim(), num: row[1].trim(), title: row[2].trim(), time: row[3].trim(), strategy: row[4].trim(), desc: row[5]?row[5].trim():'' }); localStorage.setItem('niraSessionsMap_v5', JSON.stringify(sessionsDB)); renderCurrentSessions(); return true; } return false; });
+        }
 
         // ==========================================
         // 7. Google API Sync & Reset
         // ==========================================
         function saveSettingsAndSync() {
-            gasUrl = document.getElementById('gasUrl').value.trim(); localStorage.setItem('niraGasUrl_v5', gasUrl);
+            gasUrl = document.getElementById('gasUrl').value.trim();
+            localStorage.setItem('niraGasUrl_v5', gasUrl);
             if(gasUrl) syncWithGoogleSheets(false); else { document.getElementById('syncStatus').innerHTML = "غير متصل 🔴"; showToast("أدخل الرابط أولاً", "warning"); }
         }
         function triggerAutoSync() { if(gasUrl) syncWithGoogleSheets(true); }
         function syncWithGoogleSheets(isSilent = false) {
             const statusEl = document.getElementById('syncStatus');
-            statusEl.innerHTML = "جاري الإرسال... ⏳"; statusEl.style.color = "var(--warning)"; statusEl.style.textShadow = "0 0 10px rgba(245,158,11,0.5)";
+            statusEl.innerHTML = "جاري الإرسال... ⏳"; statusEl.style.color = "var(--warning)"; statusEl.style.textShadow = "0 0 15px rgba(245,158,11,0.7)";
             const payload = JSON.stringify({ ts: new Date().toISOString(), trainees: traineesDB, programs: programsDB, sessions: sessionsDB });
-            
             fetch(gasUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: payload })
-            .then(() => { statusEl.innerHTML = "متصل 🟢"; statusEl.style.color = "var(--success)"; statusEl.style.textShadow = "0 0 10px rgba(16,185,129,0.5)"; if(!isSilent) showToast("المزامنة ناجحة ومستقرة!", "success"); })
-            .catch(err => { statusEl.innerHTML = "خطأ شبكة 🔴"; statusEl.style.color = "var(--danger)"; statusEl.style.textShadow = "0 0 10px rgba(239,68,68,0.5)"; if(!isSilent) showToast("فشل الاتصال", "error"); });
+            .then(() => { statusEl.innerHTML = "متصل 🟢"; statusEl.style.color = "var(--success)"; statusEl.style.textShadow = "0 0 15px rgba(16,185,129,0.7)"; if(!isSilent) showToast("المزامنة ناجحة ومستقرة!", "success"); })
+            .catch(err => { statusEl.innerHTML = "خطأ شبكة 🔴"; statusEl.style.color = "var(--danger)"; statusEl.style.textShadow = "0 0 15px rgba(239,68,68,0.7)"; if(!isSilent) showToast("فشل الاتصال", "error"); });
         }
 
         function factoryResetAll() {
             if(confirm("تحذير: سيتم استعادة الـ 50 برنامج وجلسات الملحق الأساسية ومسح المتدربين. متأكد؟")) {
-                localStorage.clear(); window.location.reload();
+                localStorage.clear();
+                window.location.reload();
             }
         }
 
