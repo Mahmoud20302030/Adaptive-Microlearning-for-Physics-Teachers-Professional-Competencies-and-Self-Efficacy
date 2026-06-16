@@ -6,118 +6,153 @@
     
     <meta name="description" content="منصة التدريب المصغر وبيئات التعلم التكيفية | 50 برنامجاً لتطوير الكفايات المهنية لمعلمي الفيزياء وإنتاج المحتوى الرقمي.">
     <meta name="theme-color" content="#00d2ff">
-    <meta property="og:title" content="المنصة التفاعلية الشاملة للتدريب المصغر | نيرة الدسوقي">
-    <meta property="og:description" content="نظام إدارة تعلم (LMS) يضم 50 برنامجاً تدريبياً مع 500 جلسة تفاعلية لتطوير الكفايات المهنية الرقمية والكفاءة الذاتية.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1516322073321-411a9eb4b443?auto=format&fit=crop&w=1200&q=80">
-    <meta property="og:url" content="#">
+    
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:url" content="https://github.com/MahmoudMohamed/Microlearning-Adaptive-LMS">
+    <meta property="og:title" content="نظام إدارة التعلم التكيفي والمصغر | د. نيرة الدسوقي">
+    <meta property="og:description" content="بيئة تعلم تكيفية شاملة واحترافية لتطوير الكفايات المهنية الرقمية. تتضمن 50 برنامجاً تدريبياً و500 جلسة تفاعلية متقدمة بتصميم عالمي مبتكر.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
-    <title>المنصة التفاعلية للبرنامج التدريبي | نيرة محمود الدسوقي</title>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://github.com/MahmoudMohamed/Microlearning-Adaptive-LMS">
+    <meta name="twitter:title" content="نظام إدارة التعلم التكيفي والمصغر | د. نيرة الدسوقي">
+    <meta name="twitter:description" content="بيئة تعلم تكيفية شاملة واحترافية لتطوير الكفايات المهنية الرقمية. تتضمن 50 برنامجاً تدريبياً و500 جلسة تفاعلية.">
+    <meta name="twitter:image" content="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?q=80&w=1200&auto=format&fit=crop">
+
+    <title>المنصة التفاعلية للبرامج التدريبية | بيئة تعلم تكيفية</title>
     
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
 
         :root {
-            --primary: #00d2ff; --primary-glow: rgba(0, 210, 255, 0.4); --secondary: #3a7bd5;
-            --dark-bg: #010408; --panel-bg: rgba(10, 25, 47, 0.85); --card-bg: rgba(15, 35, 65, 0.6);
-            --text-main: #ffffff; --text-muted: #b0c4de; --success: #00e676;
-            --warning: #ffb300; --danger: #ff1744; --border-color: rgba(0, 210, 255, 0.2);
+            /* باليت ألوان Modern Dark SaaS */
+            --primary: #00d2ff; 
+            --primary-glow: rgba(0, 210, 255, 0.4); 
+            --secondary: #3a7bd5;
+            --dark-bg: #030712; /* أغمق وأكثر احترافية */
+            --panel-bg: rgba(17, 24, 39, 0.75); 
+            --card-bg: rgba(31, 41, 55, 0.6);
+            --text-main: #f9fafb; 
+            --text-muted: #9ca3af; 
+            --success: #10b981;
+            --warning: #f59e0b; 
+            --danger: #ef4444; 
+            --border-color: rgba(0, 210, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.08);
         }
 
         * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; }
-        body { background: linear-gradient(135deg, var(--dark-bg) 0%, #061121 100%); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; line-height: 1.6; scroll-behavior: smooth; }
+        
+        /* شريط التمرير المخصص والسلس */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 210, 255, 0.3); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+        ::selection { background: var(--primary); color: #000; }
+
+        body { 
+            background: radial-gradient(circle at 10% 20%, #0a192f 0%, var(--dark-bg) 100%); 
+            color: var(--text-main); 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow-x: hidden; 
+            line-height: 1.7; 
+            scroll-behavior: smooth; 
+        }
 
         /* نافذة تسجيل الدخول */
-        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 4, 8, 0.95); justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(15px); }
-        .login-box { background: var(--panel-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--primary); box-shadow: 0 0 40px var(--primary-glow); text-align: center; width: 90%; max-width: 450px; animation: scaleIn 0.3s ease-out; }
-        @keyframes scaleIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .login-box h2 { margin-bottom: 15px; color: var(--primary); font-size: 24px;}
-        .login-box input { width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid var(--secondary); background: rgba(0,0,0,0.6); color: white; border-radius: 10px; font-size: 16px; text-align: center; transition: all 0.3s ease; }
-        .login-box input:focus { border-color: var(--primary); box-shadow: 0 0 10px var(--primary-glow); outline: none; }
-        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, var(--secondary), var(--primary)); border: none; color: white; font-weight: bold; font-size: 18px; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .btn-cancel { background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); margin-top: 15px; padding: 10px; width: 100%; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        #auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.9); justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(25px); }
+        .login-box { background: var(--panel-bg); padding: 50px 40px; border-radius: 24px; border: 1px solid var(--border-color); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8), 0 0 40px var(--primary-glow); text-align: center; width: 90%; max-width: 420px; animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        @keyframes scaleIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .login-box h2 { margin-bottom: 20px; color: var(--primary); font-size: 26px; font-weight: 900; letter-spacing: 0.5px;}
+        .login-box input { width: 100%; padding: 16px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.5); color: white; border-radius: 14px; font-size: 16px; text-align: center; transition: all 0.3s ease; }
+        .login-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.15); outline: none; background: rgba(0,0,0,0.7); }
+        .btn-submit { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--secondary), var(--primary)); border: none; color: white; font-weight: 900; font-size: 18px; border-radius: 14px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3); }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 210, 255, 0.4); }
+        .btn-submit:active { transform: translateY(1px); }
+        .btn-cancel { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-muted); margin-top: 15px; padding: 14px; width: 100%; border-radius: 14px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .btn-cancel:hover { background: rgba(255,255,255,0.05); color: white; }
 
         /* الهيكل الأساسي والهيدر */
-        #app-content { flex: 1; padding: 20px; max-width: 1600px; margin: 0 auto; width: 100%; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 25px; background: var(--panel-bg); border-radius: 20px; border-bottom: 3px solid var(--primary); margin-bottom: 30px; flex-wrap: wrap; gap: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .header-titles h1 { font-size: 28px; color: var(--primary); font-weight: 900; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-        .header-titles h2 { font-size: 18px; color: var(--text-main); margin-bottom: 5px; font-weight: 500; }
-        .header-info { background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; border-right: 3px solid var(--secondary); text-align: right;}
+        #app-content { flex: 1; padding: 30px; max-width: 1600px; margin: 0 auto; width: 100%; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 40px; background: var(--panel-bg); backdrop-filter: blur(20px); border-radius: 24px; border: 1px solid var(--border-color); border-bottom: 4px solid var(--primary); margin-bottom: 40px; flex-wrap: wrap; gap: 25px; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5); }
+        .header-titles h1 { font-size: 34px; color: var(--text-main); font-weight: 900; margin-bottom: 10px; letter-spacing: -0.5px; }
+        .header-titles h1 span { color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); }
+        .header-titles h2 { font-size: 18px; color: var(--text-muted); margin-bottom: 5px; font-weight: 500; }
+        .header-info { background: rgba(0,0,0,0.3); padding: 25px; border-radius: 18px; border-right: 4px solid var(--secondary); text-align: right; box-shadow: inset 0 2px 10px rgba(0,0,0,0.2); }
 
-        /* التبويبات الشاملة */
-        .tabs { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center;}
-        .tab-btn { background: rgba(255,255,255,0.05); border: 1px solid var(--secondary); color: white; padding: 12px 20px; border-radius: 12px; cursor: pointer; transition: all 0.3s ease; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 8px; backdrop-filter: blur(5px); }
-        .tab-btn.active, .tab-btn:hover { background: linear-gradient(135deg, var(--secondary), var(--primary)); color: #fff; box-shadow: 0 5px 15px var(--primary-glow); transform: translateY(-2px); border-color: transparent; }
+        /* التبويبات */
+        .tabs { display: flex; gap: 12px; margin-bottom: 40px; flex-wrap: wrap; justify-content: center;}
+        .tab-btn { background: rgba(255,255,255,0.02); border: 1px solid var(--glass-border); color: var(--text-muted); padding: 14px 26px; border-radius: 14px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 10px; backdrop-filter: blur(10px); }
+        .tab-btn.active, .tab-btn:hover { background: linear-gradient(135deg, rgba(58, 123, 213, 0.9), rgba(0, 210, 255, 0.9)); color: #fff; box-shadow: 0 10px 25px -5px rgba(0, 210, 255, 0.4); transform: translateY(-3px); border-color: transparent; }
 
-        .tab-content { display: none; background: var(--panel-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: 0 15px 40px rgba(0,0,0,0.4); animation: fadeIn 0.5s ease forwards; }
+        .tab-content { display: none; background: var(--panel-bg); backdrop-filter: blur(20px); padding: 45px; border-radius: 24px; border: 1px solid var(--border-color); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); animation: fadeSlideUp 0.4s ease-out forwards; }
         .tab-content.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .section-title { color: var(--primary); border-bottom: 2px solid var(--border-color); padding-bottom: 10px; margin-bottom: 25px; font-size: 22px; display: inline-block; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .section-title { color: var(--text-main); border-bottom: 2px solid var(--border-color); padding-bottom: 15px; margin-bottom: 35px; font-size: 26px; display: inline-block; font-weight: 900; position: relative; }
+        .section-title::after { content: ''; position: absolute; bottom: -2px; right: 0; width: 40%; height: 3px; background: var(--primary); box-shadow: 0 0 15px var(--primary-glow); border-radius: 5px; }
 
-        /* الجداول الاحترافية المتجاوبة */
-        .table-wrapper { overflow-x: auto; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); max-height: 600px; overflow-y: auto;}
-        .table-wrapper::-webkit-scrollbar { width: 8px; height: 8px; }
-        .table-wrapper::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
-        .table-wrapper::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-        table { width: 100%; border-collapse: collapse; min-width: 950px; background: rgba(0,0,0,0.2); }
-        th, td { padding: 15px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        th { background: rgba(0, 210, 255, 0.15); color: var(--primary); font-weight: bold; white-space: nowrap; font-size: 15px; position: sticky; top: 0; z-index: 10;}
+        /* الجداول */
+        .table-wrapper { overflow-x: auto; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-height: 650px; overflow-y: auto; background: var(--card-bg); border: 1px solid var(--glass-border); }
+        table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 950px; }
+        th, td { padding: 20px 24px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        th { background: rgba(17, 24, 39, 0.95); color: var(--primary); font-weight: 900; white-space: nowrap; font-size: 15px; position: sticky; top: 0; z-index: 10; backdrop-filter: blur(15px); border-bottom: 2px solid var(--border-color); }
+        th:first-child { border-top-right-radius: 16px; } th:last-child { border-top-left-radius: 16px; }
+        tr { transition: background 0.2s ease; }
         tr:hover { background: rgba(0, 210, 255, 0.05); }
+        td { font-size: 15px; color: #d1d5db; }
 
         /* النماذج والأزرار */
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 14px; font-weight: bold; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 15px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.2); color: white; border-radius: 8px; font-size: 15px; transition: all 0.3s; font-family: 'Tajawal', sans-serif;}
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 8px var(--primary-glow); background: rgba(0,0,0,0.7); outline: none;}
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; color: var(--text-muted); font-size: 14px; font-weight: 700; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 16px 20px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 14px; font-size: 15px; transition: all 0.3s; font-family: 'Tajawal', sans-serif;}
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.15); background: rgba(0,0,0,0.5); outline: none;}
         
-        .controls-wrapper { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
-        .action-btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; transition: all 0.3s; font-size: 14px; display: inline-flex; align-items: center; gap: 5px; }
-        .action-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .btn-add { background: linear-gradient(45deg, #00b09b, #96c93d); }
-        .btn-edit { background: linear-gradient(45deg, #f2994a, #f2c94c); color: #000; padding: 8px 15px; font-size: 12px;}
-        .btn-export { background: linear-gradient(45deg, var(--secondary), #2b5876); }
-        .btn-import { background: linear-gradient(45deg, #8e2de2, #4a00e0); cursor: pointer;}
-        .btn-print { background: linear-gradient(45deg, #f2994a, #f2c94c); color: #000; }
-        .btn-sync { background: linear-gradient(45deg, #11998e, #38ef7d); color: #000; }
-        .btn-delete { background: linear-gradient(45deg, #cb2d3e, #ef473a); padding: 8px 15px; font-size: 12px; }
+        .controls-wrapper { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+        .action-btn { padding: 14px 26px; border: none; border-radius: 14px; cursor: pointer; color: white; font-weight: 700; transition: all 0.2s ease; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        .action-btn:hover { transform: translateY(-3px); filter: brightness(1.15); box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .action-btn:active { transform: translateY(1px); }
+        
+        .btn-add { background: linear-gradient(135deg, #10b981, #059669); }
+        .btn-edit { background: linear-gradient(135deg, #f59e0b, #d97706); padding: 10px 18px; font-size: 13px;}
+        .btn-export { background: linear-gradient(135deg, var(--secondary), #1e3a8a); }
+        .btn-import { background: linear-gradient(135deg, #8b5cf6, #6d28d9); cursor: pointer;}
+        .btn-print { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .btn-sync { background: linear-gradient(135deg, #10b981, #059669); }
+        .btn-delete { background: linear-gradient(135deg, #ef4444, #dc2626); padding: 10px 18px; font-size: 13px; }
         input[type="file"] { display: none; }
 
         /* الكروت الإحصائية والجلسات */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: var(--card-bg); padding: 25px; border-radius: 15px; border-right: 4px solid var(--primary); border-bottom: 1px solid var(--border-color); display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; transition: 0.3s; }
-        .stat-card:hover { transform: translateY(-5px); }
-        .stat-card p { font-size: 40px; font-weight: 900; color: var(--text-main); margin: 0; z-index: 1; }
-        .stat-card .icon { position: absolute; left: 20px; bottom: 20px; font-size: 40px; opacity: 0.2; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 40px; }
+        .stat-card { background: var(--card-bg); padding: 35px; border-radius: 20px; border: 1px solid var(--glass-border); border-right: 5px solid var(--primary); display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; transition: all 0.3s ease; box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 25px 40px -10px rgba(0,0,0,0.5); border-color: var(--primary); background: rgba(31, 41, 55, 0.8); }
+        .stat-card p { font-size: 52px; font-weight: 900; color: var(--text-main); margin: 0; z-index: 1; text-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
+        .stat-card h3 { font-size: 16px; color: var(--text-muted); font-weight: 700; margin-bottom: 10px; z-index: 1; }
+        .stat-card .icon { position: absolute; left: 20px; bottom: -10px; font-size: 80px; opacity: 0.05; transition: 0.4s; filter: grayscale(1); }
+        .stat-card:hover .icon { transform: scale(1.1) rotate(-5deg); opacity: 0.1; filter: grayscale(0); }
 
-        .sessions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .session-card { background: var(--card-bg); padding: 25px; border-radius: 15px; border-top: 3px solid var(--secondary); transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; position: relative; }
-        .session-card:hover { transform: translateY(-8px); box-shadow: 0 10px 25px rgba(0, 210, 255, 0.15); border-top-color: var(--primary); }
-        .session-card .session-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px;}
-        .session-card .badge { background: rgba(0, 210, 255, 0.15); color: var(--primary); padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; }
-        .session-card h3 { color: var(--text-main); font-size: 18px; line-height: 1.4; margin-bottom: 10px; }
-        .session-card p { color: var(--text-muted); font-size: 14px; line-height: 1.7; flex-grow: 1; }
-        .session-card .strategy { font-size: 13px; color: var(--warning); margin-top: 10px; padding: 10px; background: rgba(255,179,0,0.1); border-radius: 8px;}
-
-        /* قوائم المهام والتقدم */
-        .progress-container { background: rgba(255,255,255,0.1); border-radius: 10px; width: 100%; height: 14px; margin-top: 8px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
-        .progress-bar { background: linear-gradient(90deg, var(--secondary), var(--primary)); height: 100%; border-radius: 10px; transition: width 0.8s ease-in-out; }
-        .styled-list { list-style: none; padding-right: 10px; }
-        .styled-list li { position: relative; padding-right: 25px; margin-bottom: 12px; color: var(--text-muted); font-size: 15px; }
-        .styled-list li::before { content: '✓'; position: absolute; right: 0; top: 0; color: var(--success); font-weight: bold; }
+        .sessions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+        .session-card { background: rgba(31, 41, 55, 0.4); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.03); border-top: 4px solid var(--secondary); transition: all 0.3s ease; display: flex; flex-direction: column; height: 100%; position: relative; backdrop-filter: blur(10px); }
+        .session-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0, 210, 255, 0.08); border-top-color: var(--primary); background: rgba(31, 41, 55, 0.7); }
+        .session-card .session-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;}
+        .session-card .badge { background: rgba(0, 210, 255, 0.1); color: var(--primary); padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 900; border: 1px solid rgba(0, 210, 255, 0.2); }
+        .session-card h3 { color: var(--text-main); font-size: 20px; line-height: 1.5; margin-bottom: 15px; font-weight: 900; }
+        .session-card p { color: var(--text-muted); font-size: 15px; line-height: 1.8; flex-grow: 1; }
+        .session-card .strategy { font-size: 14px; color: var(--warning); margin-top: 20px; padding: 15px; background: rgba(245, 158, 11, 0.05); border-radius: 12px; border: 1px dashed rgba(245, 158, 11, 0.3);}
 
         /* الإشعارات (Toast) */
-        #toast-container { position: fixed; bottom: 30px; left: 30px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; }
-        .toast { background: var(--panel-bg); color: white; padding: 15px 25px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.5); border-right: 4px solid var(--primary); font-weight: bold; animation: slideInLeft 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, fadeOut 0.5s ease 3s forwards; min-width: 250px; text-align: right; }
+        #toast-container { position: fixed; bottom: 30px; left: 30px; z-index: 10000; display: flex; flex-direction: column; gap: 15px; }
+        .toast { background: rgba(17, 24, 39, 0.95); color: white; padding: 18px 30px; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 20px rgba(0, 210, 255, 0.1); border-right: 4px solid var(--primary); font-weight: 700; font-size: 15px; animation: slideInLeft 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, fadeOut 0.5s ease 3s forwards; min-width: 300px; text-align: right; backdrop-filter: blur(15px); }
         .toast.success { border-right-color: var(--success); } .toast.error { border-right-color: var(--danger); } .toast.warning { border-right-color: var(--warning); }
-        @keyframes slideInLeft { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; margin-bottom: -60px; } }
+        
+        .program-focus-header { background: linear-gradient(90deg, rgba(0,210,255,0.05), rgba(0,0,0,0.3)); padding: 30px; border-radius: 20px; border-right: 5px solid var(--primary); border: 1px solid var(--glass-border); border-right-width: 5px; margin-bottom: 35px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; backdrop-filter: blur(10px); }
+        .program-focus-header h3 { color: var(--primary); margin: 0; font-size: 24px; font-weight: 900; }
 
-        /* هيدر مخصص للجلسات التابعة للبرنامج */
-        .program-focus-header { background: linear-gradient(90deg, rgba(0,210,255,0.1), transparent); padding: 20px; border-radius: 10px; border-right: 4px solid var(--primary); margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;}
-        .program-focus-header h3 { color: var(--primary); margin: 0; font-size: 20px; font-weight: 900;}
-
-        /* الفوتر الأصلي (Sovereign Eagle) بدون أي تغيير في الألوان */
+        /* الفوتر الأصلي بدون أي تغيير في الألوان كما طلب تماماً */
         .footer-wrapper { padding: 40px 20px; background: rgba(2, 5, 10, 0.98); border-top: 3px solid var(--primary); display: flex; justify-content: center; align-items: center; margin-top: auto; position: relative; overflow: hidden; height: 550px; flex-shrink: 0; box-shadow: 0 -15px 50px rgba(0,0,0,0.8); }
         .circle-container { position: relative; width: 480px; height: 480px; display: flex; justify-content: center; align-items: center; transform: scale(0.8); }
         @media (min-width: 768px) { .circle-container { transform: scale(1); } .footer-wrapper { padding: 80px 20px; } }
@@ -133,9 +168,8 @@
         @media print {
             body { background: white; color: black; } header, .tabs, .footer-wrapper, .action-btn, .controls-wrapper, #auth-modal, #toast-container { display: none !important; }
             .tab-content { border: none; box-shadow: none; display: block !important; padding: 0; background: white;}
-            .section-title { color: black; border-bottom: 1px solid #ccc; } .table-wrapper { max-height: none; overflow: visible;} table { border: 1px solid #ddd; } th { background: #eee !important; color: black !important; position: static;} td { color: black; border-bottom: 1px solid #ddd; }
-            .stat-card { border: 1px solid #ccc; break-inside: avoid; background: #fff;} .stat-card p, .stat-card h3 { color: black; text-shadow: none; }
-            .program-focus-header { border: 1px solid #000; background: #fff;} .program-focus-header h3 { color: #000;}
+            .section-title { color: black; border-bottom: 1px solid #ccc; } .table-wrapper { max-height: none; overflow: visible; border: none; box-shadow: none; } table { border: 1px solid #ddd; } th { background: #eee !important; color: black !important; position: static;} td { color: black; border-bottom: 1px solid #ddd; }
+            .stat-card, .session-card { border: 1px solid #ccc; break-inside: avoid; background: #fff;} .stat-card p, .stat-card h3, .session-card h3, .session-card p { color: black; text-shadow: none; }
         }
     </style>
 </head>
@@ -146,7 +180,7 @@
     <div id="auth-modal">
         <div class="login-box">
             <h2>الوصول للإدارة الشاملة</h2>
-            <p>الرجاء إدخال كلمة المرور (nira) للوصول لأدوات التحكم والتعديل.</p>
+            <p style="color: var(--text-muted); margin-bottom: 25px; line-height: 1.6;">الرجاء إدخال كلمة المرور (nira) للوصول لأدوات التحكم والتعديل.</p>
             <input type="password" id="passwordInput" placeholder="كلمة المرور..." onkeypress="if(event.key === 'Enter') verifyPassword()">
             <button class="btn-submit" onclick="verifyPassword()">🔑 تسجيل دخول</button>
             <button class="btn-cancel" onclick="closeAuthModal()">إلغاء والعودة للمحتوى العام</button>
@@ -158,67 +192,67 @@
         <header>
             <div class="header-titles">
                 <h2>جامعة المنصورة | كلية التربية | قسم المناهج وطرق التدريس</h2>
-                <h1>المنصة التفاعلية المتقدمة لبرامج التدريب المصغر</h1>
-                <p>بيئة تعلم تكيفية شاملة لتنمية الكفايات المهنية الرقمية والكفاءة الذاتية</p>
+                <h1>المنصة التفاعلية المتقدمة <span>لبرامج التدريب المصغر</span></h1>
+                <p style="color: var(--text-muted); font-size: 16px;">بيئة تعلم تكيفية شاملة لتنمية الكفايات المهنية الرقمية والكفاءة الذاتية</p>
             </div>
             <div class="header-info">
                 <p><strong>إعداد وتطوير:</strong> نيرة محمود الدسوقي عبد الخالق</p>
                 <p><strong>الجهة:</strong> مديرية التربية والتعليم - الدقهلية</p>
-                <p style="margin-top: 10px; color: var(--primary); font-size: 13px;" id="dateTimeDisplay"></p>
-                <p style="font-size: 13px;">حالة المزامنة السحابية: <span id="syncStatus" style="color: var(--danger); font-weight: bold;">غير متصل 🔴</span></p>
+                <p style="margin-top: 12px; color: var(--primary); font-size: 14px; font-weight: bold;" id="dateTimeDisplay"></p>
+                <p style="font-size: 14px; margin-top: 5px;">حالة المزامنة: <span id="syncStatus" style="color: var(--danger); font-weight: bold;">غير متصل 🔴</span></p>
             </div>
         </header>
 
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('program-info')">📖 عن البرنامج الأساسي</button>
             <button class="tab-btn" onclick="switchTab('all-programs')">🎓 دليل الـ 50 برنامج تدريبي</button>
-            <button class="tab-btn" onclick="switchTab('program-sessions')" id="tabSessionsBtn" style="display:none; background: linear-gradient(135deg, #f2994a, #f2c94c); color: #000; border: none;">📚 تصفح جلسات البرنامج المحدد (10)</button>
+            <button class="tab-btn" onclick="switchTab('program-sessions')" id="tabSessionsBtn" style="display:none; background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; border: none; box-shadow: 0 5px 20px rgba(245, 158, 11, 0.4);">📚 تصفح جلسات البرنامج (10)</button>
             
-            <button class="tab-btn" onclick="requestAccess('dashboard')">📊 لوحة الإحصائيات</button>
+            <button class="tab-btn" onclick="requestAccess('dashboard')">📊 الإحصائيات</button>
             <button class="tab-btn" onclick="requestAccess('trainees')">👥 إدارة المتدربين</button>
             <button class="tab-btn" onclick="requestAccess('evaluation')">📝 أدوات التقويم</button>
-            <button class="tab-btn" onclick="requestAccess('manage-programs')">📂 تحرير البرامج الـ 50</button>
-            <button class="tab-btn" onclick="requestAccess('settings')">🔄 الإعدادات والمزامنة</button>
+            <button class="tab-btn" onclick="requestAccess('manage-programs')">📂 تحرير البرامج</button>
+            <button class="tab-btn" onclick="requestAccess('settings')">🔄 الإعدادات</button>
         </div>
 
         <div id="program-info" class="tab-content active">
             <h2 class="section-title">المقدمة والأسس النظرية للتدريب المصغر</h2>
-            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 25px;">
-                <p style="margin-bottom: 15px; text-align: justify; line-height: 1.8;">
-                    يُعد المعلم الركيزة الأساسية في أي تطوير تربوي. وفي عصر التحول الرقمي، لم تعد طرق التدريس التقليدية كافية. جاء هذا النظام لمعالجة الضعف في مستوى الكفايات المهنية الرقمية والكفاءة الذاتية لدى معلمي الفيزياء والمواد الأخرى، من خلال تقديم <strong>50 برنامجاً تدريبياً</strong> قائماً على <strong>التدريب المصغر (Microlearning)</strong> في <strong>بيئة تعلم تكيفية (Adaptive Learning Environment)</strong> وفق مسارات تلبي احتياجات كل متدرب.
+            <div style="background: var(--card-bg); padding: 35px; border-radius: 20px; margin-bottom: 35px; border: 1px solid var(--glass-border); box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);">
+                <p style="margin-bottom: 0; text-align: justify; line-height: 2; font-size: 17px; color: #e5e7eb;">
+                    [span_0](start_span)[span_1](start_span)يُعد المعلم الركيزة الأساسية في أي تطوير تربوي. وفي عصر التحول الرقمي، لم تعد طرق التدريس التقليدية كافية. جاء هذا النظام لمعالجة الضعف في مستوى الكفايات المهنية الرقمية والكفاءة الذاتية لدى معلمي الفيزياء والمواد الأخرى، من خلال تقديم <strong style="color: var(--primary);">50 برنامجاً تدريبياً</strong> قائماً على <strong style="color: var(--warning);">التدريب المصغر (Microlearning)</strong> في <strong style="color: var(--success);">بيئة تعلم تكيفية (Adaptive Learning Environment)</strong> وفق مسارات تلبي احتياجات كل متدرب بصورة مبتكرة.[span_0](end_span)[span_1](end_span)
                 </p>
             </div>
             <div class="form-grid">
-                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; border-right: 3px solid var(--primary);">
-                    <h3 style="color: var(--secondary); margin-bottom: 15px;">أسس البرنامج (Bandura & Microlearning)</h3>
-                    <ul class="styled-list">
-                        <li><strong>الكفايات المهنية:</strong> التكنولوجيا، المحتوى التفاعلي، التقويم الرقمي.</li>
-                        <li><strong>الكفاءة الذاتية:</strong> إنجازات الأداء، الخبرات البديلة، والتشجيع.</li>
-                        <li><strong>التدريب المصغر:</strong> كائنات تدريبية مكثفة 5-10 دقائق.</li>
-                        <li><strong>التكيفية:</strong> مسارات متعددة (مبتدئ، متوسط، متقدم) بوتيرة ذاتية.</li>
+                <div style="background: rgba(0,0,0,0.2); padding: 30px; border-radius: 18px; border-right: 5px solid var(--primary); border: 1px solid rgba(0, 210, 255, 0.1); border-right-width: 5px;">
+                    <h3 style="color: var(--primary); margin-bottom: 20px; font-weight: 900;">أسس البرنامج (Bandura & Microlearning)</h3>
+                    <ul style="list-style: none; padding-right: 15px;">
+                        [span_2](start_span)<li style="margin-bottom: 12px; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> <strong>الكفايات المهنية:</strong> التكنولوجيا، المحتوى التفاعلي، التقويم الرقمي.[span_2](end_span)</li>
+                        [span_3](start_span)<li style="margin-bottom: 12px; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> <strong>الكفاءة الذاتية:</strong> إنجازات الأداء، الخبرات البديلة، والتشجيع.[span_3](end_span)</li>
+                        [span_4](start_span)<li style="margin-bottom: 12px; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> <strong>التدريب المصغر:</strong> كائنات تدريبية مكثفة 5-10 دقائق.[span_4](end_span)</li>
+                        [span_5](start_span)<li style="margin-bottom: 0; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> <strong>التكيفية:</strong> مسارات (مبتدئ، متوسط، متقدم) بوتيرة ذاتية.[span_5](end_span)</li>
                     </ul>
                 </div>
-                <div style="background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; border-right: 3px solid var(--warning);">
-                    <h3 style="color: var(--warning); margin-bottom: 15px;">متطلبات البيئة التدريبية</h3>
-                    <ul class="styled-list">
-                        <li>قاعة افتراضية (Classroom + Zoom).</li>
-                        <li>أجهزة ذكية واتصال إنترنت مستقر (5 ميجابت).</li>
-                        <li>حسابات Google للوصول لنماذج الاختبارات والتخزين السحابي.</li>
-                        <li>تطبيقات تواصل (WhatsApp/Telegram) للمناقشات التعاونية.</li>
+                <div style="background: rgba(0,0,0,0.2); padding: 30px; border-radius: 18px; border-right: 5px solid var(--warning); border: 1px solid rgba(245, 158, 11, 0.1); border-right-width: 5px;">
+                    <h3 style="color: var(--warning); margin-bottom: 20px; font-weight: 900;">متطلبات البيئة التدريبية</h3>
+                    <ul style="list-style: none; padding-right: 15px;">
+                        [span_6](start_span)<li style="margin-bottom: 12px; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> قاعة افتراضية (Classroom + Zoom).[span_6](end_span)</li>
+                        [span_7](start_span)<li style="margin-bottom: 12px; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> أجهزة ذكية واتصال إنترنت مستقر (5 ميجابت).[span_7](end_span)</li>
+                        [span_8](start_span)<li style="margin-bottom: 12px; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> حسابات Google للوصول لنماذج الاختبارات.[span_8](end_span)</li>
+                        [span_9](start_span)<li style="margin-bottom: 0; color: #d1d5db; position: relative;"><span style="color: var(--success); position: absolute; right: -20px; font-weight: bold;">✓</span> تطبيقات تواصل (WhatsApp/Telegram) للمناقشات.[span_9](end_span)</li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div id="all-programs" class="tab-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; flex-wrap: wrap; gap: 15px;">
                 <h2 class="section-title" style="margin:0;">قاعدة بيانات برامج التدريب المصغر (50 برنامج)</h2>
                 <div class="controls-wrapper">
-                    <span style="background: var(--success); color: var(--dark-bg); padding: 5px 15px; border-radius: 20px; font-weight: bold;">تتضمن 500 جلسة تفاعلية</span>
+                    <span style="background: rgba(16, 185, 129, 0.15); color: var(--success); padding: 10px 20px; border-radius: 20px; font-weight: 900; border: 1px solid rgba(16, 185, 129, 0.3);">يتضمن 500 جلسة تفاعلية</span>
                     <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة الدليل</button>
                 </div>
             </div>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">انقر على زر <strong>(عرض الجلسات)</strong> بجوار أي برنامج لتصفح تفاصيل ومحتوى الجلسات العشر المخصصة له.</p>
+            <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 16px;">انقر على زر <strong style="color: var(--primary);">(عرض الجلسات)</strong> بجوار أي برنامج لتصفح تفاصيل ومحتوى الجلسات العشر المخصصة له.</p>
             
             <div class="table-wrapper">
                 <table>
@@ -232,39 +266,39 @@
             <div class="program-focus-header">
                 <div>
                     <h3 id="currentProgramTitle">الجلسات التدريبية</h3>
-                    <p style="color: var(--text-muted); font-size: 14px; margin-top: 8px;" id="currentProgramMeta">...</p>
+                    <p style="color: var(--text-muted); font-size: 15px; margin-top: 10px;" id="currentProgramMeta">...</p>
                 </div>
                 <div class="controls-wrapper">
-                    <button class="action-btn" style="background: var(--secondary);" onclick="switchTab('all-programs')">↩️ العودة لدليل البرامج</button>
+                    <button class="action-btn" style="background: linear-gradient(135deg, var(--secondary), #1e3a8a);" onclick="switchTab('all-programs')">↩️ العودة لدليل البرامج</button>
                     <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة محتوى الجلسات</button>
                     <button class="action-btn btn-export admin-only" style="display:none;" onclick="exportSessionsCSV()">⬇️ تصدير الجلسات</button>
                     <label class="action-btn btn-import admin-only" style="display:none;">⬆️ استيراد الجلسات<input type="file" accept=".csv" onchange="importSessionsCSV(event)"></label>
                 </div>
             </div>
 
-            <div id="editSessionBlock" class="admin-only" style="display:none; background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--primary);">
-                <h3 style="color: white; margin-bottom: 20px;">محرر الجلسات (للبرنامج الحالي)</h3>
+            <div id="editSessionBlock" class="admin-only" style="display:none; background: var(--card-bg); padding: 35px; border-radius: 20px; margin-bottom: 35px; border: 1px solid var(--glass-border); border-left: 5px solid var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
+                <h3 style="color: white; margin-bottom: 25px; font-weight: 900;">محرر الجلسات (للبرنامج الحالي)</h3>
                 <input type="hidden" id="sId">
                 <div class="form-grid">
                     <div class="form-group"><label>اليوم</label><input type="text" id="sDay" placeholder="اليوم الأول"></div>
                     <div class="form-group"><label>رقم الجلسة</label><input type="text" id="sNum" placeholder="الجلسة 1"></div>
                     <div class="form-group"><label>المدة الزمنية</label><input type="text" id="sTime" placeholder="60 دقيقة"></div>
                 </div>
-                <div class="form-group"><label>عنوان الجلسة</label><input type="text" id="sTitle"></div>
-                <div class="form-group"><label>الوصف والموضوعات التفصيلية</label><textarea id="sDesc" rows="3"></textarea></div>
-                <div class="form-group"><label>أساليب واستراتيجيات التدريس</label><input type="text" id="sStrategy" placeholder="مثال: تدريب مصغر، محاكاة..."></div>
+                <div class="form-group" style="margin-bottom: 24px;"><label>عنوان الجلسة</label><input type="text" id="sTitle"></div>
+                <div class="form-group" style="margin-bottom: 24px;"><label>الوصف والموضوعات التفصيلية</label><textarea id="sDesc" rows="3"></textarea></div>
+                <div class="form-group" style="margin-bottom: 24px;"><label>أساليب واستراتيجيات التدريس</label><input type="text" id="sStrategy" placeholder="مثال: تدريب مصغر، محاكاة..."></div>
                 
                 <div class="controls-wrapper">
                     <button class="action-btn btn-add" id="btnSaveSession" onclick="saveSessionData()">💾 حفظ وإضافة الجلسة</button>
-                    <button class="action-btn btn-cancel" id="btnCancelSession" onclick="cancelEditSession()" style="display: none; background: rgba(255,255,255,0.1); border:none;">❌ إلغاء التعديل</button>
+                    <button class="action-btn btn-cancel" id="btnCancelSession" onclick="cancelEditSession()" style="display: none; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); margin-top: 0; padding: 14px 26px;">❌ إلغاء التعديل</button>
                 </div>
             </div>
 
             <div class="sessions-grid" id="publicSessionsGrid">
-                </div>
+            </div>
 
-            <div class="table-wrapper admin-only" style="display:none; margin-top: 20px;">
-                <h3 style="margin-bottom:15px; color:var(--warning);">جدول الإدارة السريع للجلسات</h3>
+            <div class="table-wrapper admin-only" style="display:none; margin-top: 35px;">
+                <h3 style="margin: 25px; color:var(--warning); font-weight: 900;">جدول الإدارة السريع للجلسات</h3>
                 <table>
                     <thead><tr><th width="15%">اليوم/الجلسة</th><th width="25%">العنوان</th><th width="35%">المحتوى والتفاصيل</th><th width="10%">المدة</th><th width="15%">إدارة</th></tr></thead>
                     <tbody id="sessionsTableBody"></tbody>
@@ -282,7 +316,7 @@
         </div>
 
         <div id="trainees" class="tab-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; flex-wrap: wrap; gap: 15px;">
                 <h2 class="section-title" style="margin:0;">قاعدة بيانات المتدربين (الدقهلية)</h2>
                 <div class="controls-wrapper">
                     <button class="action-btn btn-print" onclick="window.print()">🖨️ طباعة السجل</button>
@@ -291,13 +325,13 @@
                 </div>
             </div>
 
-            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--secondary);">
+            <div style="background: var(--card-bg); padding: 35px; border-radius: 20px; margin-bottom: 35px; border: 1px solid var(--glass-border); border-left: 5px solid var(--secondary); box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
                 <div class="form-grid" style="align-items: end;">
                     <div class="form-group"><label>الاسم الرباعي</label><input type="text" id="tName"></div>
                     <div class="form-group"><label>الجهة / الإدارة</label><input type="text" id="tSchool" value="إدارة ميت غمر التعليمية"></div>
                     <div class="form-group"><label>المسار التكيفي</label><select id="tLevel"><option>مبتدئ</option><option>متوسط</option><option>متقدم</option></select></div>
                     <div class="form-group"><label>الإنجاز (%)</label><input type="number" id="tProgress" min="0" max="100"></div>
-                    <div class="form-group"><button class="action-btn btn-add" style="width: 100%; height: 45px;" onclick="addTrainee()">➕ إضافة المتدرب</button></div>
+                    <div class="form-group"><button class="action-btn btn-add" style="width: 100%; height: 55px; justify-content: center; font-size: 16px;" onclick="addTrainee()">➕ إضافة المتدرب</button></div>
                 </div>
             </div>
 
@@ -314,33 +348,33 @@
             <div class="sessions-grid">
                 <div class="session-card">
                     <h3>1. التقويم التشخيصي (القبلي)</h3>
-                    <p>يُطبق في الجلسة الأولى لتحديد المستوى والمسار التكيفي.</p>
-                    <ul class="styled-list" style="margin-top: 15px;">
-                        <li>اختبار الكفايات المهنية المعرفي.</li>
-                        <li>مقياس الكفاءة الذاتية (Bandura).</li>
+                    <p>يُطبق في الجلسة الأولى لتحديد المستوى والمسار التكيفي المناسب لكل متدرب.</p>
+                    <ul style="list-style: none; margin-top: 20px; color:#d1d5db;">
+                        <li style="margin-bottom: 10px;">✓ اختبار الكفايات المهنية المعرفي.</li>
+                        <li>✓ مقياس الكفاءة الذاتية (Bandura).</li>
                     </ul>
                 </div>
                 <div class="session-card">
                     <h3>2. التقويم التكويني (المستمر)</h3>
-                    <p>أثناء الجلسات عبر مهام مصغرة لتصحيح المسار.</p>
-                    <ul class="styled-list" style="margin-top: 15px;">
-                        <li>تصميم خطة درس مصغرة.</li>
-                        <li>إنتاج محتوى (عرض/فيديو).</li>
+                    <p>أثناء الجلسات عبر مهام مصغرة لتصحيح المسار وتعزيز الاستيعاب.</p>
+                    <ul style="list-style: none; margin-top: 20px; color:#d1d5db;">
+                        <li style="margin-bottom: 10px;">✓ تصميم خطة درس مصغرة.</li>
+                        <li>✓ إنتاج محتوى (عرض/فيديو).</li>
                     </ul>
                 </div>
                 <div class="session-card">
                     <h3>3. التقويم الختامي (البعدي)</h3>
-                    <p>لقياس مدى تحقق الأهداف ومنح الشهادات.</p>
-                    <ul class="styled-list" style="margin-top: 15px;">
-                        <li>الاختبار البعدي.</li>
-                        <li>تقييم المشاريع النهائية (بطاقة ملاحظة).</li>
+                    <p>لقياس مدى تحقق الأهداف ومنح الشهادات واجتياز البرامج بنجاح.</p>
+                    <ul style="list-style: none; margin-top: 20px; color:#d1d5db;">
+                        <li style="margin-bottom: 10px;">✓ الاختبار البعدي.</li>
+                        <li>✓ تقييم المشاريع النهائية.</li>
                     </ul>
                 </div>
             </div>
         </div>
 
         <div id="manage-programs" class="tab-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; flex-wrap: wrap; gap: 15px;">
                 <h2 class="section-title" style="margin:0;">تحرير قاعدة بيانات الـ 50 برنامج</h2>
                 <div class="controls-wrapper">
                     <button class="action-btn btn-export" onclick="exportProgramsCSV()">⬇️ تصدير</button>
@@ -348,7 +382,7 @@
                 </div>
             </div>
 
-            <div style="background: var(--card-bg); padding: 25px; border-radius: 15px; margin-bottom: 30px; border-left: 5px solid var(--success);">
+            <div style="background: var(--card-bg); padding: 35px; border-radius: 20px; margin-bottom: 35px; border: 1px solid var(--glass-border); border-left: 5px solid var(--success); box-shadow: 0 15px 30px rgba(0,0,0,0.3);">
                 <input type="hidden" id="pId">
                 <div class="form-grid">
                     <div class="form-group" style="grid-column: span 2;"><label>اسم البرنامج التدريبي التكيفي</label><input type="text" id="pTitle"></div>
@@ -357,7 +391,7 @@
                 </div>
                 <div class="controls-wrapper">
                     <button class="action-btn btn-add" id="btnSaveProgram" onclick="saveProgramData()">💾 إضافة البرنامج وتوليد جلساته</button>
-                    <button class="action-btn btn-cancel" id="btnCancelProgram" onclick="cancelEditProgram()" style="display: none; background: rgba(255,255,255,0.1); border:none;">❌ إلغاء</button>
+                    <button class="action-btn btn-cancel" id="btnCancelProgram" onclick="cancelEditProgram()" style="display: none; background: rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); margin-top: 0; padding: 14px 26px;">❌ إلغاء</button>
                 </div>
             </div>
 
@@ -371,18 +405,19 @@
 
         <div id="settings" class="tab-content">
             <h2 class="section-title">المزامنة السحابية وإعدادات الـ Webhook</h2>
-            <div style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 15px; margin-bottom: 30px;">
-                <h3 style="color: var(--primary); margin-bottom: 15px;">Google Apps Script API (Text/Plain Bypassing)</h3>
-                <p style="color: var(--text-muted); margin-bottom: 15px;">تم تصميم النظام ليعمل بنمط <code>no-cors</code>، مما يعني أن الرابط أدناه سيتلقى البيانات بصمت تام في الخلفية وتخزينها في جدول Google الخاص بك.</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 35px; border-radius: 20px; margin-bottom: 35px; border: 1px solid rgba(0, 210, 255, 0.1);">
+                <h3 style="color: var(--primary); margin-bottom: 15px; font-weight: 900;">Google Apps Script API (Text/Plain Bypassing)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 16px;">تم تصميم النظام ليعمل بنمط <code>no-cors</code>، مما يعني أن الرابط أدناه سيتلقى البيانات بصمت تام في الخلفية وتخزينها في جدول Google الخاص بك.</p>
                 <div class="form-group" style="max-width: 800px;">
-                    <input type="text" id="gasUrl" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom: 15px;">
-                    <button class="action-btn btn-sync" onclick="saveSettingsAndSync()">🔄 حفظ الرابط والمزامنة القسرية للبيانات</button>
+                    <input type="text" id="gasUrl" placeholder="https://script.google.com/macros/s/.../exec" style="margin-bottom: 20px;">
+                    <button class="action-btn btn-sync" onclick="saveSettingsAndSync()" style="font-size: 15px; padding: 16px 30px;">🔄 حفظ الرابط والمزامنة القسرية للبيانات</button>
                 </div>
             </div>
             
-            <div style="background: rgba(255,23,68,0.1); border: 1px solid rgba(255,23,68,0.3); padding: 25px; border-radius: 15px;">
-                <h3 style="color: var(--danger); margin-bottom: 15px;">إعادة ضبط المصنع (منطقة الخطر)</h3>
-                <button class="action-btn btn-delete" onclick="factoryResetAll()" style="font-size: 14px;">⚠️ استعادة جميع بيانات النظام الأساسية (الملحق 4 والبرامج الـ 50)</button>
+            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); padding: 35px; border-radius: 20px;">
+                <h3 style="color: var(--danger); margin-bottom: 15px; font-weight: 900;">إعادة ضبط المصنع (منطقة الخطر)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 16px;">هذا الإجراء سيقوم بمسح كافة التعديلات واسترجاع الحالة الأصلية للمنصة وبيانات الـ 50 برنامجاً.</p>
+                <button class="action-btn btn-delete" onclick="factoryResetAll()" style="font-size: 15px; padding: 16px 30px;">⚠️ استعادة جميع بيانات النظام الأساسية</button>
             </div>
         </div>
     </div>
@@ -410,7 +445,7 @@
         const mainProgram = { id: 1, title: "البرنامج التدريبي المصغر في بيئة تعلم تكيفية لمعلمي الفيزياء", category: "الكفايات المهنية الرقمية", output: "معلم فيزياء قادر على إنتاج محتوى رقمي" };
         const programsCatalog = [mainProgram];
         
-        // 49 highly specific, realistic topics mapped exactly to the attachment's themes
+        // 49 highly specific topics
         const topics = [
             {t:"توظيف محاكيات PhET في تدريس الميكانيكا الكلاسيكية", c:"الفيزياء التطبيقية", o:"درس تفاعلي معتمد على المحاكاة"},
             {t:"إنتاج الفيديوهات الترويجية والتعليمية بالذكاء الاصطناعي", c:"تكنولوجيا التعليم", o:"فيديو تعليمي معزز بالـ AI"},
@@ -464,33 +499,34 @@
         ];
         for(let i=0; i<49; i++) { programsCatalog.push({ id: i+2, title: topics[i].t, category: topics[i].c, output: topics[i].o }); }
 
-        // الجلسات الـ 10 الدقيقة المطابقة للملحق
+        // تم استخراج وتصحيح هذه الجلسات الـ 10 حصرياً من الملف المرفق دون أي زيادة أو تكرار
         const exactDocSessions = [
-            { id: 1, day: "اليوم الأول", num: "الجلسة 1", time: "60 دقيقة", title: "التهيئة للبرنامج والاختبار القبلي التشخيصي", desc: "التعريف بالبرنامج، شرح آلية التكيف، الاختبار القبلي التشخيصي، والتعارف وتحديد المستويات.", strategy: "محاضرة مصغرة، حوار ومناقشة، تعلم تعاوني، تطبيق فردي" },
-            { id: 2, day: "اليوم الأول", num: "الجلسة 2", time: "60 دقيقة", title: "مهارات تدريس الفيزياء (1): توظيف اليوتيوب", desc: "معايير اختيار فيديو تعليمي مناسب، البحث عن فيديو قصير، وتصميم اختبار قصير (Google Forms).", strategy: "تدريب مصغر، عرض وتطبيق، تعلم ذاتي، تغذية راجعة فورية" },
-            { id: 3, day: "اليوم الثاني", num: "الجلسة 3", time: "60 دقيقة", title: "مهارات تدريس الفيزياء (2): توظيف السبورة الذكية ومشاركة الشاشة", desc: "شرح استخدام السبورة الذكية، محاكاة باستخدام مشاركة الشاشة في زووم لبرامج PhET، وتطبيقات عملية.", strategy: "تدريب مصغر، محاكاة، عرض نموذج، تطبيق عملي" },
-            { id: 4, day: "اليوم الثاني", num: "الجلسة 4", time: "60 دقيقة", title: "تصميم خطة الدرس التفاعلية", desc: "عناصر خطة الدرس المدمجة، صياغة الأهداف السلوكية للفيزياء، وإعداد خطة كاملة (تمهيد، عرض، تطبيق).", strategy: "تدريب مصغر، عصف ذهني، تعلم تعاوني، ورشة عمل" },
-            { id: 5, day: "اليوم الثالث", num: "الجلسة 5", time: "60 دقيقة", title: "إنتاج المحتوى الإلكتروني (1): العروض التقديمية والوسائل", desc: "مبادئ التصميم الجيد (قاعدة 5×5)، تصميم إنفوغرافيك علمي، واستخدام منصة Canva أو PowerPoint.", strategy: "تدريب مصغر، عرض وتطبيق، تعلم ذاتي، مشروع فردي" },
-            { id: 6, day: "اليوم الثالث", num: "الجلسة 6", time: "60 دقيقة", title: "إنتاج المحتوى الإلكتروني (2): الفيديو التعليمي القصير", desc: "كتابة السيناريو لظاهرة فيزيائية، خطوات الإنتاج (هاتف/شاشة)، وإضافة التعليق الصوتي والعناصر البصرية.", strategy: "تدريب مصغر، عرض نموذج، تطبيق عملي، تغذية راجعة" },
-            { id: 7, day: "اليوم الرابع", num: "الجلسة 7", time: "60 دقيقة", title: "إنتاج الاختبارات الإلكترونية (1): الإنشاء والتصحيح الآلي", desc: "إنشاء اختبار تفاعلي على Google Forms، تحديد أنواع الأسئلة، تفعيل خاصية التصحيح الآلي والدرجات.", strategy: "تدريب مصغر، عرض وتطبيق مباشر، تعلم ذاتي" },
-            { id: 8, day: "اليوم الرابع", num: "الجلسة 8", time: "60 دقيقة", title: "إنتاج الاختبارات الإلكترونية (2): التغذية الراجعة وتحليل النتائج", desc: "إضافة التغذية الراجعة الفورية (Feedback)، إرسال الاختبار، وتحليل البيانات والإحصائيات باستخدام Google Sheets.", strategy: "تدريب مصغر، عرض نموذج، تطبيق عملي، ورشة عمل" },
-            { id: 9, day: "اليوم الخامس", num: "الجلسة 9", time: "60 دقيقة", title: "تنمية الكفاءة الذاتية للمعلم", desc: "العوامل المؤثرة في الكفاءة الذاتية وفق نظرية (Bandura)، تعزيز الثقة التقنية، وتخطي حواجز الخوف من التكنولوجيا وتقديم نماذج محاكاة.", strategy: "محاضرة تفاعلية، دراسة حالة، مناقشة جماعية" },
-            { id: 10, day: "اليوم الخامس", num: "الجلسة 10", time: "60 دقيقة", title: "ختامية: مراجعة شاملة وتقويم", desc: "مراجعة شاملة للبرنامج، عرض نماذج إبداعية من إنتاجات المعلمين، تطبيق الاختبار البعدي، مقياس الكفاءة الذاتية ومنح الشهادات.", strategy: "معرض ومناقشة، تقويم ختامي، تعزيز إيجابي" }
+            { id: 1, day: "اليوم الأول", num: "الجلسة 1", time: "50 دقيقة", title: "التهيئة للبرنامج والاختبار القبلي التشخيصي", desc: "التعريف بالبرنامج، شرح آلية التكيف، الاختبار القبلي التشخيصي، والتعارف وتحديد المستويات.", strategy: "محاضرة مصغرة، حوار ومناقشة، تعلم تعاوني، تطبيق فردي" },
+            { id: 2, day: "اليوم الأول", num: "الجلسة 2", time: "50 دقيقة", title: "مهارات تدريس الفيزياء (1): توظيف اليوتيوب", desc: "معايير اختيار فيديو تعليمي، البحث عن فيديو مناسب، وتقييم الفيديو التعليمي.", strategy: "تدريب مصغر، عرض وتطبيق، تعلم ذاتي، تغذية راجعة فورية" },
+            { id: 3, day: "اليوم الثاني", num: "الجلسة 3", time: "60 دقيقة", title: "مهارات تدريس الفيزياء (2): توظيف السبورة الذكية ومشاركة الشاشة", desc: "شرح استخدام السبورة الذكية، محاكاة باستخدام مشاركة الشاشة، وتطبيقات عملية.", strategy: "تدريب مصغر، محاكاة، عرض نموذج، تطبيق عملي" },
+            { id: 4, day: "اليوم الثاني", num: "الجلسة 4", time: "60 دقيقة", title: "تصميم خطة الدرس التفاعلية", desc: "عناصر خطة الدرس، صياغة الأهداف السلوكية، وتصميم التمهيد والتقويم.", strategy: "تدريب مصغر، عصف ذهني، تعلم تعاوني، ورشة عمل" },
+            { id: 5, day: "اليوم الثالث", num: "الجلسة 5", time: "60 دقيقة", title: "إنتاج المحتوى الإلكتروني (1): العروض التقديمية والوسائل", desc: "مبادئ التصميم الجيد (قاعدة 5×5)، تصميم إنفوغرافيك، واستخدام منصة Canva أو PowerPoint.", strategy: "تدريب مصغر، عرض وتطبيق، تعلم ذاتي، مشروع فردي" },
+            { id: 6, day: "اليوم الثالث", num: "الجلسة 6", time: "60 دقيقة", title: "إنتاج المحتوى الإلكتروني (2): الفيديو التعليمي القصير", desc: "كتابة السيناريو، طرق الإنتاج (هاتف/تسجيل شاشة)، وإضافة التعليق الصوتي.", strategy: "تدريب مصغر، عرض نموذج، تطبيق عملي، تغذية راجعة" },
+            { id: 7, day: "اليوم الرابع", num: "الجلسة 7", time: "60 دقيقة", title: "إنتاج الاختبارات الإلكترونية (1): الإنشاء والتصحيح الآلي", desc: "إنشاء اختبار تفاعلي على Google Forms، تحديد أنواع الأسئلة، وتفعيل خاصية التصحيح الآلي.", strategy: "تدريب مصغر، عرض وتطبيق (مباشر على الجهاز)، تعلم ذاتي" },
+            { id: 8, day: "اليوم الرابع", num: "الجلسة 8", time: "60 دقيقة", title: "إنتاج الاختبارات الإلكترونية (2): التغذية الراجعة وتحليل النتائج", desc: "إضافة التغذية الراجعة الفورية (Feedback)، إرسال الاختبار، وتحليل النتائج باستخدام Google Sheets.", strategy: "تدريب مصغر، عرض نموذج، تطبيق عملي، ورشة عمل" },
+            { id: 9, day: "اليوم الخامس", num: "الجلسة 9", time: "60 دقيقة", title: "تنمية الكفاءة الذاتية للمعلم", desc: "العوامل المؤثرة في الكفاءة الذاتية وفق نظرية (Bandura)، تعزيز الثقة التقنية، وتخطي حواجز الخوف.", strategy: "محاضرة تفاعلية، دراسة حالة، مناقشة جماعية" },
+            { id: 10, day: "اليوم الخامس", num: "الجلسة 10", time: "60 دقيقة", title: "ختامية: مراجعة شاملة وتقويم", desc: "مراجعة شاملة للبرنامج، عرض نماذج من إنتاجات المعلمين، الاختبار البعدي، ومقياس الكفاءة الذاتية البعدي.", strategy: "معرض ومناقشة، تقويم ختامي، تعزيز إيجابي" }
         ];
 
         // ==========================================
-        // 2. State & Databases (Relational LocalStorage)
+        // 2. State & Databases (Relational LocalStorage - V3 Cache Busting)
         // ==========================================
-        let programsDB = JSON.parse(localStorage.getItem('niraPrograms_v2')) || programsCatalog;
-        let sessionsDB = JSON.parse(localStorage.getItem('niraSessionsMap_v2')) || {};
-        let traineesDB = JSON.parse(localStorage.getItem('niraTrainees_v2')) || [];
+        // تم تحديث مفاتيح التخزين إلى v3 لضمان مسح البيانات القديمة الخاطئة وتحميل الجلسات المصححة فوراً
+        let programsDB = JSON.parse(localStorage.getItem('niraPrograms_v3')) || programsCatalog;
+        let sessionsDB = JSON.parse(localStorage.getItem('niraSessionsMap_v3')) || {};
+        let traineesDB = JSON.parse(localStorage.getItem('niraTrainees_v3')) || [];
         
-        // Ensure Program 1 exists exactly as required
+        // Ensure Program 1 exists exactly as required with the new corrected data
         if(!sessionsDB[1]) sessionsDB[1] = JSON.parse(JSON.stringify(exactDocSessions));
 
         let currentProgId = 1; 
         const defaultGasUrl = "https://script.google.com/macros/s/AKfycbzKbEigjZP5rUzLdFGsfeZ8BYCfvnIUaEeHbOKDvgGaCfcVNtxFp1r5M928Bm8CoCII/exec";
-        let gasUrl = localStorage.getItem('niraGasUrl_v2') || defaultGasUrl;
+        let gasUrl = localStorage.getItem('niraGasUrl_v3') || defaultGasUrl;
 
         // ==========================================
         // 3. UI, Authentication, and Navigation
@@ -543,14 +579,14 @@
             const tbody2 = document.getElementById('manageProgramsBody'); tbody2.innerHTML = '';
             
             programsDB.forEach((p, i) => {
-                let isMainRow = p.id === 1 ? 'background: rgba(0, 210, 255, 0.15); border-right: 4px solid var(--primary);' : '';
+                let isMainRow = p.id === 1 ? 'background: rgba(0, 210, 255, 0.05); border-right: 4px solid var(--primary);' : '';
                 let commonHtml = `<td>${i + 1}</td>
-                    <td style="color:var(--primary); font-weight:bold; font-size:16px;">${p.title}</td>
+                    <td style="color:var(--primary); font-weight:900; font-size:16px;">${p.title}</td>
                     <td style="color:var(--text-muted)">${p.category}</td>
-                    <td style="color:var(--success)">${p.output}</td>`;
+                    <td style="color:var(--success); font-weight:bold;">${p.output}</td>`;
                 
                 tbody1.innerHTML += `<tr style="${isMainRow}">${commonHtml}
-                    <td><button class="action-btn" style="background: linear-gradient(45deg, #11998e, #38ef7d); color: black;" onclick="openProgramSessions(${p.id})">📂 عرض الجلسات</button></td></tr>`;
+                    <td><button class="action-btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white;" onclick="openProgramSessions(${p.id})">📂 عرض الجلسات</button></td></tr>`;
                     
                 tbody2.innerHTML += `<tr style="${isMainRow}">${commonHtml}
                     <td><div class="controls-wrapper"><button class="action-btn btn-edit" onclick="editProgram(${p.id})">✏️</button> <button class="action-btn btn-delete" onclick="deleteProgram(${p.id})">🗑</button></div></td></tr>`;
@@ -564,10 +600,9 @@
             document.getElementById('currentProgramTitle').innerText = `الجلسات الـ 10 لبرنامج: ${prog.title}`;
             document.getElementById('currentProgramMeta').innerText = `المجال: ${prog.category} | المخرجات: ${prog.output}`;
             
-            // Smart auto-generation for uninitialized programs
             if(!sessionsDB[progId]) {
                 sessionsDB[progId] = generateSmartSessionsForProgram(prog);
-                localStorage.setItem('niraSessionsMap_v2', JSON.stringify(sessionsDB));
+                localStorage.setItem('niraSessionsMap_v3', JSON.stringify(sessionsDB));
             }
             
             renderCurrentSessions();
@@ -579,7 +614,7 @@
             let temp = []; let days = ["اليوم الأول", "اليوم الثاني", "اليوم الثالث", "اليوم الرابع", "اليوم الخامس"];
             for(let i=0; i<10; i++) {
                 temp.push({
-                    id: Date.now() + i, day: days[Math.floor(i/2)], num: `الجلسة ${i+1}`, time: "60 دقيقة",
+                    id: Date.now() + i, day: days[Math.floor(i/2)], num: `الجلسة ${i+1}`, time: i < 2 ? "50 دقيقة" : "60 دقيقة",
                     title: i===0 ? `التهيئة والمدخل لبرنامج (${prog.category})` : (i===9 ? `الختام والمشروع النهائي لإنتاج: ${prog.output}` : `محور تدريبي وتطبيق عملي - جزء ${i}`),
                     desc: `تغطي هذه الجلسة الجوانب العملية والنظرية لدعم المخرجات المتمثلة في: ${prog.output}.`,
                     strategy: "تدريب مصغر، ورشة عمل، تطبيق مباشر"
@@ -595,16 +630,16 @@
 
             sessions.forEach(s => {
                 grid.innerHTML += `<div class="session-card">
-                    <div class="session-header"><span class="badge">${s.day} | ${s.time}</span><span style="color:var(--text-muted);font-weight:bold;">${s.num}</span></div>
+                    <div class="session-header"><span class="badge">${s.day} | ${s.time}</span><span style="color:var(--text-muted);font-weight:900;">${s.num}</span></div>
                     <h3>${s.title}</h3><p>${s.desc}</p>
-                    <div class="strategy">💡 <strong>الاستراتيجية:</strong> ${s.strategy}</div>
+                    <div class="strategy">💡 <strong style="color: var(--warning);">الاستراتيجية:</strong> <span style="color: #e5e7eb;">${s.strategy}</span></div>
                 </div>`;
 
                 tbody.innerHTML += `<tr>
-                    <td><strong>${s.day}</strong><br><small style="color:var(--text-muted)">${s.num}</small></td>
-                    <td style="color:var(--primary); font-weight:bold;">${s.title}</td>
-                    <td style="font-size:13px;">${s.desc}<br><em style="color:var(--warning)">${s.strategy}</em></td>
-                    <td>${s.time}</td>
+                    <td><strong style="color: white;">${s.day}</strong><br><small style="color:var(--text-muted)">${s.num}</small></td>
+                    <td style="color:var(--primary); font-weight:900;">${s.title}</td>
+                    <td style="font-size:14px; line-height:1.7;">${s.desc}<br><em style="color:var(--warning); display:block; margin-top:5px;">${s.strategy}</em></td>
+                    <td style="font-weight:bold;">${s.time}</td>
                     <td><div class="controls-wrapper"><button class="action-btn btn-edit" onclick="editSession(${s.id})">✏️</button><button class="action-btn btn-delete" onclick="deleteSession(${s.id})">🗑</button></div></td>
                 </tr>`;
             });
@@ -615,9 +650,9 @@
             const tbody = document.getElementById('traineesTableBody'); tbody.innerHTML = '';
             traineesDB.forEach((t, i) => {
                 let clr = t.level === 'متقدم' ? 'var(--success)' : (t.level === 'متوسط' ? 'var(--primary)' : 'var(--warning)');
-                tbody.innerHTML += `<tr><td>${i + 1}</td><td><strong>${t.name}</strong></td><td style="color:var(--text-muted)">${t.school}</td>
-                    <td><span style="border:1px solid ${clr}; color:${clr}; padding:4px 10px; border-radius:12px; font-size:13px;">${t.level}</span></td>
-                    <td><div class="progress-container"><div class="progress-bar" style="width:${t.progress}%"></div></div><small style="font-weight:bold">${t.progress}%</small></td>
+                tbody.innerHTML += `<tr><td>${i + 1}</td><td style="font-size:16px;"><strong>${t.name}</strong></td><td style="color:var(--text-muted)">${t.school}</td>
+                    <td><span style="border:1px solid ${clr}; color:${clr}; padding:6px 14px; border-radius:20px; font-size:13px; font-weight: 900; background: rgba(0,0,0,0.3);">${t.level}</span></td>
+                    <td><div class="progress-container" style="background:rgba(255,255,255,0.05); height:10px;"><div class="progress-bar" style="width:${t.progress}%"></div></div><small style="font-weight:900; color:var(--text-main); margin-top:8px; display:block;">${t.progress}%</small></td>
                     <td><button class="action-btn btn-delete" onclick="deleteTrainee(${t.id})">🗑</button></td></tr>`;
             });
             updateStats();
@@ -640,7 +675,7 @@
             if(!sessionsDB[currentProgId]) sessionsDB[currentProgId] = [];
             if(id) { const i = sessionsDB[currentProgId].findIndex(s => s.id == id); if(i > -1) sessionsDB[currentProgId][i] = sData; showToast("تم تحديث الجلسة", "success"); } 
             else { sessionsDB[currentProgId].push(sData); showToast("تمت الإضافة", "success"); }
-            localStorage.setItem('niraSessionsMap_v2', JSON.stringify(sessionsDB)); renderCurrentSessions(); cancelEditSession(); triggerAutoSync();
+            localStorage.setItem('niraSessionsMap_v3', JSON.stringify(sessionsDB)); renderCurrentSessions(); cancelEditSession(); triggerAutoSync();
         }
         function editSession(id) {
             const s = sessionsDB[currentProgId].find(s => s.id === id); if(!s) return;
@@ -648,7 +683,7 @@
             document.getElementById('btnSaveSession').innerHTML = "💾 حفظ التعديلات"; document.getElementById('btnCancelSession').style.display = "inline-flex"; window.scrollTo({top: document.getElementById('editSessionBlock').offsetTop - 50, behavior: 'smooth'});
         }
         function cancelEditSession() { document.getElementById('sId').value=''; document.getElementById('sDay').value=''; document.getElementById('sNum').value=''; document.getElementById('sTime').value=''; document.getElementById('sTitle').value=''; document.getElementById('sDesc').value=''; document.getElementById('sStrategy').value=''; document.getElementById('btnSaveSession').innerHTML = "💾 حفظ وإضافة الجلسة"; document.getElementById('btnCancelSession').style.display = "none"; }
-        function deleteSession(id) { if(confirm("مسح هذه الجلسة؟")) { sessionsDB[currentProgId] = sessionsDB[currentProgId].filter(s => s.id !== id); localStorage.setItem('niraSessionsMap_v2', JSON.stringify(sessionsDB)); renderCurrentSessions(); showToast("تم المسح", "success"); triggerAutoSync(); } }
+        function deleteSession(id) { if(confirm("مسح هذه الجلسة؟")) { sessionsDB[currentProgId] = sessionsDB[currentProgId].filter(s => s.id !== id); localStorage.setItem('niraSessionsMap_v3', JSON.stringify(sessionsDB)); renderCurrentSessions(); showToast("تم المسح", "success"); triggerAutoSync(); } }
 
         // Programs
         function saveProgramData() {
@@ -657,7 +692,7 @@
             const pData = { id: id ? parseInt(id) : Date.now(), title, category: document.getElementById('pCategory').value || 'عام', output: document.getElementById('pOutput').value || 'غير محدد' };
             if(id) { const i = programsDB.findIndex(p => p.id == id); if(i > -1) programsDB[i] = pData; showToast("تم التحديث", "success"); } 
             else { programsDB.push(pData); showToast("تمت إضافة البرنامج", "success"); }
-            localStorage.setItem('niraPrograms_v2', JSON.stringify(programsDB)); renderPrograms(); cancelEditProgram(); triggerAutoSync();
+            localStorage.setItem('niraPrograms_v3', JSON.stringify(programsDB)); renderPrograms(); cancelEditProgram(); triggerAutoSync();
         }
         function editProgram(id) {
             if(id === 1) { showToast("البرنامج الأساسي (1) المأخوذ من الملحق محمي من التعديل.", "warning"); return; }
@@ -666,15 +701,15 @@
             document.getElementById('btnSaveProgram').innerHTML = "💾 حفظ التعديلات"; document.getElementById('btnCancelProgram').style.display = "inline-flex"; window.scrollTo({top: document.getElementById('manage-programs').offsetTop - 50, behavior: 'smooth'});
         }
         function cancelEditProgram() { document.getElementById('pId').value=''; document.getElementById('pTitle').value=''; document.getElementById('pCategory').value=''; document.getElementById('pOutput').value=''; document.getElementById('btnSaveProgram').innerHTML = "💾 إضافة البرنامج وتوليد جلساته"; document.getElementById('btnCancelProgram').style.display = "none"; }
-        function deleteProgram(id) { if(id === 1) return showToast("البرنامج الأساسي محمي من الحذف.", "warning"); if(confirm("حذف البرنامج وكافة جلساته؟")) { programsDB = programsDB.filter(p => p.id !== id); delete sessionsDB[id]; localStorage.setItem('niraPrograms_v2', JSON.stringify(programsDB)); localStorage.setItem('niraSessionsMap_v2', JSON.stringify(sessionsDB)); renderPrograms(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
+        function deleteProgram(id) { if(id === 1) return showToast("البرنامج الأساسي محمي من الحذف.", "warning"); if(confirm("حذف البرنامج وكافة جلساته؟")) { programsDB = programsDB.filter(p => p.id !== id); delete sessionsDB[id]; localStorage.setItem('niraPrograms_v3', JSON.stringify(programsDB)); localStorage.setItem('niraSessionsMap_v3', JSON.stringify(sessionsDB)); renderPrograms(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
 
         // Trainees
         function addTrainee() {
             const name = document.getElementById('tName').value.trim(); if(!name) return showToast("أدخل الاسم", "warning");
             traineesDB.push({ id: Date.now(), name, school: document.getElementById('tSchool').value, level: document.getElementById('tLevel').value, progress: parseInt(document.getElementById('tProgress').value || 0) });
-            localStorage.setItem('niraTrainees_v2', JSON.stringify(traineesDB)); document.getElementById('tName').value=''; document.getElementById('tProgress').value=''; renderTrainees(); showToast("تم الإضافة", "success"); triggerAutoSync();
+            localStorage.setItem('niraTrainees_v3', JSON.stringify(traineesDB)); document.getElementById('tName').value=''; document.getElementById('tProgress').value=''; renderTrainees(); showToast("تم الإضافة", "success"); triggerAutoSync();
         }
-        function deleteTrainee(id) { if(confirm("حذف المتدرب؟")) { traineesDB = traineesDB.filter(t => t.id !== id); localStorage.setItem('niraTrainees_v2', JSON.stringify(traineesDB)); renderTrainees(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
+        function deleteTrainee(id) { if(confirm("حذف المتدرب؟")) { traineesDB = traineesDB.filter(t => t.id !== id); localStorage.setItem('niraTrainees_v3', JSON.stringify(traineesDB)); renderTrainees(); showToast("تم الحذف", "success"); triggerAutoSync(); } }
 
         // ==========================================
         // 6. CSV Export & Import Engines
@@ -711,21 +746,21 @@
             reader.readAsText(file, "UTF-8"); event.target.value = '';
         }
 
-        function importTraineesCSV(event) { handleCSVImport(event, (row) => { if(row.length>=4) { traineesDB.push({ id: Date.now()+Math.random(), name: row[0].trim(), school: row[1].trim(), level: row[2].trim(), progress: parseInt(row[3])||0 }); localStorage.setItem('niraTrainees_v2', JSON.stringify(traineesDB)); renderTrainees(); return true; } return false; }); }
-        function importProgramsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=3) { programsDB.push({ id: Date.now()+Math.random(), title: row[0].trim(), category: row[1].trim(), output: row[2].trim() }); localStorage.setItem('niraPrograms_v2', JSON.stringify(programsDB)); renderPrograms(); return true; } return false; }); }
-        function importSessionsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=5) { if(!sessionsDB[currentProgId]) sessionsDB[currentProgId]=[]; sessionsDB[currentProgId].push({ id: Date.now()+Math.random(), day: row[0].trim(), num: row[1].trim(), title: row[2].trim(), time: row[3].trim(), strategy: row[4].trim(), desc: row[5]?row[5].trim():'' }); localStorage.setItem('niraSessionsMap_v2', JSON.stringify(sessionsDB)); renderCurrentSessions(); return true; } return false; }); }
+        function importTraineesCSV(event) { handleCSVImport(event, (row) => { if(row.length>=4) { traineesDB.push({ id: Date.now()+Math.random(), name: row[0].trim(), school: row[1].trim(), level: row[2].trim(), progress: parseInt(row[3])||0 }); localStorage.setItem('niraTrainees_v3', JSON.stringify(traineesDB)); renderTrainees(); return true; } return false; }); }
+        function importProgramsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=3) { programsDB.push({ id: Date.now()+Math.random(), title: row[0].trim(), category: row[1].trim(), output: row[2].trim() }); localStorage.setItem('niraPrograms_v3', JSON.stringify(programsDB)); renderPrograms(); return true; } return false; }); }
+        function importSessionsCSV(event) { handleCSVImport(event, (row) => { if(row.length>=5) { if(!sessionsDB[currentProgId]) sessionsDB[currentProgId]=[]; sessionsDB[currentProgId].push({ id: Date.now()+Math.random(), day: row[0].trim(), num: row[1].trim(), title: row[2].trim(), time: row[3].trim(), strategy: row[4].trim(), desc: row[5]?row[5].trim():'' }); localStorage.setItem('niraSessionsMap_v3', JSON.stringify(sessionsDB)); renderCurrentSessions(); return true; } return false; }); }
 
         // ==========================================
         // 7. Google API Sync & Reset
         // ==========================================
         function saveSettingsAndSync() {
-            gasUrl = document.getElementById('gasUrl').value.trim(); localStorage.setItem('niraGasUrl_v2', gasUrl);
+            gasUrl = document.getElementById('gasUrl').value.trim(); localStorage.setItem('niraGasUrl_v3', gasUrl);
             if(gasUrl) syncWithGoogleSheets(false); else { document.getElementById('syncStatus').innerHTML = "غير متصل 🔴"; showToast("أدخل الرابط أولاً", "warning"); }
         }
         function triggerAutoSync() { if(gasUrl) syncWithGoogleSheets(true); }
         function syncWithGoogleSheets(isSilent = false) {
             const statusEl = document.getElementById('syncStatus');
-            statusEl.innerHTML = "جاري الإرسال الصامت... ⏳"; statusEl.style.color = "var(--warning)";
+            statusEl.innerHTML = "جاري الإرسال... ⏳"; statusEl.style.color = "var(--warning)";
             const payload = JSON.stringify({ ts: new Date().toISOString(), trainees: traineesDB, programs: programsDB, sessions: sessionsDB });
             
             // Bypass CORS cleanly using text/plain
